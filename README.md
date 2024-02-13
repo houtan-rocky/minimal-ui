@@ -1,1 +1,1 @@
-# marginex-frontend-member
+# marginex-frontend-boilerplate
