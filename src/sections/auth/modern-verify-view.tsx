@@ -10,22 +10,22 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
+import { useTranslate } from 'src/locales';
 import { EmailInboxIcon } from 'src/assets/icons';
 
-import Iconify from 'src/components/iconify';
-import FormProvider, { RHFCode, RHFTextField } from 'src/components/hook-form';
+import FormProvider, { RHFCode } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function ModernVerifyView() {
+  const { t } = useTranslate();
+
   const VerifySchema = Yup.object().shape({
-    code: Yup.string().min(6, 'Code must be at least 6 characters').required('Code is required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
+    code: Yup.string().required(t('code_is_required')).min(4, t('code_must_be_4_characters')),
   });
 
   const defaultValues = {
     code: '',
-    email: '',
   };
 
   const methods = useForm({
@@ -50,13 +50,6 @@ export default function ModernVerifyView() {
 
   const renderForm = (
     <Stack spacing={3} alignItems="center">
-      <RHFTextField
-        name="email"
-        label="Email"
-        placeholder="example@gmail.com"
-        InputLabelProps={{ shrink: true }}
-      />
-
       <RHFCode name="code" />
 
       <LoadingButton
@@ -66,24 +59,25 @@ export default function ModernVerifyView() {
         variant="contained"
         loading={isSubmitting}
       >
-        Verify
+        {t('verify')}
       </LoadingButton>
 
       <Typography variant="body2">
-        {`Don’t have a code? `}
+        {t('do_not_have_a_code')}
+        &nbsp;
         <Link
           variant="subtitle2"
           sx={{
             cursor: 'pointer',
           }}
         >
-          Resend code
+          {t('resend')}
         </Link>
       </Typography>
 
       <Link
         component={RouterLink}
-        href={paths.auth.jwt.login}
+        href={paths.auth.jwt.register}
         color="inherit"
         variant="subtitle2"
         sx={{
@@ -91,8 +85,7 @@ export default function ModernVerifyView() {
           display: 'inline-flex',
         }}
       >
-        <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-        Return to sign in
+        {t('return_to_previous_page')}
       </Link>
     </Stack>
   );
@@ -102,11 +95,10 @@ export default function ModernVerifyView() {
       <EmailInboxIcon sx={{ height: 96 }} />
 
       <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h3">Please check your email!</Typography>
+        <Typography variant="h3">{t('enter_the_verification_code')}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          We have emailed a 6-digit confirmation code to acb@domain, please enter the code in below
-          box to verify your email.
+          {t('the_verification_code_has_been_sent_to_the_following_mobile_number')}
         </Typography>
       </Stack>
     </>

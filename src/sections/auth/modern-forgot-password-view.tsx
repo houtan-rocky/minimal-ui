@@ -10,20 +10,24 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
+import { useTranslate } from 'src/locales';
 import { PasswordIcon } from 'src/assets/icons';
 
-import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function ModernForgotPasswordView() {
+  const { t } = useTranslate();
+
   const ForgotPasswordSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
+    nationalCode: Yup.string().required(t('national_code_is_required')),
+    mobileNumber: Yup.string().required(t('mobile_number_is_required')),
   });
 
   const defaultValues = {
-    email: '',
+    nationalCode: '',
+    mobileNumber: '',
   };
 
   const methods = useForm({
@@ -47,7 +51,9 @@ export default function ModernForgotPasswordView() {
 
   const renderForm = (
     <Stack spacing={3} alignItems="center">
-      <RHFTextField name="email" label="Email address" />
+      <RHFTextField name="nationalCode" label={t('national_code')} />
+
+      <RHFTextField name="mobileNumber" label={t('mobile_number')} />
 
       <LoadingButton
         fullWidth
@@ -55,10 +61,9 @@ export default function ModernForgotPasswordView() {
         type="submit"
         variant="contained"
         loading={isSubmitting}
-        endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
-        sx={{ justifyContent: 'space-between', pl: 2, pr: 1.5 }}
+        sx={{ justifyContent: 'center', pl: 2, pr: 1.5 }}
       >
-        Send Request
+        {t('continue')}
       </LoadingButton>
 
       <Link
@@ -71,8 +76,7 @@ export default function ModernForgotPasswordView() {
           display: 'inline-flex',
         }}
       >
-        <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-        Return to sign in
+        {t('return_to_previous_page')}
       </Link>
     </Stack>
   );
@@ -82,11 +86,10 @@ export default function ModernForgotPasswordView() {
       <PasswordIcon sx={{ height: 96 }} />
 
       <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h3">Forgot your password?</Typography>
+        <Typography variant="h3">{t('forget_password')}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          Please enter the email address associated with your account and We will email you a link
-          to reset your password.
+          {t('forget_password_description')}
         </Typography>
       </Stack>
     </>

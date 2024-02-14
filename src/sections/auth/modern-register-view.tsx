@@ -4,36 +4,31 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
-import InputAdornment from '@mui/material/InputAdornment';
 
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useTranslate } from 'src/locales';
 
-import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function ModernRegisterView() {
-  const password = useBoolean();
+  const { t } = useTranslate();
 
   const RegisterSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name required'),
-    lastName: Yup.string().required('Last name required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    password: Yup.string().required('Password is required'),
+    nationalCode: Yup.string().required(t('national_code_is_required')),
+    mobileNumber: Yup.string().required(t('mobile_number_is_required')),
+    referralCode: Yup.string(),
   });
 
   const defaultValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
+    nationalCode: '',
+    mobileNumber: '',
+    referralCode: '',
   };
 
   const methods = useForm({
@@ -57,13 +52,13 @@ export default function ModernRegisterView() {
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
-      <Typography variant="h4">Get started absolutely free</Typography>
+      <Typography variant="h4">{t('register')}</Typography>
 
       <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2"> Already have an account? </Typography>
+        <Typography variant="body2">{t('already_have_an_account')}</Typography>
 
         <Link href={paths.auth.jwt.login} component={RouterLink} variant="subtitle2">
-          Sign in
+          {t('login')}
         </Link>
       </Stack>
     </Stack>
@@ -79,41 +74,23 @@ export default function ModernRegisterView() {
         color: 'text.secondary',
       }}
     >
-      {'By signing up, I agree to '}
       <Link underline="always" color="text.primary">
-        Terms of Service
+        {t('terms_of_service')}
       </Link>
-      {' and '}
+      {t('and')}
       <Link underline="always" color="text.primary">
-        Privacy Policy
+        {t('privacy_policy')}
       </Link>
-      .
     </Typography>
   );
 
   const renderForm = (
     <Stack spacing={2.5}>
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-        <RHFTextField name="firstName" label="First name" />
-        <RHFTextField name="lastName" label="Last name" />
-      </Stack>
+      <RHFTextField name="nationalCode" label={t('national_code')} />
 
-      <RHFTextField name="email" label="Email address" />
+      <RHFTextField name="mobileNumber" label={t('mobile_number')} />
 
-      <RHFTextField
-        name="password"
-        label="Password"
-        type={password.value ? 'text' : 'password'}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={password.onToggle} edge="end">
-                <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
+      <RHFTextField name="referralCode" label={t('referral_code')} />
 
       <LoadingButton
         fullWidth
@@ -122,10 +99,9 @@ export default function ModernRegisterView() {
         type="submit"
         variant="contained"
         loading={isSubmitting}
-        endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
-        sx={{ justifyContent: 'space-between', pl: 2, pr: 1.5 }}
+        sx={{ justifyContent: 'center', pl: 2, pr: 1.5 }}
       >
-        Create account
+        {t('continue')}
       </LoadingButton>
     </Stack>
   );

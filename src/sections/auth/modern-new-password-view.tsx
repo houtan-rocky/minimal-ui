@@ -14,30 +14,26 @@ import { RouterLink } from 'src/routes/components';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
+import { useTranslate } from 'src/locales';
 import { SentIcon } from 'src/assets/icons';
 
 import Iconify from 'src/components/iconify';
-import FormProvider, { RHFCode, RHFTextField } from 'src/components/hook-form';
+import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function ModernNewPasswordView() {
+  const { t } = useTranslate();
   const password = useBoolean();
 
   const NewPasswordSchema = Yup.object().shape({
-    code: Yup.string().min(6, 'Code must be at least 6 characters').required('Code is required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    password: Yup.string()
-      .min(6, 'Password must be at least 6 characters')
-      .required('Password is required'),
+    password: Yup.string().required(t('password_is_required')).min(8, t('password_condition')),
     confirmPassword: Yup.string()
-      .required('Confirm password is required')
-      .oneOf([Yup.ref('password')], 'Passwords must match'),
+      .required('password_confirm_is_required')
+      .oneOf([Yup.ref('password')], t('passwords_must_match')),
   });
 
   const defaultValues = {
-    code: '',
-    email: '',
     password: '',
     confirmPassword: '',
   };
@@ -65,17 +61,8 @@ export default function ModernNewPasswordView() {
   const renderForm = (
     <Stack spacing={3} alignItems="center">
       <RHFTextField
-        name="email"
-        label="Email"
-        placeholder="example@gmail.com"
-        InputLabelProps={{ shrink: true }}
-      />
-
-      <RHFCode name="code" />
-
-      <RHFTextField
         name="password"
-        label="Password"
+        label={t('password')}
         type={password.value ? 'text' : 'password'}
         InputProps={{
           endAdornment: (
@@ -90,7 +77,7 @@ export default function ModernNewPasswordView() {
 
       <RHFTextField
         name="confirmPassword"
-        label="Confirm New Password"
+        label={t('password_confirm')}
         type={password.value ? 'text' : 'password'}
         InputProps={{
           endAdornment: (
@@ -110,18 +97,19 @@ export default function ModernNewPasswordView() {
         variant="contained"
         loading={isSubmitting}
       >
-        Update Password
+        {t('apply')}
       </LoadingButton>
 
       <Typography variant="body2">
-        {`Don’t have a code? `}
+        {t('do_not_have_a_code')}
+        &nbsp;
         <Link
           variant="subtitle2"
           sx={{
             cursor: 'pointer',
           }}
         >
-          Resend code
+          {t('resend')}
         </Link>
       </Typography>
 
@@ -135,8 +123,7 @@ export default function ModernNewPasswordView() {
           display: 'inline-flex',
         }}
       >
-        <Iconify icon="eva:arrow-ios-back-fill" width={16} />
-        Return to sign in
+        {t('return_to_previous_page')}
       </Link>
     </Stack>
   );
@@ -146,12 +133,10 @@ export default function ModernNewPasswordView() {
       <SentIcon sx={{ height: 96 }} />
 
       <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h3">Request sent successfully!</Typography>
+        <Typography variant="h3">{t('new_password')}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          We&apos;ve sent a 6-digit confirmation email to your email.
-          <br />
-          Please enter the code in below box to verify your email.
+          {t('new_password_description')}
         </Typography>
       </Stack>
     </>

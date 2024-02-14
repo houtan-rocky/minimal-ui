@@ -22,12 +22,12 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 // ----------------------------------------------------------------------
 
 export default function ModernLoginView() {
-  const password = useBoolean();
   const { t } = useTranslate();
+  const password = useBoolean();
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    password: Yup.string().required('Password is required'),
+    email: Yup.string().required(t('username_is_required')),
+    password: Yup.string().required(t('password_is_required')),
   });
 
   const defaultValues = {
@@ -56,7 +56,7 @@ export default function ModernLoginView() {
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5 }}>
-      <Typography variant="h4">{t('welcome')}</Typography>
+      <Typography variant="h4">{t('login')}</Typography>
 
       <Stack direction="row" spacing={0.5}>
         <Typography variant="body2">{t('are_you_not_a_member')}</Typography>
@@ -105,10 +105,21 @@ export default function ModernLoginView() {
         type="submit"
         variant="contained"
         loading={isSubmitting}
-        endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
-        sx={{ justifyContent: 'space-between', pl: 2, pr: 1.5 }}
+        sx={{ justifyContent: 'center', pl: 2, pr: 1.5 }}
       >
         {t('login')}
+      </LoadingButton>
+
+      <LoadingButton
+        fullWidth
+        color="inherit"
+        size="large"
+        type="submit"
+        variant="outlined"
+        loading={isSubmitting}
+        sx={{ justifyContent: 'center', pl: 2, pr: 1.5 }}
+      >
+        {t('login_with_one_time_password')}
       </LoadingButton>
     </Stack>
   );

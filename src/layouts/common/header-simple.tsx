@@ -10,16 +10,17 @@ import { RouterLink } from 'src/routes/components';
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 
 import { bgBlur } from 'src/theme/css';
+import { useTranslate } from 'src/locales';
 
 import Logo from 'src/components/logo';
 
 import { HEADER } from '../config-layout';
 import HeaderShadow from './header-shadow';
-import SettingsButton from './settings-button';
 
 // ----------------------------------------------------------------------
 
 export default function HeaderSimple() {
+  const { t } = useTranslate();
   const theme = useTheme();
 
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
@@ -50,15 +51,13 @@ export default function HeaderSimple() {
         <Logo />
 
         <Stack direction="row" alignItems="center" spacing={1}>
-          <SettingsButton />
-
           <Link
             href={paths.faqs}
             component={RouterLink}
             color="inherit"
             sx={{ typography: 'subtitle2' }}
           >
-            Need help?
+            {t('need_help')}
           </Link>
         </Stack>
       </Toolbar>
