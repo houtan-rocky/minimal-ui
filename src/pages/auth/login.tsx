@@ -21,7 +21,6 @@ export default function LoginPage() {
     interactions: any,
     // interactions: Set<React.ProfilerInteraction> // the Set of interactions belonging to this update
   ) => {
-    // Log the profiling data or handle it as needed
     console.log('Profiling data for LoginPage:', {
       id,
       phase,
