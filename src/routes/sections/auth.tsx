@@ -2,7 +2,6 @@ import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import AuthModernLayout from 'src/layouts/auth/modern';
-import AuthModernCompactLayout from 'src/layouts/auth/modern-compact';
 
 import { SplashScreen } from 'src/components/loading-screen';
 
@@ -43,9 +42,9 @@ const auth = {
     },
     {
       element: (
-        <AuthModernCompactLayout>
+        <AuthModernLayout>
           <Outlet />
-        </AuthModernCompactLayout>
+        </AuthModernLayout>
       ),
       children: [
         { path: 'forgot-password', element: <ForgotPasswordPage /> },
