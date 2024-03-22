@@ -10,3 +10,6 @@ describe('Flattens array', () => {
     expect(flattenResult).toStrictEqual(flatForm);
   });
 });
+
+// for testing lint-staged and husky only
+console.log('hello world');
