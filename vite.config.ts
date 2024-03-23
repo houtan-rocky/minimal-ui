@@ -2,6 +2,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import checker from 'vite-plugin-checker';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // ----------------------------------------------------------------------
 
@@ -15,6 +16,27 @@ export default defineConfig({
       },
       overlay: {
         initialIsOpen: false,
+      },
+    }),
+    VitePWA({
+      registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true,
+      },
+      manifest: {
+        name: 'test-app',
+        short_name: 'TA',
+        start_url: '',
+        display: 'fullscreen',
+        theme_color: '#000',
+        background_color: '#fff',
+        icons: [
+          {
+            src: 'pwa-icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
       },
     }),
   ],
