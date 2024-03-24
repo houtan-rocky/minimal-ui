@@ -3,7 +3,7 @@ import { it, expect, describe } from 'vitest';
 
 import { REQUEST_VALID, REQUEST_INVALID } from 'src/_mock/handlers/_login';
 
-import { loginApi } from './login.api';
+import { loginApi } from '../../src/api/login.api';
 
 class LoginApiTest {
   static async testLoginWithValidCredentials() {
