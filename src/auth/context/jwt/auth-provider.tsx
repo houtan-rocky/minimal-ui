@@ -5,7 +5,7 @@ import axios, { endpoints } from 'src/utils/axios';
 import { loginApi } from 'src/api/login.api';
 
 import { AuthContext } from './auth-context';
-import { setSession, isValidToken, setLocalStorage } from './utils';
+import { setSession, setStorage, isValidToken } from './utils';
 import { AuthUserType, ActionMapType, AuthStateType } from '../../types';
 
 // ----------------------------------------------------------------------
@@ -132,10 +132,9 @@ export function AuthProvider({ children }: Props) {
   }, [initialize]);
 
   // LOGIN
-  const login = useCallback(async (email: string, password: string, rememberMe: boolean) => {
-    try {
+  const login = useCallback(
+    async (email: string, password: string, rememberMe: boolean): Promise<undefined> => {
       const res = await loginApi(email, password);
-      console.log(res);
 
       const { accessToken, user } = res;
 
@@ -156,10 +155,9 @@ export function AuthProvider({ children }: Props) {
       } else {
         sessionStorage.setItem(STORAGE_KEY, accessToken);
       }
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+    },
+    []
+  );
 
   // REGISTER
   const register = useCallback(
@@ -192,7 +190,7 @@ export function AuthProvider({ children }: Props) {
 
   // LOGOUT
   const logout = useCallback(async () => {
-    setLocalStorage(null);
+    setStorage(null);
     setSession(null);
     dispatch({
       type: Types.LOGOUT,
