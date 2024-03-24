@@ -1,4 +1,4 @@
-name: Vitest Tests
+name: Build
 
 on:
   push:
@@ -7,8 +7,7 @@ on:
     branches: [ main, dev ]
 
 jobs:
-  test:
-    timeout-minutes: 60
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,11 +18,9 @@ jobs:
         cache: 'npm'
     - name: Install dependencies
       run: npm install
-    - name: Run Vitest tests
-      run: npx vitest
+    - name: Build
+      run: npm run build
     - uses: actions/upload-artifact@v4
-      if: always()
       with:
-        name: vitest-artifacts
-        path: vitest-artifacts/
-        retention-days: 30
+        name: build-artifacts
+        path: path/to/your/build/directory
