@@ -6,11 +6,15 @@ import { endpoints } from 'src/utils/axios';
 // ----------------------CONSTANTS------------------------------------------------
 const ACCESS_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE4OTM0NTYwMDAsInVzZXIiOiJleGFtcGxlX3VzZXIifQ.UywE7SiVKaTs93c1-yF1zPA8TjznF-l0VJoQ8IqU_hY';
-const REQUEST_VALID = {
+export const REQUEST_VALID = {
   email: 'demo@minimals.cc',
   password: 'demo1234',
 };
-const RESPONSE_VALID = {
+export const REQUEST_INVALID = {
+  email: '',
+  password: '',
+};
+export const RESPONSE_VALID = {
   access_token: ACCESS_TOKEN,
   message: 'Logged In',
   user: {
@@ -20,7 +24,7 @@ const RESPONSE_VALID = {
     role: 'admin',
   },
 };
-const RESPONSE_INVALID = {
+export const RESPONSE_INVALID = {
   message: 'نام کاربری یا رمز عبور اشتباه است',
 };
 // ------------------------Types----------------------------------------------
@@ -33,8 +37,9 @@ type RequestBody = {
 };
 
 type ResponseBody = {
-  access_token: AccessToken;
-  user: {
+  access_token?: AccessToken;
+  message: string;
+  user?: {
     email: string;
     display_name: string;
     photo_url: string;
@@ -47,7 +52,6 @@ type AccessToken = string;
 
 export const mockLogin = http.post<Params, RequestBody, ResponseBody>(
   endpoints.auth.login,
-  // @ts-ignore
   async ({ params, request }) => {
     const { email, password } = await request.json();
 

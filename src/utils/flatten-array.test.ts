@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { it, expect, describe } from 'vitest';
 
 import { flattenArray } from './flatten-array';
