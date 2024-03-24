@@ -78,6 +78,7 @@ export default function ModernRegisterView() {
     </Stack>
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const renderTerms = (
     <Typography
       component="div"
@@ -100,11 +101,23 @@ export default function ModernRegisterView() {
 
   const renderForm = (
     <Stack spacing={2.5}>
-      <RHFTextField name="nationalCode" label={t('national_code')} />
+      <RHFTextField
+        name="nationalCode"
+        placeholder={t('national_code_placeholder')}
+        label={t('national_code')}
+      />
 
-      <RHFTextField name="mobileNumber" label={t('mobile_number')} />
+      <RHFTextField
+        name="mobileNumber"
+        placeholder={t('mobile_number_placeholder')}
+        label={t('mobile_number')}
+      />
 
-      <RHFTextField name="referralCode" label={t('referral_code')} />
+      <RHFTextField
+        name="referralCode"
+        placeholder={t('referral_code_placeholder')}
+        label={t('referral_code')}
+      />
 
       <LoadingButton
         fullWidth
@@ -134,7 +147,7 @@ export default function ModernRegisterView() {
 
         {renderForm}
 
-        {renderTerms}
+        {/* {renderTerms} */}
       </FormProvider>
     </>
   );
