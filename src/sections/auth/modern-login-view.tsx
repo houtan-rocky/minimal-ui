@@ -135,7 +135,7 @@ export default function ModernLoginView() {
         {t('login')}
       </LoadingButton>
 
-      <LoadingButton
+      {/* <LoadingButton
         fullWidth
         color="inherit"
         size="large"
@@ -145,7 +145,7 @@ export default function ModernLoginView() {
         sx={{ justifyContent: 'center', pl: 2, pr: 1.5 }}
       >
         {t('login_with_one_time_password')}
-      </LoadingButton>
+      </LoadingButton> */}
     </Stack>
   );
 
