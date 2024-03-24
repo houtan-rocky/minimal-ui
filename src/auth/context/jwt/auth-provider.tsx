@@ -159,6 +159,25 @@ export function AuthProvider({ children }: Props) {
     []
   );
 
+  // LOGIN WITH TOKEN
+  const loginWithToken = useCallback(async (accessToken: string) => {
+    setSession(accessToken);
+
+    const res = await axios.get(endpoints.auth.me);
+
+    const { user } = res.data;
+
+    dispatch({
+      type: Types.LOGIN,
+      payload: {
+        user: {
+          ...user,
+          accessToken,
+        },
+      },
+    });
+  }, []);
+
   // REGISTER
   const register = useCallback(
     async (email: string, password: string, firstName: string, lastName: string) => {
@@ -212,10 +231,11 @@ export function AuthProvider({ children }: Props) {
       unauthenticated: status === 'unauthenticated',
       //
       login,
+      loginWithToken,
       register,
       logout,
     }),
-    [login, logout, register, state.user, status]
+    [login, loginWithToken, logout, register, state.user, status]
   );
 
   return <AuthContext.Provider value={memoizedValue}>{children}</AuthContext.Provider>;

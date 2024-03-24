@@ -17,15 +17,17 @@ import { RouterLink } from 'src/routes/components';
 import { IRANIAN_MOBILE_NUMBER_REGEX } from 'src/utils/regExp';
 
 import { useTranslate } from 'src/locales';
-import { verifyApi } from 'src/api/verify.api';
+import { useAuthContext } from 'src/auth/hooks';
 import { EmailInboxIcon } from 'src/assets/icons';
+import { verifyRegister } from 'src/api/verify-register';
 
 import FormProvider, { RHFCode } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export default function ModernVerifyView() {
+export default function ModernVerifyRegisterView() {
   const router = useRouter();
+  const { loginWithToken } = useAuthContext();
   const { t } = useTranslate();
   const searchParams = useSearchParams();
 
@@ -39,7 +41,6 @@ export default function ModernVerifyView() {
    * If the mobile number is not valid, redirect to the forgot password page
    */
   const mobile_number = searchParams[0].get('mobile_number');
-  const is_register = searchParams[0].get('is_register');
   useEffect(() => {
     if (
       !mobile_number ||
@@ -76,15 +77,11 @@ export default function ModernVerifyView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const res = await verifyApi(data.code);
-      console.log(res, 'sdlfkjewlk');
-      if (res.status === 'ok') {
-        if (is_register === 'true') {
-          // await login?.(data.username, data.password, data.rememberMe)
-          // router.push(returnTo || PATH_AFTER_LOGIN)
-        } else {
-          router.push(paths.auth.jwt.newPassword);
-        }
+      const verifyRegisterResponse = await verifyRegister(data.code);
+      const { accessToken } = verifyRegisterResponse;
+      if (verifyRegisterResponse.status === 'ok') {
+        await loginWithToken(accessToken);
+        router.push(paths.dashboard.root);
       }
     } catch (error) {
       console.error(error);

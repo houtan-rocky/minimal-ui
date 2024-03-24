@@ -57,6 +57,8 @@ export const paths = {
       forgotPassword: `${ROOTS.AUTH}/forgot-password`,
       newPassword: `${ROOTS.AUTH}/new-password`,
       verify: (mobileNumber: string) => `${ROOTS.AUTH}/verify?mobile_number=${mobileNumber}`,
+      verifyRegister: (mobileNumber: string) =>
+        `${ROOTS.AUTH}/verify-register?mobile_number=${mobileNumber}`,
     },
   },
   // DASHBOARD

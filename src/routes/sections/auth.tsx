@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import AuthModernLayout from 'src/layouts/auth/modern';
+import VerifyRegisterPage from 'src/pages/auth/verify-register';
 
 import { SplashScreen } from 'src/components/loading-screen';
 
@@ -50,6 +51,7 @@ const auth = {
         { path: 'forgot-password', element: <ForgotPasswordPage /> },
         { path: 'new-password', element: <NewPasswordPage /> },
         { path: 'verify', element: <VerifyPage /> },
+        { path: 'verify-register', element: <VerifyRegisterPage /> },
       ],
     },
   ],
