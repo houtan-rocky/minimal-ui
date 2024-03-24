@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import path from 'path';
 import fs from 'fs';
 import { defineConfig } from 'vite';
@@ -55,7 +56,12 @@ export default defineConfig({
         ],
       },
     }),
+    sentryVitePlugin({
+      org: 'houtan',
+      project: 'marginx-tt',
+    }),
   ],
+
   resolve: {
     alias: [
       {
@@ -68,10 +74,16 @@ export default defineConfig({
       },
     ],
   },
+
   server: {
     port: 8080,
   },
+
   preview: {
     port: 8080,
+  },
+
+  build: {
+    sourcemap: true,
   },
 });

@@ -2,8 +2,8 @@
 import { Suspense } from 'react';
 import * as Sentry from '@sentry/react';
 import ReactDOM from 'react-dom/client';
-import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 import App from './app';
 import { enableMockingServiceWorker } from './_mock/utils/msw.util';
@@ -24,7 +24,7 @@ enableMockingServiceWorker().then(() => {
 });
 
 Sentry.init({
-  dsn: 'https://b8ff80def4ade7112df433ac72e1900f@o4506428773367808.ingest.us.sentry.io/4506968341872640',
+  dsn: 'https://40852bdead17025d3675f2669e56c612@o4506428773367808.ingest.us.sentry.io/4506968355831808',
   integrations: [
     Sentry.browserTracingIntegration(),
     Sentry.replayIntegration({
