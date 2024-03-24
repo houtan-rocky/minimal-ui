@@ -13,6 +13,8 @@ import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
+import { IRANIAN_MOBILE_NUMBER_REGEX, IRANIAN_NATIONAL_CODE_REGEX } from 'src/utils/regExp';
+
 import { useTranslate } from 'src/locales';
 import { PasswordIcon } from 'src/assets/icons';
 import { forgetPasswordApi } from 'src/api/forget-password.api';
@@ -26,14 +28,12 @@ export default function ModernForgotPasswordView() {
   const { t } = useTranslate();
   const [errorMsg, setErrorMsg] = useState('');
 
-  const NATIONAL_CODE_REGEX = /^[0-9]{10}$/;
-  const MOBILE_NUMBER_REGEX = /^(0|0098|\+98)9(0[1-5]|[1 3]\d|2[0-2]|98)\d{7}$/;
   const ForgotPasswordSchema = Yup.object().shape({
     nationalCode: Yup.string()
-      .matches(NATIONAL_CODE_REGEX, t('national_code_invalid'))
+      .matches(IRANIAN_NATIONAL_CODE_REGEX, t('national_code_invalid'))
       .required(t('national_code_is_required')),
     mobileNumber: Yup.string()
-      .matches(MOBILE_NUMBER_REGEX, t('mobile_number_invalid'))
+      .matches(IRANIAN_MOBILE_NUMBER_REGEX, t('mobile_number_invalid'))
       .required(t('mobile_number_is_required')),
   });
 

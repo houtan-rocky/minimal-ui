@@ -37,7 +37,14 @@ export const mockSetNewPassword = http.post<Params, RequestBody, ResponseBody>(
   async ({ params, request }) => {
     const { password, confirm_password } = await request.json();
 
-    if (+passwordStrength(password).value < 3 || password !== confirm_password) {
+    const passwordData = passwordStrength(password);
+    if (
+      password !== confirm_password ||
+      !passwordData.contains.includes('number') ||
+      !passwordData.contains.includes('uppercase') ||
+      !passwordData.contains.includes('lowercase') ||
+      password.length < 8
+    ) {
       return HttpResponse.json(RESPONSE_INVALID, {
         status: 401,
         statusText: 'Unauthorized',

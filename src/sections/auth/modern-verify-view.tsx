@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -14,6 +14,8 @@ import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
+import { IRANIAN_MOBILE_NUMBER_REGEX } from 'src/utils/regExp';
+
 import { useTranslate } from 'src/locales';
 import { verifyApi } from 'src/api/verify.api';
 import { EmailInboxIcon } from 'src/assets/icons';
@@ -26,12 +28,36 @@ export default function ModernVerifyView() {
   const router = useRouter();
   const { t } = useTranslate();
   const searchParams = useSearchParams();
+
   const [errorMsg, setErrorMsg] = useState('');
 
   const VerifySchema = Yup.object().shape({
     code: Yup.string().required(t('code_is_required')).min(4, t('code_must_be_4_characters')),
   });
 
+  /**
+   * If the mobile number is not valid, redirect to the forgot password page
+   */
+  const mobile_number = searchParams[0].get('mobile_number');
+  useEffect(() => {
+    if (
+      !mobile_number ||
+      !mobile_number.match(IRANIAN_MOBILE_NUMBER_REGEX) ||
+      mobile_number === 'null'
+    ) {
+      console.log(
+        !mobile_number,
+        !mobile_number?.match(IRANIAN_MOBILE_NUMBER_REGEX),
+        mobile_number === 'null',
+        'googooli'
+      );
+      router.push(paths.auth.jwt.forgotPassword);
+    }
+  }, [mobile_number, router]);
+
+  /**
+   * Form Stuff
+   */
   const defaultValues = {
     code: '',
   };

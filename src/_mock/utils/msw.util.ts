@@ -3,7 +3,8 @@
 
 // Browser integration
 export async function enableMockingServiceWorker() {
-  if (process.env.NODE_ENV !== 'development') {
+  const __DEV__ = process.env.NODE_ENV === 'development';
+  if (!__DEV__) {
     return;
   }
 
@@ -11,16 +12,33 @@ export async function enableMockingServiceWorker() {
 
   // `worker.start()` returns a Promise that resolves
   // once the Service Worker is up and ready to intercept requests.
-  return worker.start({
-    onUnhandledRequest: 'warn',
-    serviceWorker: {
-      url: '/mockServiceWorker.js',
-    },
-    findWorker(scriptUrl, mockServiceWorkerUrl) {
-      if (scriptUrl.includes(mockServiceWorkerUrl)) {
-        return true;
-      }
-      return false;
-    },
+  // eslint-disable-next-line @typescript-eslint/return-await
+  await new Promise((resolve) => {
+    worker
+      .start({
+        onUnhandledRequest: 'warn',
+        serviceWorker: {
+          url: '/mockServiceWorker.js',
+        },
+        findWorker(scriptUrl, mockServiceWorkerUrl) {
+          if (scriptUrl.includes(mockServiceWorkerUrl)) {
+            return true;
+          }
+          return false;
+        },
+      })
+      .then(() => setTimeout(resolve, 100));
   });
+  // return await worker.start({
+  //   onUnhandledRequest: 'warn',
+  //   serviceWorker: {
+  //     url: '/mockServiceWorker.js',
+  //   },
+  //   findWorker(scriptUrl, mockServiceWorkerUrl) {
+  //     if (scriptUrl.includes(mockServiceWorkerUrl)) {
+  //       return true;
+  //     }
+  //     return false;
+  //   },
+  // });
 }
