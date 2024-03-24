@@ -10,10 +10,10 @@ import { VitePWA } from 'vite-plugin-pwa';
 function excludeMsw() {
   return {
     name: 'exclude-msw',
-    resolveId(source) {
+    resolveId(source: any) {
       return source === 'virtual-module' ? source : null;
     },
-    renderStart(outputOptions, _inputOptions) {
+    renderStart(outputOptions: any, _inputOptions: any) {
       const outDir = outputOptions.dir;
       const msWorker = path.resolve(outDir, 'mockServiceWorker.js');
       fs.rm(msWorker, () => console.log(`Deleted ${msWorker}`));
