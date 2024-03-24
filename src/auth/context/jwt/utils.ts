@@ -72,3 +72,13 @@ export const setSession = (accessToken: string | null) => {
     delete axios.defaults.headers.common.Authorization;
   }
 };
+
+// ----------------------------------------------------------------------
+
+export const setLocalStorage = (accessToken: string | null) => {
+  if (accessToken) {
+    localStorage.setItem('accessToken', accessToken);
+  } else {
+    localStorage.removeItem('accessToken');
+  }
+};

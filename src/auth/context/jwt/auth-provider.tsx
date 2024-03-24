@@ -5,7 +5,7 @@ import axios, { endpoints } from 'src/utils/axios';
 import { loginApi } from 'src/api/login.api';
 
 import { AuthContext } from './auth-context';
-import { setSession, isValidToken } from './utils';
+import { setSession, isValidToken, setLocalStorage } from './utils';
 import { AuthUserType, ActionMapType, AuthStateType } from '../../types';
 
 // ----------------------------------------------------------------------
@@ -86,7 +86,11 @@ export function AuthProvider({ children }: Props) {
 
   const initialize = useCallback(async () => {
     try {
-      const accessToken = sessionStorage.getItem(STORAGE_KEY);
+      let accessToken = sessionStorage.getItem(STORAGE_KEY);
+
+      if (!accessToken) {
+        accessToken = localStorage.getItem(STORAGE_KEY);
+      }
 
       if (accessToken && isValidToken(accessToken)) {
         setSession(accessToken);
@@ -128,23 +132,33 @@ export function AuthProvider({ children }: Props) {
   }, [initialize]);
 
   // LOGIN
-  const login = useCallback(async (email: string, password: string) => {
-    const res = await loginApi(email, password);
-    console.log(res);
+  const login = useCallback(async (email: string, password: string, rememberMe: boolean) => {
+    try {
+      const res = await loginApi(email, password);
+      console.log(res);
 
-    const { accessToken, user } = res;
+      const { accessToken, user } = res;
 
-    setSession(accessToken);
+      setSession(accessToken);
 
-    dispatch({
-      type: Types.LOGIN,
-      payload: {
-        user: {
-          ...user,
-          accessToken,
+      dispatch({
+        type: Types.LOGIN,
+        payload: {
+          user: {
+            ...user,
+            accessToken,
+          },
         },
-      },
-    });
+      });
+
+      if (rememberMe) {
+        localStorage.setItem(STORAGE_KEY, accessToken);
+      } else {
+        sessionStorage.setItem(STORAGE_KEY, accessToken);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   // REGISTER
@@ -178,6 +192,7 @@ export function AuthProvider({ children }: Props) {
 
   // LOGOUT
   const logout = useCallback(async () => {
+    setLocalStorage(null);
     setSession(null);
     dispatch({
       type: Types.LOGOUT,
