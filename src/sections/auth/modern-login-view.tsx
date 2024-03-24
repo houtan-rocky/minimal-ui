@@ -66,7 +66,6 @@ export default function ModernLoginView() {
   const onSubmit = handleSubmit(async (data) => {
     try {
       await login?.(data.username, data.password, data.rememberMe);
-
       router.push(returnTo || PATH_AFTER_LOGIN);
     } catch (error) {
       console.error(error);

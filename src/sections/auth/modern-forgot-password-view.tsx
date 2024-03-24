@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { paths } from 'src/routes/paths';
+import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
 import { useTranslate } from 'src/locales';
@@ -21,6 +22,7 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 // ----------------------------------------------------------------------
 
 export default function ModernForgotPasswordView() {
+  const router = useRouter();
   const { t } = useTranslate();
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -52,8 +54,11 @@ export default function ModernForgotPasswordView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await forgetPasswordApi(data.nationalCode, data.mobileNumber);
-      console.info('DATA', data);
+      const res = await forgetPasswordApi(data.nationalCode, data.mobileNumber);
+
+      if (res.status === 'ok') {
+        router.push(`${paths.auth.jwt.verify(data.mobileNumber)}`);
+      }
     } catch (error) {
       console.error(error);
       setErrorMsg(error.message);

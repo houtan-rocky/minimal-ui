@@ -1,6 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { mockLogin } from './_login';
-import { mockForgetPassword } from './_forgetPassword-step-1';
+import { mockVerify } from './_verify';
+import { mockSetNewPassword } from './_newPassword';
+import { mockForgetPassword } from './_forgetPassword';
 
-export const handlers = [mockLogin, mockForgetPassword];
+export const handlers = [mockLogin, mockForgetPassword, mockVerify, mockSetNewPassword];

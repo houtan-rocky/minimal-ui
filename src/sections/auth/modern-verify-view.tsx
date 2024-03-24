@@ -1,16 +1,21 @@
 import * as Yup from 'yup';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSearchParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Link from '@mui/material/Link';
+import { Alert } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { paths } from 'src/routes/paths';
+import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
 import { useTranslate } from 'src/locales';
+import { verifyApi } from 'src/api/verify.api';
 import { EmailInboxIcon } from 'src/assets/icons';
 
 import FormProvider, { RHFCode } from 'src/components/hook-form';
@@ -18,7 +23,10 @@ import FormProvider, { RHFCode } from 'src/components/hook-form';
 // ----------------------------------------------------------------------
 
 export default function ModernVerifyView() {
+  const router = useRouter();
   const { t } = useTranslate();
+  const searchParams = useSearchParams();
+  const [errorMsg, setErrorMsg] = useState('');
 
   const VerifySchema = Yup.object().shape({
     code: Yup.string().required(t('code_is_required')).min(4, t('code_must_be_4_characters')),
@@ -41,10 +49,13 @@ export default function ModernVerifyView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      console.info('DATA', data);
+      const res = await verifyApi(data.code);
+      if (res.status === 'ok') {
+        router.push(paths.auth.jwt.newPassword);
+      }
     } catch (error) {
       console.error(error);
+      setErrorMsg(error.message);
     }
   });
 
@@ -77,7 +88,7 @@ export default function ModernVerifyView() {
 
       <Link
         component={RouterLink}
-        href={paths.auth.jwt.register}
+        href={paths.auth.jwt.forgotPassword}
         color="inherit"
         variant="subtitle2"
         sx={{
@@ -98,17 +109,26 @@ export default function ModernVerifyView() {
         <Typography variant="h3">{t('enter_the_verification_code')}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {t('the_verification_code_has_been_sent_to_the_following_mobile_number')}
+          {t('the_verification_code_has_been_sent_to_the_following_mobile_number', {
+            mobile_number: searchParams[0].get('mobile_number'),
+          })}
         </Typography>
       </Stack>
     </>
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      {renderHead}
+    <>
+      {!!errorMsg && (
+        <Alert severity="error" sx={{ mb: 3 }}>
+          {errorMsg}
+        </Alert>
+      )}
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        {renderHead}
 
-      {renderForm}
-    </FormProvider>
+        {renderForm}
+      </FormProvider>
+    </>
   );
 }
