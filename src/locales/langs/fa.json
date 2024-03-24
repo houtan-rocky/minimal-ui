@@ -48,5 +48,7 @@
   "passwords_must_match": "عدم تطابق تکرار رمز عبور",
   "weak": "ضعیف",
   "medium": "متوسط",
-  "strong": "قوی"
+  "strong": "قوی",
+  "national_code_is_invalid": "کد ملی نامعتبر است",
+  "mobile_number_is_invalid": "شماره موبایل نامعتبر است"
 }
