@@ -1,14 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { server } from 'src/_mock/handlers/server';
-
 // Browser integration
 export async function enableMockingServiceWorker() {
   if (process.env.NODE_ENV !== 'development') {
     return;
   }
 
-  const { worker } = await import('src/_mock/handlers/browser');
+  const { worker } = await import('src/_mock/servers/browser');
 
   // `worker.start()` returns a Promise that resolves
   // once the Service Worker is up and ready to intercept requests.
@@ -23,19 +21,5 @@ export async function enableMockingServiceWorker() {
       }
       return false;
     },
-  });
-}
-
-// Server integration
-/* eslint-disable import/no-extraneous-dependencies */
-export async function enableMockingServer() {
-  if (process.env.NODE_ENV !== 'development') {
-    return;
-  }
-
-  // `worker.start()` returns a Promise that resolves
-  // once the Service Worker is up and ready to intercept requests.
-  server.listen({
-    onUnhandledRequest: 'warn',
   });
 }

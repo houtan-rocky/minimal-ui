@@ -9,8 +9,8 @@ import { paths } from 'src/routes/paths';
 
 import { useDebounce } from 'src/hooks/use-debounce';
 
-import { POST_SORT_OPTIONS } from 'src/_mock';
-import { useGetPosts, useSearchPosts } from 'src/api/blog';
+import { POST_SORT_OPTIONS } from 'src/__mock';
+import { useGetPosts, useSearchPosts } from 'src/__api/blog';
 
 import { useSettingsContext } from 'src/components/settings';
 

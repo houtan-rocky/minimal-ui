@@ -23,7 +23,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 import { isAfter, isBetween } from 'src/utils/format-time';
 
-import { _invoices, INVOICE_SERVICE_OPTIONS } from 'src/_mock';
+import { _invoices, INVOICE_SERVICE_OPTIONS } from 'src/__mock';
 
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';

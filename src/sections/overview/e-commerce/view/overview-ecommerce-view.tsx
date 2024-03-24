@@ -11,7 +11,7 @@ import {
   _ecommerceBestSalesman,
   _ecommerceSalesOverview,
   _ecommerceLatestProducts,
-} from 'src/_mock';
+} from 'src/__mock';
 
 import { useSettingsContext } from 'src/components/settings';
 

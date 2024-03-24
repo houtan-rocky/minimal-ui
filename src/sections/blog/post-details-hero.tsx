@@ -12,7 +12,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import { fDate } from 'src/utils/format-time';
 
-import { _socials } from 'src/_mock';
+import { _socials } from 'src/__mock';
 import { bgGradient } from 'src/theme/css';
 
 import Iconify from 'src/components/iconify';

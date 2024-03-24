@@ -20,7 +20,7 @@ import { useRouter } from 'src/routes/hooks';
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _tags } from 'src/_mock';
+import { _tags } from 'src/__mock';
 
 import { CustomFile } from 'src/components/upload';
 import { useSnackbar } from 'src/components/snackbar';

@@ -3,7 +3,7 @@ import { m } from 'framer-motion';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
-import { _mock } from 'src/_mock';
+import { _mock } from 'src/__mock';
 
 import getVariant from '../get-variant';
 

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { afterAll, afterEach, beforeAll } from 'vitest';
 
-import { server } from '../src/_mock/handlers/server';
+import { server } from '../src/_mock/servers/node';
 
 beforeAll(() => {
   server.listen();

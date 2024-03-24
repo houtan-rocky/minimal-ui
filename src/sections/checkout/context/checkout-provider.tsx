@@ -6,7 +6,7 @@ import { useRouter } from 'src/routes/hooks';
 
 import { getStorage, useLocalStorage } from 'src/hooks/use-local-storage';
 
-import { PRODUCT_CHECKOUT_STEPS } from 'src/_mock/_product';
+import { PRODUCT_CHECKOUT_STEPS } from 'src/__mock/_product';
 
 import { IAddressItem } from 'src/types/address';
 import { ICheckoutItem } from 'src/types/checkout';

@@ -10,7 +10,7 @@ import { useRouter, useSearchParams } from 'src/routes/hooks';
 
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 
-import { useGetContacts, useGetConversation, useGetConversations } from 'src/api/chat';
+import { useGetContacts, useGetConversation, useGetConversations } from 'src/__api/chat';
 
 import { useSettingsContext } from 'src/components/settings';
 

@@ -7,7 +7,7 @@ import {
   _analyticPosts,
   _analyticTraffic,
   _analyticOrderTimeline,
-} from 'src/_mock';
+} from 'src/__mock';
 
 import { useSettingsContext } from 'src/components/settings';
 

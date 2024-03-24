@@ -14,7 +14,7 @@ import { RouterLink } from 'src/routes/components';
 
 import { fShortenNumber } from 'src/utils/format-number';
 
-import { useGetPost, useGetLatestPosts } from 'src/api/blog';
+import { useGetPost, useGetLatestPosts } from 'src/__api/blog';
 
 import Iconify from 'src/components/iconify';
 import Markdown from 'src/components/markdown';

@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { moveTask, moveColumn, useGetBoard } from 'src/api/kanban';
+import { moveTask, moveColumn, useGetBoard } from 'src/__api/kanban';
 
 import Scrollbar from 'src/components/scrollbar';
 import EmptyContent from 'src/components/empty-content';

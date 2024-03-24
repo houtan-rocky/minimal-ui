@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { _bankingContacts, _bankingCreditCard, _bankingRecentTransitions } from 'src/_mock';
+import { _bankingContacts, _bankingCreditCard, _bankingRecentTransitions } from 'src/__mock';
 
 import { useSettingsContext } from 'src/components/settings';
 

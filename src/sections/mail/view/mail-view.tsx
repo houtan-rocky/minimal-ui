@@ -10,7 +10,7 @@ import { useRouter, useSearchParams } from 'src/routes/hooks';
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { useGetMail, useGetMails, useGetLabels } from 'src/api/mail';
+import { useGetMail, useGetMails, useGetLabels } from 'src/__api/mail';
 
 import EmptyContent from 'src/components/empty-content';
 import { useSettingsContext } from 'src/components/settings';

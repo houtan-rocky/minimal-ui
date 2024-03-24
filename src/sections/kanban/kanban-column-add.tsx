@@ -10,7 +10,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 import uuidv4 from 'src/utils/uuidv4';
 
-import { createColumn } from 'src/api/kanban';
+import { createColumn } from 'src/__api/kanban';
 
 import Iconify from 'src/components/iconify';
 

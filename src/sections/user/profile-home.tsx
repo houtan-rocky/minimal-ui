@@ -14,7 +14,7 @@ import CardHeader from '@mui/material/CardHeader';
 
 import { fNumber } from 'src/utils/format-number';
 
-import { _socials } from 'src/_mock';
+import { _socials } from 'src/__mock';
 
 import Iconify from 'src/components/iconify';
 

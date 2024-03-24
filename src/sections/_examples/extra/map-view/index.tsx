@@ -8,8 +8,8 @@ import CardContent from '@mui/material/CardContent';
 import { paths } from 'src/routes/paths';
 
 import { MAPBOX_API } from 'src/config-global';
-import { cities as CITIES } from 'src/_mock/map/cities';
-import { countries as COUNTRIES } from 'src/_mock/map/countries';
+import { cities as CITIES } from 'src/__mock/map/cities';
+import { countries as COUNTRIES } from 'src/__mock/map/countries';
 
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
