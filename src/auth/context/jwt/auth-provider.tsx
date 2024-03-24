@@ -2,6 +2,8 @@ import { useMemo, useEffect, useReducer, useCallback } from 'react';
 
 import axios, { endpoints } from 'src/utils/axios';
 
+import { loginApi } from 'src/api/login.api';
+
 import { AuthContext } from './auth-context';
 import { setSession, isValidToken } from './utils';
 import { AuthUserType, ActionMapType, AuthStateType } from '../../types';
@@ -127,14 +129,10 @@ export function AuthProvider({ children }: Props) {
 
   // LOGIN
   const login = useCallback(async (email: string, password: string) => {
-    const data = {
-      email,
-      password,
-    };
+    const res = await loginApi(email, password);
+    console.log(res);
 
-    const res = await axios.post(endpoints.auth.login, data);
-
-    const { accessToken, user } = res.data;
+    const { accessToken, user } = res;
 
     setSession(accessToken);
 
