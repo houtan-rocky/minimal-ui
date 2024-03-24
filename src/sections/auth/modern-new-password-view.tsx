@@ -26,14 +26,21 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
+// const STEPS = ['weak', 'medium', 'strong']
+
 export default function ModernNewPasswordView() {
   const { t } = useTranslate();
   const password = useBoolean();
   const [errorMsg, setErrorMsg] = useState('');
+  // const [passwordStrengthState, setPasswordStrengthState] = useState(0)
   const router = useRouter();
 
   const NewPasswordSchema = Yup.object().shape({
-    password: Yup.string().required(t('password_is_required')).min(8, t('password_condition')),
+    password: Yup.string()
+      .required(t('password_is_required'))
+      .matches(/[a-zA-Z]/, t('password_must_contain_letters'))
+      .matches(/\d/, t('password_must_contain_numbers'))
+      .matches(/[@$!%*?&]/, t('password_must_contain_special_characters')),
     confirmPassword: Yup.string()
       .required(t('password_confirm_is_required'))
       .oneOf([Yup.ref('password')], t('passwords_must_match')),
@@ -86,6 +93,14 @@ export default function ModernNewPasswordView() {
           ),
         }}
       />
+
+      {/* <Stepper alternativeLabel activeStep={passwordStrengthState} connector={<QontoConnector />}>
+        {STEPS.map((label) => (
+          <Step key={label}>
+            <StepLabel StepIconComponent={QontoStepIcon}>{t(label)}</StepLabel>
+          </Step>
+        ))}
+      </Stepper> */}
 
       <RHFTextField
         name="confirmPassword"

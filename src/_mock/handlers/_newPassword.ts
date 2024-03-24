@@ -10,7 +10,7 @@ const RESPONSE_VALID = {
   status: 'ok',
 } as const;
 const RESPONSE_INVALID = {
-  message: 'رمز عبور باید حداقل ۸ کاراکتر و شامل حروف بزرگ و کوچک و عدد باشد.',
+  message: 'رمز عبور وارد شده سختی کافی ندارد.',
   status: 'failed',
 } as const;
 // ------------------------Types----------------------------------------------
@@ -41,8 +41,8 @@ export const mockSetNewPassword = http.post<Params, RequestBody, ResponseBody>(
     if (
       password !== confirm_password ||
       !passwordData.contains.includes('number') ||
-      !passwordData.contains.includes('uppercase') ||
       !passwordData.contains.includes('lowercase') ||
+      !passwordData.contains.includes('symbol') ||
       password.length < 8
     ) {
       return HttpResponse.json(RESPONSE_INVALID, {
