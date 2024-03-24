@@ -16,7 +16,6 @@ import { RouterLink } from 'src/routes/components';
 import { IRANIAN_MOBILE_NUMBER_REGEX, IRANIAN_NATIONAL_CODE_REGEX } from 'src/utils/regExp';
 
 import { useTranslate } from 'src/locales';
-import { PasswordIcon } from 'src/assets/icons';
 import { forgetPasswordApi } from 'src/api/forget-password.api';
 
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
@@ -99,7 +98,7 @@ export default function ModernForgotPasswordView() {
 
   const renderHead = (
     <>
-      <PasswordIcon sx={{ height: 96 }} />
+      {/* <PasswordIcon sx={{ height: 96 }} /> */}
 
       <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
         <Typography variant="h3">{t('forget_password')}</Typography>
