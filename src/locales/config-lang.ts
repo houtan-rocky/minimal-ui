@@ -35,6 +35,17 @@ export const allLangs = [
       currency: 'AED',
     },
   },
+  {
+    label: 'Farsi',
+    value: 'fa',
+    systemValue: merge(arSDDataGrid, arSACore),
+    adapterLocale: arSAAdapter,
+    icon: 'flagpack:ir',
+    numberFormat: {
+      code: 'fa',
+      currency: 'IRR',
+    },
+  },
 ];
 
 export const defaultLang = allLangs[0]; // English

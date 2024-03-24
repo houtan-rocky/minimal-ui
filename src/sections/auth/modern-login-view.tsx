@@ -37,7 +37,7 @@ export default function ModernLoginView() {
   const [errorMsg, setErrorMsg] = useState('');
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().required(t('username_is_required')),
+    email: Yup.string().email(t('email_invalid')).required(t('username_is_required')),
     password: Yup.string().required(t('password_is_required')),
   });
 
