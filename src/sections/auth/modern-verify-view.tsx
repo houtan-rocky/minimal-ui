@@ -18,7 +18,6 @@ import { IRANIAN_MOBILE_NUMBER_REGEX } from 'src/utils/regExp';
 
 import { useTranslate } from 'src/locales';
 import { verifyApi } from 'src/api/verify.api';
-import { EmailInboxIcon } from 'src/assets/icons';
 
 import FormProvider, { RHFCode } from 'src/components/hook-form';
 
@@ -147,10 +146,10 @@ export default function ModernVerifyView() {
 
   const renderHead = (
     <>
-      <EmailInboxIcon sx={{ height: 96 }} />
+      {/* <EmailInboxIcon sx={{ height: 96 }} /> */}
 
       <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h3">{t('enter_the_verification_code')}</Typography>
+        <Typography variant="h5">{t('enter_the_verification_code')}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {t('the_verification_code_has_been_sent_to_the_following_mobile_number', {
