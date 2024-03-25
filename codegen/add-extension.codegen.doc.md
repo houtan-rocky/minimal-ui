@@ -1,96 +1,87 @@
-<div id="message-text-1e72b6fa-6f61-45a5-be5c-be988c5c13f4" class=" markdown prose w-full flex flex-col break-words dark:prose-invert">
-    <h1>Project Update Utility Documentation</h1>
-<h2>Overview</h2>
-<p>The Project Update Utility (<code>updateProject</code>) is a command-line tool designed to help developers refactor their codebase by renaming React component files and updating their references throughout a web development project. This utility automates the renaming of component files to follow a new naming convention and ensures that all references to these components are correctly updated in the project's code files.</p>
-<h2>Features</h2>
-<ul>
-<li>
-<strong>Recursive Directory Traversal</strong>: Searches through all directories and subdirectories from a given root directory for React component files.</li>
-<li>
-<strong>Smart Renaming</strong>: Renames <code>.jsx</code> and <code>.tsx</code> files according to a specified naming convention, appending a custom extension before the existing file extension.</li>
-<li>
-<strong>Reference Updates</strong>: Scans all project files for import statements referencing the renamed component files and updates those references to the new file names.</li>
-<li>
-<strong>Ignore Patterns</strong>: Supports exclusion of files and directories by specifying patterns in a <code>.codegenignore</code> file, similar to <code>.gitignore</code>.</li>
-</ul>
-<h2>Prerequisites</h2>
-<ul>
-<li>A Unix-like operating system (Linux, macOS) or Windows with a compatible shell.</li>
-<li>Basic command-line interface (CLI) knowledge.</li>
-</ul>
-<h2>Installation</h2>
-<p>Currently, the <code>updateProject</code> utility does not have an automated installation process. You need to compile the source code manually using a C++ compiler that supports C++17 or later.</p>
-<ol>
-<li>
-<p>Clone or download the utility's source code to your local machine.</p>
-</li>
-<li>
-<p>Navigate to the source code directory.</p>
-</li>
-<li>
-<p>Compile the source code using a C++ compiler. For example, using <code>g++</code>:</p>
-<pre dir="ltr" class="w-full"><div class="dark bg-black mb-4 rounded-md">
+File Renaming and Reference Update Utility Documentation
+========================================================
 
-<div class="p-4 overflow-y-auto">
-<code class="!whitespace-pre hljs language-sh">g++ -std=c++17 updateProject.cpp -o updateProject
-</code>
-</div>
-</div>
-</pre>
-</li>
-</ol>
-<h2>Usage</h2>
-<p>To use the <code>updateProject</code> utility, follow these steps:</p>
-<h3>Basic Command Structure</h3>
-<pre dir="ltr" class="w-full" grepper_trigger_added="1" style="position: relative;"><div class="dark bg-black mb-4 rounded-md">
+Overview
+--------
 
-<div class="p-4 overflow-y-auto">
-<code class="!whitespace-pre hljs language-sh">./updateProject &lt;project_root_path&gt; &lt;new_extension&gt; &lt;ignore_file_path&gt;
-</code>
-</div>
-</div>
-<div class="open_grepper_editor gpt_grepper_add_answer_trigger" title="Edit &amp; Save To Grepper">Save to grepper</div>
-</pre>
-<ul>
-<li>
-<code>&lt;project_root_path&gt;</code>: The path to the root directory of your project where the script starts processing.</li>
-<li>
-<code>&lt;new_extension&gt;</code>: The new extension (or part of the new file naming convention) you're adding to your React component files. This should include the period (<code>.</code>) at the beginning.</li>
-<li>
-<code>&lt;ignore_file_path&gt;</code>: The path to your <code>.codegenignore</code> file, which specifies the files or patterns to ignore during processing.</li>
-</ul>
-<h3>Example Command</h3>
-<pre dir="ltr" class="w-full" grepper_trigger_added="1" style="position: relative;"><div class="dark bg-black mb-4 rounded-md">
+The File Renaming and Reference Update Utility is a versatile command-line tool designed to assist developers in refactoring their codebases. It automates the process of renaming files within a specified directory (and its subdirectories) by appending a new extension to the filenames before their existing extension. Additionally, it updates all references to these renamed files across various code files, ensuring consistency and integrity within the project.
 
-<div class="p-4 overflow-y-auto">
-<code class="!whitespace-pre hljs language-sh">./updateProject /path/to/my/react/project .component /path/to/my/react/project/.codegenignore
-</code>
-</div>
-</div>
-<div class="open_grepper_editor gpt_grepper_add_answer_trigger" title="Edit &amp; Save To Grepper">Save to grepper</div>
-</pre>
-<p>This command tells the utility to start at <code>/path/to/my/react/project</code>, rename React component files by appending <code>.component</code> before their existing extension, and ignore files listed in <code>/path/to/my/react/project/.codegenignore</code>.</p>
-<h3>The <code>.codegenignore</code> File</h3>
-<p>Create a <code>.codegenignore</code> file in your project directory to specify files or directories that the utility should ignore. The format is similar to <code>.gitignore</code>, with one pattern per line:</p>
-<pre dir="ltr" class="w-full" grepper_trigger_added="1" style="position: relative;"><div class="dark bg-black mb-4 rounded-md">
+Features
+--------
 
-<div class="p-4 overflow-y-auto">
-<code class="!whitespace-pre hljs language-plaintext">node_modules/
-build/
-*.test.jsx
-*.test.tsx
-</code>
-</div>
-</div>
-<div class="open_grepper_editor gpt_grepper_add_answer_trigger" title="Edit &amp; Save To Grepper">Save to grepper</div>
-</pre>
-<h2>Best Practices</h2>
-<ul>
-<li>
-<strong>Backup Your Project</strong>: Always ensure you have a complete backup of your project before running the utility. This precaution helps prevent accidental data loss.</li>
-<li>
-<strong>Review Changes</strong>: After running the utility, review the changes made to your project files to ensure everything is as expected.</li>
-<li>
-<strong>Version Control</strong>: It's a good idea to commit changes to your version control system (e.g., Git) before and after running the utility. This practice makes it easier to track changes and revert them if necessary.</li>
-</ul>
+*   **Recursive File Renaming**: Automatically renames files, appending a specified extension before the file's original extension, across a specified directory and its subdirectories.
+*   **Smart Reference Updating**: Scans and updates references to the renamed files in code files, supporting a range of file types including `.js`, `.jsx`, `.ts`, and `.tsx`.
+*   **Ignore Pattern Support**: Excludes files and directories from being processed based on patterns specified in a `.codegenignore` file, similar to `.gitignore`.
+*   **Versatile File Support**: Operates on a wide array of file types, making it suitable for projects in languages like JavaScript, TypeScript, and frameworks like React.
+
+Prerequisites
+-------------
+
+*   A modern C++ compiler that supports C++17 or newer.
+*   Familiarity with the command-line interface (CLI).
+*   Basic understanding of regular expressions and file paths.
+
+Installation
+------------
+
+This utility must be compiled from the provided source code. Follow these steps to prepare the utility for use:
+
+1.  Ensure you have a C++ compiler installed that supports C++17 standards.
+
+2.  Save the provided source code to a file named `fileRenameUpdate.cpp`.
+
+3.  Open a terminal or command prompt.
+
+4.  Navigate to the directory containing `fileRenameUpdate.cpp`.
+
+5.  Compile the source code using the following command (example for `g++`):
+
+    sh
+
+    Copy code
+
+    `g++ -std=c++17 fileRenameUpdate.cpp -o fileRenameUpdate`
+
+
+Usage
+-----
+
+After compiling the utility, execute it from the command line by providing the required arguments.
+
+### Command Structure
+
+sh
+
+Copy code
+
+`./fileRenameUpdate <root_directory_path> <new_extension> <ignore_file_path>`
+
+*   `<root_directory_path>`: Path to the root directory of the project where files should be renamed.
+*   `<new_extension>`: The new extension to append to file names, before their existing extension.
+*   `<ignore_file_path>`: Path to the `.codegenignore` file containing patterns of files and directories to ignore.
+
+### Example Usage
+
+sh
+
+Copy code
+
+`./fileRenameUpdate /path/to/project .new /path/to/project/.codegenignore`
+
+This command will rename files in `/path/to/project`, appending `.new` before their current extension, and update references in the project accordingly. It will ignore files and directories specified in `/path/to/project/.codegenignore`.
+
+### The `.codegenignore` File
+
+The `.codegenignore` file should contain one pattern per line, specifying files and directories to be ignored during the renaming and reference updating process:
+
+Copy code
+
+`node_modules/ dist/ *.min.js`
+
+Best Practices
+--------------
+
+*   **Backup Your Project**: Always backup your project before running this utility to prevent accidental data loss.
+*   **Version Control**: Use a version control system like Git to track changes made by this utility. This approach allows easy reversion if necessary.
+*   **Test After Use**: After running the utility, thoroughly test your project to ensure that all references have been correctly updated and that there are no broken dependencies.
 

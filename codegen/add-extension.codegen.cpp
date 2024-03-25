@@ -1,66 +1,72 @@
-#include <fstream>
 #include <iostream>
 #include <filesystem>
-#include <unordered_map>
+#include <fstream>
 #include <vector>
 #include <string>
+#include <regex>
 
 namespace fs = std::filesystem;
 
 std::vector<std::string> loadIgnorePatterns(const std::string& ignoreFilePath) {
-    std::vector<std::string> patterns;
+    std::vector<std::string> ignorePatterns;
     std::ifstream file(ignoreFilePath);
     std::string line;
-    while (std::getline(file, line)) {
+    while (getline(file, line)) {
         if (!line.empty()) {
-            patterns.push_back(line);
+            ignorePatterns.push_back(line);
         }
     }
-    return patterns;
+    return ignorePatterns;
 }
 
-bool shouldIgnore(const fs::path& path, const std::vector<std::string>& ignorePatterns) {
+bool shouldIgnore(const fs::path& filePath, const std::vector<std::string>& ignorePatterns) {
     for (const auto& pattern : ignorePatterns) {
-        if (path.string().find(pattern) != std::string::npos) {
+        if (filePath.string().find(pattern) != std::string::npos) {
             return true;
         }
     }
     return false;
 }
 
-void updateFileReferences(const fs::path& filePath, const std::unordered_map<std::string, std::string>& renamedFiles) {
-    std::ifstream file(filePath);
-    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-    file.close();
+void updateFileReferences(const fs::path& dirPath, const std::string& originalFilename, const std::string& newFilename, const std::vector<std::string>& ignorePatterns) {
+    std::regex pattern("(['\"])" + originalFilename + "\\1");
+    std::string replacement = "$1" + newFilename + "$1";
+    for (const auto& entry : fs::recursive_directory_iterator(dirPath, fs::directory_options::skip_permission_denied)) {
+        if (entry.is_regular_file() && !shouldIgnore(entry.path(), ignorePatterns)) {
+            std::ifstream file(entry.path());
+            std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+            file.close();
 
-    bool modified = false;
-    for (const auto& [oldName, newName] : renamedFiles) {
-        if (content.find(oldName) != std::string::npos) {
-            content.replace(content.find(oldName), oldName.length(), newName);
-            modified = true;
+            if (std::regex_search(content, pattern)) {
+                std::string updatedContent = std::regex_replace(content, pattern, replacement);
+                std::ofstream outFile(entry.path());
+                outFile << updatedContent;
+                outFile.close();
+            }
         }
-    }
-
-    if (modified) {
-        std::ofstream outFile(filePath);
-        outFile << content;
-        outFile.close();
     }
 }
 
-void processDirectory(const fs::path& dirPath, const std::string& newExt, const std::vector<std::string>& ignorePatterns, std::unordered_map<std::string, std::string>& renamedFiles) {
+void renameFilesWithNewExtension(const fs::path& dirPath, const std::string& newExt, const std::vector<std::string>& ignorePatterns) {
     for (const auto& entry : fs::recursive_directory_iterator(dirPath, fs::directory_options::skip_permission_denied)) {
         if (entry.is_regular_file() && !shouldIgnore(entry.path(), ignorePatterns)) {
             fs::path filePath = entry.path();
             std::string originalFilename = filePath.filename().string();
             std::string originalStem = filePath.stem().string();
 
-            if (!filePath.extension().empty() && originalStem.find(newExt) == std::string::npos) {
+            if (originalFilename.find(newExt) == std::string::npos) {
                 std::string newFilename = originalStem + newExt + filePath.extension().string();
                 fs::path newFilePath = filePath.parent_path() / newFilename;
 
-                fs::rename(filePath, newFilePath);
-                renamedFiles[filePath.string()] = newFilePath.string();
+                try {
+                    fs::rename(filePath, newFilePath);
+                    std::cout << "Renamed: " << originalFilename << " to " << newFilename << std::endl;
+
+                    // Update references in other files
+                    updateFileReferences(dirPath, originalFilename, newFilename, ignorePatterns);
+                } catch (const fs::filesystem_error& e) {
+                    std::cerr << "Error renaming file: " << e.what() << std::endl;
+                }
             }
         }
     }
@@ -68,28 +74,20 @@ void processDirectory(const fs::path& dirPath, const std::string& newExt, const 
 
 int main(int argc, char* argv[]) {
     if (argc != 4) {
-        std::cerr << "Usage: " << argv[0] << " <root_directory_path> <new_extension> <.codegenignore_path>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <root_directory_path> <new_extension> <ignore_file_path>" << std::endl;
         return 1;
     }
 
-    std::string rootPath = argv[1];
+    fs::path rootDirPath = argv[1];
     std::string newExt = argv[2];
     std::string ignoreFilePath = argv[3];
-    auto ignorePatterns = loadIgnorePatterns(ignoreFilePath);
 
     if (newExt.front() != '.') {
         newExt = "." + newExt;
     }
 
-    std::unordered_map<std::string, std::string> renamedFiles;
-    processDirectory(rootPath, newExt, ignorePatterns, renamedFiles);
-
-    // Update references in all files except those ignored
-    for (const auto& entry : fs::recursive_directory_iterator(rootPath, fs::directory_options::skip_permission_denied)) {
-        if (entry.is_regular_file() && !shouldIgnore(entry.path(), ignorePatterns)) {
-            updateFileReferences(entry.path(), renamedFiles);
-        }
-    }
+    auto ignorePatterns = loadIgnorePatterns(ignoreFilePath);
+    renameFilesWithNewExtension(rootDirPath, newExt, ignorePatterns);
 
     return 0;
 }
