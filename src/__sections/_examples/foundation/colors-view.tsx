@@ -8,10 +8,10 @@ import { paths } from 'src/routes/paths';
 
 import { useCopyToClipboard } from 'src/hooks/use-copy-to-clipboard';
 
+import ComponentHero from 'src/__sections/_examples/component-hero';
+
 import { useSnackbar } from 'src/components/snackbar';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 // ----------------------------------------------------------------------
 

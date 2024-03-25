@@ -10,10 +10,9 @@ import { paths } from 'src/routes/paths';
 import { MAPBOX_API } from 'src/config-global';
 import { cities as CITIES } from 'src/__mock/map/cities';
 import { countries as COUNTRIES } from 'src/__mock/map/countries';
+import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import MapHeatmap from './heatmap';
 import MapClusters from './clusters';

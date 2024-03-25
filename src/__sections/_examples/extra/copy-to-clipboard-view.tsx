@@ -15,11 +15,11 @@ import { paths } from 'src/routes/paths';
 import { useDoubleClick } from 'src/hooks/use-double-click';
 import { useCopyToClipboard } from 'src/hooks/use-copy-to-clipboard';
 
+import ComponentHero from 'src/__sections/_examples/component-hero';
+
 import Iconify from 'src/components/iconify';
 import { useSnackbar } from 'src/components/snackbar';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 // ----------------------------------------------------------------------
 

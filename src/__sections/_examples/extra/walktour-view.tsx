@@ -15,6 +15,16 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { paths } from 'src/routes/paths';
 
 import { MotivationIllustration } from 'src/assets/illustrations';
+import ComponentHero from 'src/__sections/_examples/component-hero';
+import EcommerceWelcome from 'src/__sections/overview/e-commerce/ecommerce-welcome';
+import EcommerceNewProducts from 'src/__sections/overview/e-commerce/ecommerce-new-products';
+import EcommerceYearlySales from 'src/__sections/overview/e-commerce/ecommerce-yearly-sales';
+import EcommerceBestSalesman from 'src/__sections/overview/e-commerce/ecommerce-best-salesman';
+import EcommerceSaleByGender from 'src/__sections/overview/e-commerce/ecommerce-sale-by-gender';
+import EcommerceSalesOverview from 'src/__sections/overview/e-commerce/ecommerce-sales-overview';
+import EcommerceWidgetSummary from 'src/__sections/overview/e-commerce/ecommerce-widget-summary';
+import EcommerceLatestProducts from 'src/__sections/overview/e-commerce/ecommerce-latest-products';
+import EcommerceCurrentBalance from 'src/__sections/overview/e-commerce/ecommerce-current-balance';
 import {
   _mock,
   _ecommerceNewProducts,
@@ -26,17 +36,6 @@ import {
 import Iconify from 'src/components/iconify';
 import Walktour, { useWalktour } from 'src/components/walktour';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
-import EcommerceWelcome from 'src/__sections/overview/e-commerce/ecommerce-welcome';
-import EcommerceNewProducts from 'src/__sections/overview/e-commerce/ecommerce-new-products';
-import EcommerceYearlySales from 'src/__sections/overview/e-commerce/ecommerce-yearly-sales';
-import EcommerceBestSalesman from 'src/__sections/overview/e-commerce/ecommerce-best-salesman';
-import EcommerceSaleByGender from 'src/__sections/overview/e-commerce/ecommerce-sale-by-gender';
-import EcommerceSalesOverview from 'src/__sections/overview/e-commerce/ecommerce-sales-overview';
-import EcommerceWidgetSummary from 'src/__sections/overview/e-commerce/ecommerce-widget-summary';
-import EcommerceLatestProducts from 'src/__sections/overview/e-commerce/ecommerce-latest-products';
-import EcommerceCurrentBalance from 'src/__sections/overview/e-commerce/ecommerce-current-balance';
 
 // ----------------------------------------------------------------------
 

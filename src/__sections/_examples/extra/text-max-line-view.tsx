@@ -6,10 +6,10 @@ import CardContent from '@mui/material/CardContent';
 
 import { paths } from 'src/routes/paths';
 
+import ComponentHero from 'src/__sections/_examples/component-hero';
+
 import TextMaxLine from 'src/components/text-max-line';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 // ----------------------------------------------------------------------
 

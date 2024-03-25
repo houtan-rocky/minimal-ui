@@ -9,10 +9,10 @@ import CardContent from '@mui/material/CardContent';
 
 import { paths } from 'src/routes/paths';
 
+import ComponentHero from 'src/__sections/_examples/component-hero';
+
 import ScrollProgress from 'src/components/scroll-progress';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 // ----------------------------------------------------------------------
 

@@ -2,6 +2,7 @@ import { Profiler } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
+
 import ModernVerifyRegisterView from 'src/sections/auth/modern-verify-register-view';
 
 // ----------------------------------------------------------------------

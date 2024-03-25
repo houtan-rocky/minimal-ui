@@ -8,10 +8,9 @@ import CardContent from '@mui/material/CardContent';
 import { paths } from 'src/routes/paths';
 
 import { _mock } from 'src/__mock';
+import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import CarouselBasic1 from './carousel-basic-1';
 import CarouselBasic2 from './carousel-basic-2';

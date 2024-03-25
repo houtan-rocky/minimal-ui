@@ -11,11 +11,11 @@ import IconButton from '@mui/material/IconButton';
 
 import { paths } from 'src/routes/paths';
 
+import ComponentHero from 'src/__sections/_examples/component-hero';
+
 import Iconify from 'src/components/iconify';
 import { varHover } from 'src/components/animate';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import ComponentBlock from '../component-block';
 

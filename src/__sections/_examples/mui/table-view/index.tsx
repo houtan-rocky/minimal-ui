@@ -5,9 +5,9 @@ import CardHeader from '@mui/material/CardHeader';
 
 import { paths } from 'src/routes/paths';
 
-import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
 import ComponentHero from 'src/__sections/_examples/component-hero';
+
+import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
 import BasicTable from './basic-table';
 import CollapsibleTable from './collapsible-table';

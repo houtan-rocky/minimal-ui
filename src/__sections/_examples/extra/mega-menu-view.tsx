@@ -16,6 +16,7 @@ import { usePathname } from 'src/routes/hooks';
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import { _mock } from 'src/__mock';
+import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
@@ -26,8 +27,6 @@ import {
   MegaMenuDesktopVertical,
   MegaMenuDesktopHorizontal,
 } from 'src/components/mega-menu';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 // ----------------------------------------------------------------------
 

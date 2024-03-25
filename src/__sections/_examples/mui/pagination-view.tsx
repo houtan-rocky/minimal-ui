@@ -7,9 +7,9 @@ import TablePagination from '@mui/material/TablePagination';
 
 import { paths } from 'src/routes/paths';
 
-import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
 import ComponentHero from 'src/__sections/_examples/component-hero';
+
+import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
 import ComponentBlock from '../component-block';
 

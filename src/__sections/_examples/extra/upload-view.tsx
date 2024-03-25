@@ -15,11 +15,11 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 import { fData } from 'src/utils/format-number';
 
+import ComponentHero from 'src/__sections/_examples/component-hero';
+
 import Iconify from 'src/components/iconify';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 import { Upload, UploadBox, UploadAvatar } from 'src/components/upload';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 // ----------------------------------------------------------------------
 

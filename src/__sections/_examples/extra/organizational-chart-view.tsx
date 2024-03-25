@@ -5,11 +5,10 @@ import Container from '@mui/material/Container';
 import { paths } from 'src/routes/paths';
 
 import { _mock } from 'src/__mock';
+import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 import OrganizationalChart from 'src/components/organizational-chart';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import ComponentBlock from '../component-block';
 

@@ -19,6 +19,8 @@ import { paths } from 'src/routes/paths';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
+import ComponentHero from 'src/__sections/_examples/component-hero';
+
 import Logo from 'src/components/logo';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
@@ -29,8 +31,6 @@ import {
   NavSectionVertical,
   NavSectionHorizontal,
 } from 'src/components/nav-section';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 // ----------------------------------------------------------------------
 

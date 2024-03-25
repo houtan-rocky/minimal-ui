@@ -4,10 +4,10 @@ import Container from '@mui/material/Container';
 
 import { paths } from 'src/routes/paths';
 
+import ComponentHero from 'src/__sections/_examples/component-hero';
+
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 import { useSnackbar, VariantType, SnackbarOrigin } from 'src/components/snackbar';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import ComponentBlock from '../component-block';
 

@@ -19,11 +19,10 @@ import { paths } from 'src/routes/paths';
 import { fData, fNumber, fPercent, fCurrency, fShortenNumber } from 'src/utils/format-number';
 
 import { useLocales, useTranslate } from 'src/locales';
+import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import Iconify from 'src/components/iconify';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 // ----------------------------------------------------------------------
 

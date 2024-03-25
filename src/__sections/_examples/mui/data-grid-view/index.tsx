@@ -9,10 +9,9 @@ import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
 
 import { _mock } from 'src/__mock';
+import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
-
-import ComponentHero from 'src/__sections/_examples/component-hero';
 
 import DataGridBasic from './data-grid-basic';
 import DataGridCustom from './data-grid-custom';
