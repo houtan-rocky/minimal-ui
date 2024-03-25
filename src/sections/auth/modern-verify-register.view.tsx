@@ -19,7 +19,7 @@ import { IRANIAN_MOBILE_NUMBER_REGEX } from 'src/utils/regExp.util';
 import { useTranslate } from 'src/locales';
 import { useAuthContext } from 'src/auth/hooks';
 import { EmailInboxIcon } from 'src/assets/icons';
-import { verifyRegister } from 'src/api/verify-register';
+import { verifyRegister } from 'src/api/verify-register.api';
 
 import FormProvider, { RHFCode } from 'src/components/hook-form';
 
