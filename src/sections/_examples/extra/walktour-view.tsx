@@ -21,7 +21,7 @@ import {
   _ecommerceBestSalesman,
   _ecommerceSalesOverview,
   _ecommerceLatestProducts,
-} from 'src/_mock';
+} from 'src/__mock';
 
 import Iconify from 'src/components/iconify';
 import Walktour, { useWalktour } from 'src/components/walktour';

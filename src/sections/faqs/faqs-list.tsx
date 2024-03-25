@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 
-import { _faqs } from 'src/_mock';
+import { _faqs } from 'src/__mock';
 
 import Iconify from 'src/components/iconify';
 

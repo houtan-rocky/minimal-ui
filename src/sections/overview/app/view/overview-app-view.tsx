@@ -7,7 +7,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 
 import { SeoIllustration } from 'src/assets/illustrations';
-import { _appAuthors, _appRelated, _appFeatured, _appInvoices, _appInstalled } from 'src/_mock';
+import { _appAuthors, _appRelated, _appFeatured, _appInvoices, _appInstalled } from 'src/__mock';
 
 import { useSettingsContext } from 'src/components/settings';
 

@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import checker from 'vite-plugin-checker';
@@ -6,9 +7,24 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // ----------------------------------------------------------------------
 
+function excludeMsw() {
+  return {
+    name: 'exclude-msw',
+    resolveId(source: any) {
+      return source === 'virtual-module' ? source : null;
+    },
+    renderStart(outputOptions: any, _inputOptions: any) {
+      const outDir = outputOptions.dir;
+      const msWorker = path.resolve(outDir, 'mockServiceWorker.js');
+      fs.rm(msWorker, () => console.log(`Deleted ${msWorker}`));
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
     react(),
+    excludeMsw(),
     checker({
       typescript: true,
       eslint: {

@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import { _mapContact } from 'src/_mock';
+import { _mapContact } from 'src/__mock';
 
 import ContactMap from '../contact-map';
 import ContactHero from '../contact-hero';

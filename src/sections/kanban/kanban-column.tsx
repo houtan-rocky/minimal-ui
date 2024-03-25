@@ -15,7 +15,7 @@ import {
   clearColumn,
   updateColumn,
   deleteColumn,
-} from 'src/api/kanban';
+} from 'src/__api/kanban';
 
 import Iconify from 'src/components/iconify';
 import { useSnackbar } from 'src/components/snackbar';

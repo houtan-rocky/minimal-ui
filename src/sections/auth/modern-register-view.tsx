@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -8,20 +9,30 @@ import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { paths } from 'src/routes/paths';
+import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
+import { IRANIAN_MOBILE_NUMBER_REGEX, IRANIAN_NATIONAL_CODE_REGEX } from 'src/utils/regExp';
+
 import { useTranslate } from 'src/locales';
+import { registerApi } from 'src/api/register.api';
 
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function ModernRegisterView() {
+  const router = useRouter();
+  const [errorMsg, setErrorMsg] = useState('');
   const { t } = useTranslate();
 
   const RegisterSchema = Yup.object().shape({
-    nationalCode: Yup.string().required(t('national_code_is_required')),
-    mobileNumber: Yup.string().required(t('mobile_number_is_required')),
+    nationalCode: Yup.string()
+      .required(t('national_code_is_required'))
+      .matches(IRANIAN_NATIONAL_CODE_REGEX, t('national_code_is_invalid')),
+    mobileNumber: Yup.string()
+      .required(t('mobile_number_is_required'))
+      .matches(IRANIAN_MOBILE_NUMBER_REGEX, t('mobile_number_is_invalid')),
     referralCode: Yup.string(),
   });
 
@@ -43,10 +54,13 @@ export default function ModernRegisterView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      console.info('DATA', data);
+      const res = await registerApi(data.nationalCode, data.mobileNumber, data.referralCode || '');
+      if (res.status === 'ok') {
+        router.push(paths.auth.jwt.verifyRegister(data.mobileNumber));
+      }
     } catch (error) {
       console.error(error);
+      setErrorMsg(typeof error === 'string' ? error : error.message);
     }
   });
 
@@ -107,12 +121,21 @@ export default function ModernRegisterView() {
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      {renderHead}
+    <>
+      {errorMsg && (
+        <Stack spacing={2} sx={{ mb: 5 }}>
+          <Typography variant="h4" color="error">
+            {errorMsg}
+          </Typography>
+        </Stack>
+      )}
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        {renderHead}
 
-      {renderForm}
+        {renderForm}
 
-      {renderTerms}
-    </FormProvider>
+        {renderTerms}
+      </FormProvider>
+    </>
   );
 }

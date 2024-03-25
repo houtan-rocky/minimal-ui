@@ -16,8 +16,8 @@ import { RouterLink } from 'src/routes/components';
 
 import { fShortenNumber } from 'src/utils/format-number';
 
-import { useGetPost } from 'src/api/blog';
-import { POST_PUBLISH_OPTIONS } from 'src/_mock';
+import { useGetPost } from 'src/__api/blog';
+import { POST_PUBLISH_OPTIONS } from 'src/__mock';
 
 import Iconify from 'src/components/iconify';
 import Markdown from 'src/components/markdown';

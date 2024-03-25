@@ -2,8 +2,10 @@ import { useMemo, useEffect, useReducer, useCallback } from 'react';
 
 import axios, { endpoints } from 'src/utils/axios';
 
+import { loginApi } from 'src/api/login.api';
+
 import { AuthContext } from './auth-context';
-import { setSession, isValidToken } from './utils';
+import { setSession, setStorage, isValidToken } from './utils';
 import { AuthUserType, ActionMapType, AuthStateType } from '../../types';
 
 // ----------------------------------------------------------------------
@@ -84,7 +86,11 @@ export function AuthProvider({ children }: Props) {
 
   const initialize = useCallback(async () => {
     try {
-      const accessToken = sessionStorage.getItem(STORAGE_KEY);
+      let accessToken = sessionStorage.getItem(STORAGE_KEY);
+
+      if (!accessToken) {
+        accessToken = localStorage.getItem(STORAGE_KEY);
+      }
 
       if (accessToken && isValidToken(accessToken)) {
         setSession(accessToken);
@@ -126,17 +132,40 @@ export function AuthProvider({ children }: Props) {
   }, [initialize]);
 
   // LOGIN
-  const login = useCallback(async (email: string, password: string) => {
-    const data = {
-      email,
-      password,
-    };
+  const login = useCallback(
+    async (email: string, password: string, rememberMe: boolean): Promise<undefined> => {
+      const res = await loginApi(email, password);
 
-    const res = await axios.post(endpoints.auth.login, data);
+      const { accessToken, user } = res;
 
-    const { accessToken, user } = res.data;
+      setSession(accessToken);
 
+      dispatch({
+        type: Types.LOGIN,
+        payload: {
+          user: {
+            ...user,
+            accessToken,
+          },
+        },
+      });
+
+      if (rememberMe) {
+        localStorage.setItem(STORAGE_KEY, accessToken);
+      } else {
+        sessionStorage.setItem(STORAGE_KEY, accessToken);
+      }
+    },
+    []
+  );
+
+  // LOGIN WITH TOKEN
+  const loginWithToken = useCallback(async (accessToken: string) => {
     setSession(accessToken);
+
+    const res = await axios.get(endpoints.auth.me);
+
+    const { user } = res.data;
 
     dispatch({
       type: Types.LOGIN,
@@ -180,6 +209,7 @@ export function AuthProvider({ children }: Props) {
 
   // LOGOUT
   const logout = useCallback(async () => {
+    setStorage(null);
     setSession(null);
     dispatch({
       type: Types.LOGOUT,
@@ -201,10 +231,11 @@ export function AuthProvider({ children }: Props) {
       unauthenticated: status === 'unauthenticated',
       //
       login,
+      loginWithToken,
       register,
       logout,
     }),
-    [login, logout, register, state.user, status]
+    [login, loginWithToken, logout, register, state.user, status]
   );
 
   return <AuthContext.Provider value={memoizedValue}>{children}</AuthContext.Provider>;

@@ -36,7 +36,7 @@ import { paths } from 'src/routes/paths';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _mock } from 'src/_mock';
+import { _mock } from 'src/__mock';
 
 import Label from 'src/components/label';
 import Image from 'src/components/image';

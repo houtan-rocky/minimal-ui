@@ -27,7 +27,7 @@ import {
   PRODUCT_GENDER_OPTIONS,
   PRODUCT_COLOR_NAME_OPTIONS,
   PRODUCT_CATEGORY_GROUP_OPTIONS,
-} from 'src/_mock';
+} from 'src/__mock';
 
 import { useSnackbar } from 'src/components/snackbar';
 import FormProvider, {

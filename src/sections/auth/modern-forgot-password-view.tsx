@@ -1,33 +1,45 @@
 import * as Yup from 'yup';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Link from '@mui/material/Link';
+import { Alert } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { paths } from 'src/routes/paths';
+import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
+
+import { IRANIAN_MOBILE_NUMBER_REGEX, IRANIAN_NATIONAL_CODE_REGEX } from 'src/utils/regExp';
 
 import { useTranslate } from 'src/locales';
 import { PasswordIcon } from 'src/assets/icons';
+import { forgetPasswordApi } from 'src/api/forget-password.api';
 
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function ModernForgotPasswordView() {
+  const router = useRouter();
   const { t } = useTranslate();
+  const [errorMsg, setErrorMsg] = useState('');
 
   const ForgotPasswordSchema = Yup.object().shape({
-    nationalCode: Yup.string().required(t('national_code_is_required')),
-    mobileNumber: Yup.string().required(t('mobile_number_is_required')),
+    nationalCode: Yup.string()
+      .matches(IRANIAN_NATIONAL_CODE_REGEX, t('national_code_invalid'))
+      .required(t('national_code_is_required')),
+    mobileNumber: Yup.string()
+      .matches(IRANIAN_MOBILE_NUMBER_REGEX, t('mobile_number_invalid'))
+      .required(t('mobile_number_is_required')),
   });
 
   const defaultValues = {
-    nationalCode: '',
-    mobileNumber: '',
+    nationalCode: '1234567890',
+    mobileNumber: '09123456789',
   };
 
   const methods = useForm({
@@ -42,10 +54,14 @@ export default function ModernForgotPasswordView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      console.info('DATA', data);
+      const res = await forgetPasswordApi(data.nationalCode, data.mobileNumber);
+
+      if (res.status === 'ok') {
+        router.push(`${paths.auth.jwt.verify(data.mobileNumber)}`);
+      }
     } catch (error) {
       console.error(error);
+      setErrorMsg(error.message);
     }
   });
 
@@ -96,10 +112,17 @@ export default function ModernForgotPasswordView() {
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      {renderHead}
+    <>
+      {!!errorMsg && (
+        <Alert severity="error" sx={{ mb: 3 }}>
+          {errorMsg}
+        </Alert>
+      )}
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        {renderHead}
 
-      {renderForm}
-    </FormProvider>
+        {renderForm}
+      </FormProvider>
+    </>
   );
 }

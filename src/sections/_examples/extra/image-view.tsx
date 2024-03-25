@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 
 import { paths } from 'src/routes/paths';
 
-import { _mock } from 'src/_mock';
+import { _mock } from 'src/__mock';
 
 import Image from 'src/components/image';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';

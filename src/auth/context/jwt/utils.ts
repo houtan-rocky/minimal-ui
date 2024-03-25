@@ -1,5 +1,7 @@
 import { paths } from 'src/routes/paths';
 
+import { removeStorage } from 'src/hooks/use-local-storage';
+
 import axios from 'src/utils/axios';
 
 // ----------------------------------------------------------------------
@@ -70,5 +72,15 @@ export const setSession = (accessToken: string | null) => {
     sessionStorage.removeItem('accessToken');
 
     delete axios.defaults.headers.common.Authorization;
+  }
+};
+
+// ----------------------------------------------------------------------
+
+export const setStorage = (accessToken: string | null) => {
+  if (accessToken) {
+    localStorage.setItem('accessToken', accessToken);
+  } else {
+    removeStorage('accessToken');
   }
 };

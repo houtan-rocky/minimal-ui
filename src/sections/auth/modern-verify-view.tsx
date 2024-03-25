@@ -1,16 +1,23 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Link from '@mui/material/Link';
+import { Alert } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { paths } from 'src/routes/paths';
+import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
+import { IRANIAN_MOBILE_NUMBER_REGEX } from 'src/utils/regExp';
+
 import { useTranslate } from 'src/locales';
+import { verifyApi } from 'src/api/verify.api';
 import { EmailInboxIcon } from 'src/assets/icons';
 
 import FormProvider, { RHFCode } from 'src/components/hook-form';
@@ -18,12 +25,40 @@ import FormProvider, { RHFCode } from 'src/components/hook-form';
 // ----------------------------------------------------------------------
 
 export default function ModernVerifyView() {
+  const router = useRouter();
   const { t } = useTranslate();
+  const searchParams = useSearchParams();
+
+  const [errorMsg, setErrorMsg] = useState('');
 
   const VerifySchema = Yup.object().shape({
     code: Yup.string().required(t('code_is_required')).min(4, t('code_must_be_4_characters')),
   });
 
+  /**
+   * If the mobile number is not valid, redirect to the forgot password page
+   */
+  const mobile_number = searchParams[0].get('mobile_number');
+  const is_register = searchParams[0].get('is_register');
+  useEffect(() => {
+    if (
+      !mobile_number ||
+      !mobile_number.match(IRANIAN_MOBILE_NUMBER_REGEX) ||
+      mobile_number === 'null'
+    ) {
+      console.log(
+        !mobile_number,
+        !mobile_number?.match(IRANIAN_MOBILE_NUMBER_REGEX),
+        mobile_number === 'null',
+        'googooli'
+      );
+      router.push(paths.auth.jwt.forgotPassword);
+    }
+  }, [mobile_number, router]);
+
+  /**
+   * Form Stuff
+   */
   const defaultValues = {
     code: '',
   };
@@ -41,10 +76,19 @@ export default function ModernVerifyView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      console.info('DATA', data);
+      const res = await verifyApi(data.code);
+      console.log(res, 'sdlfkjewlk');
+      if (res.status === 'ok') {
+        if (is_register === 'true') {
+          // await login?.(data.username, data.password, data.rememberMe)
+          // router.push(returnTo || PATH_AFTER_LOGIN)
+        } else {
+          router.push(paths.auth.jwt.newPassword);
+        }
+      }
     } catch (error) {
       console.error(error);
+      setErrorMsg(error.message);
     }
   });
 
@@ -77,7 +121,7 @@ export default function ModernVerifyView() {
 
       <Link
         component={RouterLink}
-        href={paths.auth.jwt.register}
+        href={paths.auth.jwt.forgotPassword}
         color="inherit"
         variant="subtitle2"
         sx={{
@@ -98,17 +142,26 @@ export default function ModernVerifyView() {
         <Typography variant="h3">{t('enter_the_verification_code')}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {t('the_verification_code_has_been_sent_to_the_following_mobile_number')}
+          {t('the_verification_code_has_been_sent_to_the_following_mobile_number', {
+            mobile_number: searchParams[0].get('mobile_number'),
+          })}
         </Typography>
       </Stack>
     </>
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      {renderHead}
+    <>
+      {!!errorMsg && (
+        <Alert severity="error" sx={{ mb: 3 }}>
+          {errorMsg}
+        </Alert>
+      )}
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        {renderHead}
 
-      {renderForm}
-    </FormProvider>
+        {renderForm}
+      </FormProvider>
+    </>
   );
 }

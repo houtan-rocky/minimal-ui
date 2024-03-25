@@ -1,7 +1,9 @@
 import * as Yup from 'yup';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { Alert } from '@mui/material';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
@@ -10,26 +12,37 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import { paths } from 'src/routes/paths';
+import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import { useTranslate } from 'src/locales';
 import { SentIcon } from 'src/assets/icons';
+import { setNewPasswordApi } from 'src/api/set-new-password.api';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
+// const STEPS = ['weak', 'medium', 'strong']
+
 export default function ModernNewPasswordView() {
   const { t } = useTranslate();
   const password = useBoolean();
+  const [errorMsg, setErrorMsg] = useState('');
+  // const [passwordStrengthState, setPasswordStrengthState] = useState(0)
+  const router = useRouter();
 
   const NewPasswordSchema = Yup.object().shape({
-    password: Yup.string().required(t('password_is_required')).min(8, t('password_condition')),
+    password: Yup.string()
+      .required(t('password_is_required'))
+      .matches(/[a-zA-Z]/, t('password_must_contain_letters'))
+      .matches(/\d/, t('password_must_contain_numbers'))
+      .matches(/[@$!%*?&]/, t('password_must_contain_special_characters')),
     confirmPassword: Yup.string()
-      .required('password_confirm_is_required')
+      .required(t('password_confirm_is_required'))
       .oneOf([Yup.ref('password')], t('passwords_must_match')),
   });
 
@@ -51,9 +64,15 @@ export default function ModernNewPasswordView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      const res = await setNewPasswordApi(data.password, data.confirmPassword);
+
+      if (res.status === 'ok') {
+        console.info('MESSAGE', res.message);
+        router.push(paths.auth.jwt.login);
+      }
       console.info('DATA', data);
     } catch (error) {
+      setErrorMsg(error.message);
       console.error(error);
     }
   });
@@ -74,6 +93,14 @@ export default function ModernNewPasswordView() {
           ),
         }}
       />
+
+      {/* <Stepper alternativeLabel activeStep={passwordStrengthState} connector={<QontoConnector />}>
+        {STEPS.map((label) => (
+          <Step key={label}>
+            <StepLabel StepIconComponent={QontoStepIcon}>{t(label)}</StepLabel>
+          </Step>
+        ))}
+      </Stepper> */}
 
       <RHFTextField
         name="confirmPassword"
@@ -143,10 +170,17 @@ export default function ModernNewPasswordView() {
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      {renderHead}
+    <>
+      {!!errorMsg && (
+        <Alert severity="error" sx={{ mb: 3 }}>
+          {errorMsg}
+        </Alert>
+      )}
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        {renderHead}
 
-      {renderForm}
-    </FormProvider>
+        {renderForm}
+      </FormProvider>
+    </>
   );
 }

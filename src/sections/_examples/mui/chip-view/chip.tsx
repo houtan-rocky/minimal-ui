@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
-import { _mock } from 'src/_mock';
+import { _mock } from 'src/__mock';
 
 import Iconify from 'src/components/iconify';
 

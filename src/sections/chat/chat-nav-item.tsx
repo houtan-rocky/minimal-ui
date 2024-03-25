@@ -16,7 +16,7 @@ import { useRouter } from 'src/routes/hooks';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 
-import { clickConversation } from 'src/api/chat';
+import { clickConversation } from 'src/__api/chat';
 
 import { IChatConversation } from 'src/types/chat';
 

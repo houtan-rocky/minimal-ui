@@ -9,7 +9,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 
 import { paths } from 'src/routes/paths';
 
-import { _mock } from 'src/_mock';
+import { _mock } from 'src/__mock';
 
 import Iconify from 'src/components/iconify';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';

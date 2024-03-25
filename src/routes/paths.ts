@@ -1,6 +1,6 @@
 import { paramCase } from 'src/utils/change-case';
 
-import { _id, _postTitles } from 'src/_mock/assets';
+import { _id, _postTitles } from 'src/__mock/assets';
 
 // ----------------------------------------------------------------------
 
@@ -56,7 +56,9 @@ export const paths = {
       register: `${ROOTS.AUTH}/register`,
       forgotPassword: `${ROOTS.AUTH}/forgot-password`,
       newPassword: `${ROOTS.AUTH}/new-password`,
-      verify: `${ROOTS.AUTH}/verify`,
+      verify: (mobileNumber: string) => `${ROOTS.AUTH}/verify?mobile_number=${mobileNumber}`,
+      verifyRegister: (mobileNumber: string) =>
+        `${ROOTS.AUTH}/verify-register?mobile_number=${mobileNumber}`,
     },
   },
   // DASHBOARD

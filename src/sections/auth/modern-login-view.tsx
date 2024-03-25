@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { Box } from '@mui/system';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Alert from '@mui/material/Alert';
+import { useTheme } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -22,12 +24,14 @@ import { useAuthContext } from 'src/auth/hooks';
 import { PATH_AFTER_LOGIN } from 'src/config-global';
 
 import Iconify from 'src/components/iconify';
-import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import FormProvider, { RHFCheckbox, RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function ModernLoginView() {
   const { t } = useTranslate();
+  // using theme colors
+  const theme = useTheme();
 
   const { login } = useAuthContext();
   const password = useBoolean();
@@ -37,13 +41,15 @@ export default function ModernLoginView() {
   const [errorMsg, setErrorMsg] = useState('');
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().required(t('username_is_required')),
+    username: Yup.string().email(t('email_invalid')).required(t('username_is_required')),
     password: Yup.string().required(t('password_is_required')),
+    rememberMe: Yup.boolean().required(),
   });
 
   const defaultValues = {
-    email: 'demo@minimals.cc',
+    username: 'demo@minimals.cc',
     password: 'demo1234',
+    rememberMe: false,
   };
 
   const methods = useForm({
@@ -59,8 +65,7 @@ export default function ModernLoginView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await login?.(data.email, data.password);
-
+      await login?.(data.username, data.password, data.rememberMe);
       router.push(returnTo || PATH_AFTER_LOGIN);
     } catch (error) {
       console.error(error);
@@ -85,11 +90,12 @@ export default function ModernLoginView() {
 
   const renderForm = (
     <Stack spacing={2.5}>
-      <RHFTextField name="email" label={t('username')} />
+      <RHFTextField name="username" placeholder={t('username_placeholder')} label={t('username')} />
 
       <RHFTextField
         name="password"
         label={t('password')}
+        placeholder={t('password_placeholder')}
         type={password.value ? 'text' : 'password'}
         InputProps={{
           endAdornment: (
@@ -102,16 +108,19 @@ export default function ModernLoginView() {
         }}
       />
 
-      <Link
-        component={RouterLink}
-        href={paths.auth.jwt.forgotPassword}
-        variant="body2"
-        color="inherit"
-        underline="always"
-        sx={{ alignSelf: 'flex-end' }}
-      >
-        {t('forget_password')}
-      </Link>
+      <Box display="flex" justifyContent="space-between" alignItems="flex-center">
+        <RHFCheckbox name="rememberMe" label={t('remember_me')} />
+        <Link
+          component={RouterLink}
+          href={paths.auth.jwt.forgotPassword}
+          variant="body2"
+          color={theme.palette.primary.light}
+          underline="always"
+          sx={{ alignSelf: 'center' }}
+        >
+          {t('forget_password')}
+        </Link>
+      </Box>
 
       <LoadingButton
         fullWidth
@@ -125,7 +134,7 @@ export default function ModernLoginView() {
         {t('login')}
       </LoadingButton>
 
-      <LoadingButton
+      {/* <LoadingButton
         fullWidth
         color="inherit"
         size="large"
@@ -135,7 +144,7 @@ export default function ModernLoginView() {
         sx={{ justifyContent: 'center', pl: 2, pr: 1.5 }}
       >
         {t('login_with_one_time_password')}
-      </LoadingButton>
+      </LoadingButton> */}
     </Stack>
   );
 

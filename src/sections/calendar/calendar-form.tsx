@@ -15,7 +15,7 @@ import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import uuidv4 from 'src/utils/uuidv4';
 import { isAfter, fTimestamp } from 'src/utils/format-time';
 
-import { createEvent, updateEvent, deleteEvent } from 'src/api/calendar';
+import { createEvent, updateEvent, deleteEvent } from 'src/__api/calendar';
 
 import Iconify from 'src/components/iconify';
 import { useSnackbar } from 'src/components/snackbar';

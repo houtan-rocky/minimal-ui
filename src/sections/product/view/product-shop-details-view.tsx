@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { useGetProduct } from 'src/api/product';
+import { useGetProduct } from 'src/__api/product';
 
 import Iconify from 'src/components/iconify';
 import EmptyContent from 'src/components/empty-content';

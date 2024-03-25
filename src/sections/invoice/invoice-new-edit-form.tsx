@@ -12,7 +12,7 @@ import { useRouter } from 'src/routes/hooks';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { _addressBooks } from 'src/_mock';
+import { _addressBooks } from 'src/__mock';
 
 import FormProvider from 'src/components/hook-form';
 

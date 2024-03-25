@@ -15,7 +15,7 @@ import { paths } from 'src/routes/paths';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _homePlans } from 'src/_mock';
+import { _homePlans } from 'src/__mock';
 
 import Iconify from 'src/components/iconify';
 import { varFade, MotionViewport } from 'src/components/animate';

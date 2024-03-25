@@ -21,7 +21,7 @@ import { useRouter } from 'src/routes/hooks';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import { countries } from 'src/assets/data';
-import { _tags, _tourGuides, TOUR_SERVICE_OPTIONS } from 'src/_mock';
+import { _tags, _tourGuides, TOUR_SERVICE_OPTIONS } from 'src/__mock';
 
 import { useSnackbar } from 'src/components/snackbar';
 import FormProvider, {

@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 
 import { paths } from 'src/routes/paths';
 
-import { _mock } from 'src/_mock';
+import { _mock } from 'src/__mock';
 
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 

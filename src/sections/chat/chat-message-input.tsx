@@ -12,7 +12,7 @@ import { useMockedUser } from 'src/hooks/use-mocked-user';
 
 import uuidv4 from 'src/utils/uuidv4';
 
-import { sendMessage, createConversation } from 'src/api/chat';
+import { sendMessage, createConversation } from 'src/__api/chat';
 
 import Iconify from 'src/components/iconify';
 

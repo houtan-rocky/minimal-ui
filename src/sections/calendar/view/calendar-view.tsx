@@ -20,8 +20,8 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import { isAfter, isBetween } from 'src/utils/format-time';
 
-import { CALENDAR_COLOR_OPTIONS } from 'src/_mock/_calendar';
-import { updateEvent, useGetEvents } from 'src/api/calendar';
+import { CALENDAR_COLOR_OPTIONS } from 'src/__mock/_calendar';
+import { updateEvent, useGetEvents } from 'src/__api/calendar';
 
 import Iconify from 'src/components/iconify';
 import { useSettingsContext } from 'src/components/settings';

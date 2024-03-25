@@ -15,7 +15,7 @@ import { usePathname } from 'src/routes/hooks';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { _mock } from 'src/_mock';
+import { _mock } from 'src/__mock';
 
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';

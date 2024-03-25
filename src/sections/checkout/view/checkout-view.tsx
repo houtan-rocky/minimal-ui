@@ -2,7 +2,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
-import { PRODUCT_CHECKOUT_STEPS } from 'src/_mock/_product';
+import { PRODUCT_CHECKOUT_STEPS } from 'src/__mock/_product';
 
 import { useSettingsContext } from 'src/components/settings';
 
