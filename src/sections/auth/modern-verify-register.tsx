@@ -5,8 +5,8 @@ import { useSearchParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Link from '@mui/material/Link';
-import { Alert } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
@@ -26,6 +26,7 @@ import FormProvider, { RHFCode } from 'src/components/hook-form';
 // ----------------------------------------------------------------------
 
 export default function ModernVerifyRegisterView() {
+  const { palette } = useTheme();
   const router = useRouter();
   const { loginWithToken } = useAuthContext();
   const { t } = useTranslate();
@@ -92,6 +93,16 @@ export default function ModernVerifyRegisterView() {
   const renderForm = (
     <Stack spacing={3} alignItems="center">
       <RHFCode name="code" />
+      {!!errorMsg && (
+        <Typography
+          color={palette.error.main}
+          fontSize={14}
+          fontWeight={400}
+          sx={{ mb: 3, textAlign: 'center' }}
+        >
+          {errorMsg}
+        </Typography>
+      )}
 
       <LoadingButton
         fullWidth
@@ -148,17 +159,10 @@ export default function ModernVerifyRegisterView() {
   );
 
   return (
-    <>
-      {!!errorMsg && (
-        <Alert severity="error" sx={{ mb: 3 }}>
-          {errorMsg}
-        </Alert>
-      )}
-      <FormProvider methods={methods} onSubmit={onSubmit}>
-        {renderHead}
+    <FormProvider methods={methods} onSubmit={onSubmit}>
+      {renderHead}
 
-        {renderForm}
-      </FormProvider>
-    </>
+      {renderForm}
+    </FormProvider>
   );
 }

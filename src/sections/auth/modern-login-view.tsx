@@ -6,7 +6,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box } from '@mui/system';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import Alert from '@mui/material/Alert';
 import { useTheme } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -29,9 +28,9 @@ import FormProvider, { RHFCheckbox, RHFTextField } from 'src/components/hook-for
 // ----------------------------------------------------------------------
 
 export default function ModernLoginView() {
+  const { palette } = useTheme();
   const { t } = useTranslate();
   // using theme colors
-  const theme = useTheme();
 
   const { login } = useAuthContext();
   const password = useBoolean();
@@ -60,7 +59,7 @@ export default function ModernLoginView() {
   const {
     reset,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
@@ -90,9 +89,25 @@ export default function ModernLoginView() {
 
   const renderForm = (
     <Stack spacing={2.5}>
-      <RHFTextField name="username" placeholder={t('username_placeholder')} label={t('username')} />
+      {!!errorMsg && (
+        <Typography
+          color={palette.error.main}
+          fontSize={14}
+          fontWeight={400}
+          sx={{ mb: 3, textAlign: 'center' }}
+        >
+          {errorMsg}
+        </Typography>
+      )}
+      <RHFTextField
+        error={!!errorMsg || !!errors.username}
+        name="username"
+        placeholder={t('username_placeholder')}
+        label={t('username')}
+      />
 
       <RHFTextField
+        error={!!errorMsg || !!errors.password}
         name="password"
         label={t('password')}
         placeholder={t('password_placeholder')}
@@ -114,7 +129,7 @@ export default function ModernLoginView() {
           component={RouterLink}
           href={paths.auth.jwt.forgotPassword}
           variant="body2"
-          color={theme.palette.primary.light}
+          color={palette.primary.light}
           underline="always"
           sx={{ alignSelf: 'center' }}
         >
@@ -149,18 +164,10 @@ export default function ModernLoginView() {
   );
 
   return (
-    <>
-      {!!errorMsg && (
-        <Alert severity="error" sx={{ mb: 3 }}>
-          {errorMsg}
-        </Alert>
-      )}
+    <FormProvider methods={methods} onSubmit={onSubmit}>
+      {renderHead}
 
-      <FormProvider methods={methods} onSubmit={onSubmit}>
-        {renderHead}
-
-        {renderForm}
-      </FormProvider>
-    </>
+      {renderForm}
+    </FormProvider>
   );
 }

@@ -49,7 +49,7 @@ export default function ModernRegisterView() {
 
   const {
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
@@ -102,18 +102,21 @@ export default function ModernRegisterView() {
   const renderForm = (
     <Stack spacing={2.5}>
       <RHFTextField
+        error={!!errorMsg || !!errors.nationalCode}
         name="nationalCode"
         placeholder={t('national_code_placeholder')}
         label={t('national_code')}
       />
 
       <RHFTextField
+        error={!!errorMsg || !!errors.mobileNumber}
         name="mobileNumber"
         placeholder={t('mobile_number_placeholder')}
         label={t('mobile_number')}
       />
 
       <RHFTextField
+        error={!!errorMsg || !!errors.referralCode}
         name="referralCode"
         placeholder={t('referral_code_placeholder')}
         label={t('referral_code')}

@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Link from '@mui/material/Link';
-import { Alert } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
@@ -23,6 +23,7 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 // ----------------------------------------------------------------------
 
 export default function ModernForgotPasswordView() {
+  const { palette } = useTheme();
   const router = useRouter();
   const { t } = useTranslate();
   const [errorMsg, setErrorMsg] = useState('');
@@ -48,7 +49,7 @@ export default function ModernForgotPasswordView() {
 
   const {
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
@@ -66,9 +67,27 @@ export default function ModernForgotPasswordView() {
 
   const renderForm = (
     <Stack spacing={3} alignItems="center">
-      <RHFTextField name="nationalCode" label={t('national_code')} />
+      {!!errorMsg && (
+        <Typography
+          color={palette.error.main}
+          fontSize={14}
+          fontWeight={400}
+          sx={{ mb: 3, textAlign: 'center' }}
+        >
+          {errorMsg}
+        </Typography>
+      )}
+      <RHFTextField
+        error={!!errorMsg || !!errors.nationalCode}
+        name="nationalCode"
+        label={t('national_code')}
+      />
 
-      <RHFTextField name="mobileNumber" label={t('mobile_number')} />
+      <RHFTextField
+        error={!!errorMsg || !!errors.mobileNumber}
+        name="mobileNumber"
+        label={t('mobile_number')}
+      />
 
       <LoadingButton
         fullWidth
@@ -111,17 +130,10 @@ export default function ModernForgotPasswordView() {
   );
 
   return (
-    <>
-      {!!errorMsg && (
-        <Alert severity="error" sx={{ mb: 3 }}>
-          {errorMsg}
-        </Alert>
-      )}
-      <FormProvider methods={methods} onSubmit={onSubmit}>
-        {renderHead}
+    <FormProvider methods={methods} onSubmit={onSubmit}>
+      {renderHead}
 
-        {renderForm}
-      </FormProvider>
-    </>
+      {renderForm}
+    </FormProvider>
   );
 }

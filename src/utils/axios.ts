@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
+import i18n from 'src/locales/i18n';
 import { HOST_API } from 'src/config-global';
 
 // ----------------------------------------------------------------------
@@ -8,7 +9,10 @@ const axiosInstance = axios.create({ baseURL: HOST_API });
 
 axiosInstance.interceptors.response.use(
   (res) => res,
-  (error) => Promise.reject((error.response && error.response.data) || 'Something went wrong')
+  (error) => {
+    throw new Error(error.response.data.message || i18n.t('something_went_wrong'));
+  }
+  // Promise.reject((error.response && error.response.data) || i18n.t('something_went_wrong'))
 );
 
 export default axiosInstance;
