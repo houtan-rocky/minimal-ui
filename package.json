@@ -125,7 +125,8 @@
     "vite": "^5.0.7",
     "vite-plugin-checker": "^0.6.2",
     "vite-plugin-pwa": "^0.19.7",
-    "vitest": "^1.4.0"
+    "vitest": "^1.4.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   },
   "msw": {
     "workerDirectory": [

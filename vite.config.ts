@@ -22,6 +22,15 @@ function excludeMsw() {
 }
 
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
+        },
+      },
+    },
+  },
   plugins: [
     react(),
     excludeMsw(),
