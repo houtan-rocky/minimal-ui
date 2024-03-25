@@ -12,12 +12,12 @@ import TableBody from '@mui/material/TableBody';
 import IconButton from '@mui/material/IconButton';
 import TableContainer from '@mui/material/TableContainer';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
 
-import { isAfter, isBetween } from 'src/utils/format-time';
+import { isAfter, isBetween } from 'src/utils/format-time.util';
 
 import { _orders, ORDER_STATUS_OPTIONS } from 'src/__mock';
 

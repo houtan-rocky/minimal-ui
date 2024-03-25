@@ -5,7 +5,7 @@ import { alpha } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import AlertTitle from '@mui/material/AlertTitle';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import ComponentHero from 'src/__sections/_examples/component-hero';
 

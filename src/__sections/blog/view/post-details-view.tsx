@@ -11,10 +11,10 @@ import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import AvatarGroup, { avatarGroupClasses } from '@mui/material/AvatarGroup';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
 
-import { fShortenNumber } from 'src/utils/format-number';
+import { fShortenNumber } from 'src/utils/format-number.util';
 
 import { useGetPost } from 'src/__api/blog';
 import { POST_PUBLISH_OPTIONS } from 'src/__mock';

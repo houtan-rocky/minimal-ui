@@ -8,7 +8,7 @@ import 'src/locales/i18n';
 
 import Router from 'src/routes/sections';
 
-import { useScrollToTop } from 'src/hooks/use-scroll-to-top';
+import { useScrollToTop } from 'src/hooks/use-scroll-to-top.hook';
 
 import ThemeProvider from 'src/theme';
 import { LocalizationProvider } from 'src/locales';

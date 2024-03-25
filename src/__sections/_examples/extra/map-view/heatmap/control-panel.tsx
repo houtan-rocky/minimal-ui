@@ -5,7 +5,7 @@ import Slider from '@mui/material/Slider';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 
-import { fDate } from 'src/utils/format-time';
+import { fDate } from 'src/utils/format-time.util';
 
 import { StyledControlPanel } from 'src/components/map';
 

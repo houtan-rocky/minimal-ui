@@ -11,7 +11,7 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import ComponentHero from 'src/__sections/_examples/component-hero';
 

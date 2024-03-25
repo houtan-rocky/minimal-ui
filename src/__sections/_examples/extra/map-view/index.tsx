@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import { MAPBOX_API } from 'src/config-global';
 import { cities as CITIES } from 'src/__mock/map/cities';

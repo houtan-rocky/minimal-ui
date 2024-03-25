@@ -6,7 +6,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
 
-import { fCurrency, fShortenNumber } from 'src/utils/format-number';
+import { fCurrency, fShortenNumber } from 'src/utils/format-number.util';
 
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';

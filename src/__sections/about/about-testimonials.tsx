@@ -12,9 +12,9 @@ import ListItemText from '@mui/material/ListItemText';
 import { alpha, useTheme } from '@mui/material/styles';
 import Stack, { StackProps } from '@mui/material/Stack';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
-import { fDate } from 'src/utils/format-time';
+import { fDate } from 'src/utils/format-time.util';
 
 import { _testimonials } from 'src/__mock';
 import { bgBlur, bgGradient, hideScroll } from 'src/theme/css';

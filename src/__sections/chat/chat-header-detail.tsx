@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 import AvatarGroup, { avatarGroupClasses } from '@mui/material/AvatarGroup';
 
-import { fToNow } from 'src/utils/format-time';
+import { fToNow } from 'src/utils/format-time.util';
 
 import Iconify from 'src/components/iconify';
 

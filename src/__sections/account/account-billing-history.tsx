@@ -7,10 +7,10 @@ import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
 
-import { fDate } from 'src/utils/format-time';
-import { fCurrency } from 'src/utils/format-number';
+import { fDate } from 'src/utils/format-time.util';
+import { fCurrency } from 'src/utils/format-number.util';
 
 import Iconify from 'src/components/iconify';
 

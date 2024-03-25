@@ -2,7 +2,7 @@ import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';

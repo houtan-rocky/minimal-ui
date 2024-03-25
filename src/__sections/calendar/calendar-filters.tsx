@@ -13,7 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-import { fDateTime } from 'src/utils/format-time';
+import { fDateTime } from 'src/utils/format-time.util';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';

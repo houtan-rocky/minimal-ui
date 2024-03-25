@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
 
 import { useGetProduct } from 'src/__api/product';

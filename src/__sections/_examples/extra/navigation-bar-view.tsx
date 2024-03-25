@@ -15,9 +15,9 @@ import ToggleButton from '@mui/material/ToggleButton';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
 
 import ComponentHero from 'src/__sections/_examples/component-hero';
 

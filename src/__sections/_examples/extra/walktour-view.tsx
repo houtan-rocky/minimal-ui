@@ -12,7 +12,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import { MotivationIllustration } from 'src/assets/illustrations';
 import ComponentHero from 'src/__sections/_examples/component-hero';

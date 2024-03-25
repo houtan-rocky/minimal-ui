@@ -6,9 +6,9 @@ import TextField from '@mui/material/TextField';
 import { inputBaseClasses } from '@mui/material/InputBase';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
 
-import uuidv4 from 'src/utils/uuidv4';
+import uuidv4 from 'src/utils/uuidv4.util';
 
 import { createColumn } from 'src/__api/kanban';
 

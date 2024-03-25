@@ -9,10 +9,10 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';

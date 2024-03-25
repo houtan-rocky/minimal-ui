@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
 import { alpha, useTheme } from '@mui/material/styles';
 
-import { fDate } from 'src/utils/format-time';
+import { fDate } from 'src/utils/format-time.util';
 
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';

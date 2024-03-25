@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 
-import { fNumber } from 'src/utils/format-number';
+import { fNumber } from 'src/utils/format-number.util';
 
 import Chart, { useChart } from 'src/components/chart';
 

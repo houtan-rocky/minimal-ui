@@ -12,8 +12,8 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import DialogActions from '@mui/material/DialogActions';
 import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 
-import uuidv4 from 'src/utils/uuidv4';
-import { isAfter, fTimestamp } from 'src/utils/format-time';
+import uuidv4 from 'src/utils/uuidv4.util';
+import { isAfter, fTimestamp } from 'src/utils/format-time.util';
 
 import { createEvent, updateEvent, deleteEvent } from 'src/__api/calendar';
 

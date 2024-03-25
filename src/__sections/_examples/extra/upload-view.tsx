@@ -9,11 +9,11 @@ import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
 
-import { fData } from 'src/utils/format-number';
+import { fData } from 'src/utils/format-number.util';
 
 import ComponentHero from 'src/__sections/_examples/component-hero';
 

@@ -24,8 +24,8 @@ import {
   GridToolbarDensitySelector,
 } from '@mui/x-data-grid';
 
-import { fPercent } from 'src/utils/format-number';
-import { fDate, fTime } from 'src/utils/format-time';
+import { fPercent } from 'src/utils/format-number.util';
+import { fDate, fTime } from 'src/utils/format-time.util';
 
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';

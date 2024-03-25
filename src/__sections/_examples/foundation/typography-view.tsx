@@ -5,7 +5,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import { Variant } from '@mui/material/styles/createTypography';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import ComponentHero from 'src/__sections/_examples/component-hero';
 

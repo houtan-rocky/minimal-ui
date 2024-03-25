@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import Card, { CardProps } from '@mui/material/Card';
 import ListItemText from '@mui/material/ListItemText';
 
-import { fData } from 'src/utils/format-number';
+import { fData } from 'src/utils/format-number.util';
 
 import Chart, { useChart } from 'src/components/chart';
 

@@ -10,11 +10,11 @@ import AvatarGroup from '@mui/material/AvatarGroup';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
-import { useResponsive } from 'src/hooks/use-responsive';
-import { useMockedUser } from 'src/hooks/use-mocked-user';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
+import { useMockedUser } from 'src/hooks/use-mocked-user.hook';
 
 import { clickConversation } from 'src/__api/chat';
 

@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Pagination from '@mui/material/Pagination';
 import TablePagination from '@mui/material/TablePagination';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import ComponentHero from 'src/__sections/_examples/component-hero';
 

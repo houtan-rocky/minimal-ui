@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
 import ListItemText from '@mui/material/ListItemText';
 
-import { fDateTime } from 'src/utils/format-time';
+import { fDateTime } from 'src/utils/format-time.util';
 
 import Carousel, { useCarousel, CarouselArrows } from 'src/components/carousel';
 

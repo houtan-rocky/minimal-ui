@@ -4,11 +4,11 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
-import { useRouter, useSearchParams } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
+import { useRouter, useSearchParams } from 'src/routes/hooks/index.hook';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
 import { useGetMail, useGetMails, useGetLabels } from 'src/__api/mail';
 

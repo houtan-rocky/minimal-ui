@@ -15,10 +15,10 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
-import { isAfter, isBetween } from 'src/utils/format-time';
+import { isAfter, isBetween } from 'src/utils/format-time.util';
 
 import { CALENDAR_COLOR_OPTIONS } from 'src/__mock/_calendar';
 import { updateEvent, useGetEvents } from 'src/__api/calendar';

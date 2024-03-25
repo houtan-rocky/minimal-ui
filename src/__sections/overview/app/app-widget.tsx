@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import ListItemText from '@mui/material/ListItemText';
 import Stack, { StackProps } from '@mui/material/Stack';
 
-import { fNumber } from 'src/utils/format-number';
+import { fNumber } from 'src/utils/format-number.util';
 
 import { ColorSchema } from 'src/theme/palette';
 

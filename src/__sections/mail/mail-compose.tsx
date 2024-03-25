@@ -11,8 +11,8 @@ import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
 import Editor from 'src/components/editor';
 import Iconify from 'src/components/iconify';

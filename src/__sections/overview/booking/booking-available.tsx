@@ -7,7 +7,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Card, { CardProps } from '@mui/material/Card';
 import { alpha, useTheme } from '@mui/material/styles';
 
-import { fNumber } from 'src/utils/format-number';
+import { fNumber } from 'src/utils/format-number.util';
 
 import Chart, { useChart } from 'src/components/chart';
 

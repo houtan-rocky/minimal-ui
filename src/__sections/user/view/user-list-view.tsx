@@ -13,11 +13,11 @@ import TableBody from '@mui/material/TableBody';
 import IconButton from '@mui/material/IconButton';
 import TableContainer from '@mui/material/TableContainer';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
 
 import { _roles, _userList, USER_STATUS_OPTIONS } from 'src/__mock';
 

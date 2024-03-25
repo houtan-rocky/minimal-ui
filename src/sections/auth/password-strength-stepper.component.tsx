@@ -1,6 +1,57 @@
+import { FC } from 'react';
+
 import { styled } from '@mui/material/styles';
-import { StepIconProps } from '@mui/material';
+import { Step, Stepper, StepLabel, StepIconProps } from '@mui/material';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+
+import { StepIdEnum, StepLabelEnum } from 'src/utils/password-strength.util';
+
+import { useTranslate } from 'src/locales';
+
+// ------------------------types----------------------------------------------
+
+const STEPS: IStep[] = [
+  {
+    id: StepIdEnum.Weak,
+    label: StepLabelEnum.Weak,
+  },
+  {
+    id: StepIdEnum.Medium,
+    label: StepLabelEnum.Medium,
+  },
+  {
+    id: StepIdEnum.Strong,
+    label: StepLabelEnum.Strong,
+  },
+];
+
+export type IStep = {
+  id: StepIdEnum;
+  label: StepLabelEnum;
+};
+
+type IProps = {
+  activeStep: number;
+  setActiveStep: (step: number) => void;
+};
+
+// ------------------------component----------------------------------------------
+
+export const PasswordStrengthStepper: FC<IProps> = (props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { activeStep, setActiveStep: _ } = props;
+  const { t } = useTranslate();
+
+  return (
+    <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />}>
+      {STEPS.map((step) => (
+        <Step key={step.label}>
+          <StepLabel StepIconComponent={QontoStepIcon}>{t(step.label)}</StepLabel>
+        </Step>
+      ))}
+    </Stepper>
+  );
+};
 
 export const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -29,7 +80,7 @@ export const QontoStepIconRoot = styled('div')<{ ownerState: { active?: boolean 
   ({ theme, ownerState }) => ({
     color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
     display: 'flex',
-    height: 22,
+    height: 22, // Ensure this matches your design requirements
     alignItems: 'center',
     ...(ownerState.active && {
       color: '#D05354',
@@ -37,11 +88,11 @@ export const QontoStepIconRoot = styled('div')<{ ownerState: { active?: boolean 
     '& .QontoStepIcon-completedIcon': {
       color: '#D05354',
       zIndex: 1,
-      fontSize: 18,
+      fontSize: 18, // Adjust if necessary to match the size of other icons
     },
     '& .QontoStepIcon-circle': {
-      width: 8,
-      height: 8,
+      width: 8, // Adjust if necessary for visual consistency
+      height: 8, // Adjust if necessary for visual consistency
       borderRadius: '50%',
       backgroundColor: 'currentColor',
     },

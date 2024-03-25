@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
 import { alpha, useTheme } from '@mui/material/styles';
 
-import { fShortenNumber } from 'src/utils/format-number';
+import { fShortenNumber } from 'src/utils/format-number.util';
 
 import { _socials } from 'src/__mock';
 import { AvatarShape } from 'src/assets/illustrations';

@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import Popover from '@mui/material/Popover';
 import Divider from '@mui/material/Divider';
 
-import { usePathname, useActiveLink } from 'src/routes/hooks';
+import { usePathname, useActiveLink } from 'src/routes/hooks/index.hook';
 
 import { hideScroll } from 'src/theme/css';
 

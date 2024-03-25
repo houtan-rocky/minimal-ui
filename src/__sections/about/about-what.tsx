@@ -9,9 +9,9 @@ import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
-import { fPercent } from 'src/utils/format-number';
+import { fPercent } from 'src/utils/format-number.util';
 
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';

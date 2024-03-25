@@ -5,7 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Card, { CardProps } from '@mui/material/Card';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import { fShortenNumber } from 'src/utils/format-number';
+import { fShortenNumber } from 'src/utils/format-number.util';
 
 // ----------------------------------------------------------------------
 

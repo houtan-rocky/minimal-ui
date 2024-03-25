@@ -10,7 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Paper, { PaperProps } from '@mui/material/Paper';
 import FormHelperText from '@mui/material/FormHelperText';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
 
 import Iconify from 'src/components/iconify';
 

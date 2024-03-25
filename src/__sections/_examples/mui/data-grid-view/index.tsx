@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import { _mock } from 'src/__mock';
 import ComponentHero from 'src/__sections/_examples/component-hero';

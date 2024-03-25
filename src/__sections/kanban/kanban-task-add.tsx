@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import InputBase, { inputBaseClasses } from '@mui/material/InputBase';
 
-import uuidv4 from 'src/utils/uuidv4';
+import uuidv4 from 'src/utils/uuidv4.util';
 
 import { _mock } from 'src/__mock';
 

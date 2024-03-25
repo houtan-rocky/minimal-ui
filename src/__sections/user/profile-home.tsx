@@ -12,7 +12,7 @@ import InputBase from '@mui/material/InputBase';
 import Grid from '@mui/material/Unstable_Grid2';
 import CardHeader from '@mui/material/CardHeader';
 
-import { fNumber } from 'src/utils/format-number';
+import { fNumber } from 'src/utils/format-number.util';
 
 import { _socials } from 'src/__mock';
 

@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import AvatarGroup, { avatarGroupClasses } from '@mui/material/AvatarGroup';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import { _mock } from 'src/__mock';
 import ComponentHero from 'src/__sections/_examples/component-hero';

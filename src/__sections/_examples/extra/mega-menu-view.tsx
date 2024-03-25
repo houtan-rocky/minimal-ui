@@ -10,10 +10,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
-import { usePathname } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
+import { usePathname } from 'src/routes/hooks/index.hook';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
 
 import { _mock } from 'src/__mock';
 import ComponentHero from 'src/__sections/_examples/component-hero';

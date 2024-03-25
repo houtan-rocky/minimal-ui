@@ -9,10 +9,10 @@ import Typography from '@mui/material/Typography';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
 
-import { fShortenNumber } from 'src/utils/format-number';
+import { fShortenNumber } from 'src/utils/format-number.util';
 
 import { useGetPost, useGetLatestPosts } from 'src/__api/blog';
 

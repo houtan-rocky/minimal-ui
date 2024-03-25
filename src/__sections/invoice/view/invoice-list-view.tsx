@@ -15,13 +15,13 @@ import IconButton from '@mui/material/IconButton';
 import { alpha, useTheme } from '@mui/material/styles';
 import TableContainer from '@mui/material/TableContainer';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
 
-import { isAfter, isBetween } from 'src/utils/format-time';
+import { isAfter, isBetween } from 'src/utils/format-time.util';
 
 import { _invoices, INVOICE_SERVICE_OPTIONS } from 'src/__mock';
 

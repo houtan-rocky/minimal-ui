@@ -16,10 +16,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import AvatarGroup, { avatarGroupClasses } from '@mui/material/AvatarGroup';
 
-import { useMockedUser } from 'src/hooks/use-mocked-user';
+import { useMockedUser } from 'src/hooks/use-mocked-user.hook';
 
-import { fDate } from 'src/utils/format-time';
-import { fShortenNumber } from 'src/utils/format-number';
+import { fDate } from 'src/utils/format-time.util';
+import { fShortenNumber } from 'src/utils/format-number.util';
 
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';

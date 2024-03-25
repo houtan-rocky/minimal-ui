@@ -37,6 +37,7 @@
   "referral_code": "کد معرف",
   "need_help": "به کمک نیاز دارید؟",
   "enter_the_verification_code": "کد تایید را وارد کنید",
+  "password_must_be_at_least_8_characters": "رمز عبور باید حداقل 8 کاراکتر باشد",
   "the_verification_code_has_been_sent_to_the_following_mobile_number": " کد تایید به شماره {{mobile_number}} ارسال شده است.",
   "do_not_have_a_code": "دسترسی ندارید؟",
   "code_must_be_4_characters": "کد تایید 4 رقمی می باشد",

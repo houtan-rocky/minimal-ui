@@ -14,8 +14,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 
-import { fDate } from 'src/utils/format-time';
-import { fCurrency } from 'src/utils/format-number';
+import { fDate } from 'src/utils/format-time.util';
+import { fCurrency } from 'src/utils/format-number.util';
 
 import { INVOICE_STATUS_OPTIONS } from 'src/__mock';
 

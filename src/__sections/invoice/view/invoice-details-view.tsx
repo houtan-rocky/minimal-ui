@@ -1,6 +1,6 @@
 import Container from '@mui/material/Container';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import { _invoices } from 'src/__mock';
 

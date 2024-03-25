@@ -5,12 +5,12 @@ import Stack from '@mui/material/Stack';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
-import { useMockedUser } from 'src/hooks/use-mocked-user';
+import { useMockedUser } from 'src/hooks/use-mocked-user.hook';
 
-import uuidv4 from 'src/utils/uuidv4';
+import uuidv4 from 'src/utils/uuidv4.util';
 
 import { sendMessage, createConversation } from 'src/__api/chat';
 

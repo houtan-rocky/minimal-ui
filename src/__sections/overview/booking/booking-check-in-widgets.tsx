@@ -6,9 +6,9 @@ import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
-import { fNumber } from 'src/utils/format-number';
+import { fNumber } from 'src/utils/format-number.util';
 
 import Chart, { useChart } from 'src/components/chart';
 

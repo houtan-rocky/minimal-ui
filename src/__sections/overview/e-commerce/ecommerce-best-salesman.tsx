@@ -7,7 +7,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Card, { CardProps } from '@mui/material/Card';
 import TableContainer from '@mui/material/TableContainer';
 
-import { fCurrency } from 'src/utils/format-number';
+import { fCurrency } from 'src/utils/format-number.util';
 
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';

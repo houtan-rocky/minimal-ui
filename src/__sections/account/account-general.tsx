@@ -11,9 +11,9 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
-import { useMockedUser } from 'src/hooks/use-mocked-user';
+import { useMockedUser } from 'src/hooks/use-mocked-user.hook';
 
-import { fData } from 'src/utils/format-number';
+import { fData } from 'src/utils/format-number.util';
 
 import { countries } from 'src/assets/data';
 

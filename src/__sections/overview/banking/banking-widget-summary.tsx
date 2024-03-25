@@ -6,7 +6,7 @@ import { CardProps } from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
 
-import { fPercent, fCurrency } from 'src/utils/format-number';
+import { fPercent, fCurrency } from 'src/utils/format-number.util';
 
 import { bgGradient } from 'src/theme/css';
 import { ColorSchema } from 'src/theme/palette';

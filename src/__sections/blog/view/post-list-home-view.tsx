@@ -5,9 +5,9 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
-import { useDebounce } from 'src/hooks/use-debounce';
+import { useDebounce } from 'src/hooks/use-debounce.hook';
 
 import { POST_SORT_OPTIONS } from 'src/__mock';
 import { useGetPosts, useSearchPosts } from 'src/__api/blog';

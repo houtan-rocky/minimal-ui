@@ -5,10 +5,10 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
 
-import { fCurrency } from 'src/utils/format-number';
+import { fCurrency } from 'src/utils/format-number.util';
 
 import Label from 'src/components/label';
 import Image from 'src/components/image';

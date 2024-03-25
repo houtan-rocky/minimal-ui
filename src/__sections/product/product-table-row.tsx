@@ -6,8 +6,8 @@ import { GridCellParams } from '@mui/x-data-grid';
 import ListItemText from '@mui/material/ListItemText';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import { fCurrency } from 'src/utils/format-number';
-import { fTime, fDate } from 'src/utils/format-time';
+import { fCurrency } from 'src/utils/format-number.util';
+import { fTime, fDate } from 'src/utils/format-time.util';
 
 import Label from 'src/components/label';
 

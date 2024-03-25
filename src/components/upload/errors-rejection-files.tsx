@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import { alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
-import { fData } from 'src/utils/format-number';
+import { fData } from 'src/utils/format-number.util';
 
 import { fileData } from '../file-thumbnail';
 

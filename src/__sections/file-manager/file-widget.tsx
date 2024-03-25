@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import { fData } from 'src/utils/format-number';
+import { fData } from 'src/utils/format-number.util';
 
 // ----------------------------------------------------------------------
 

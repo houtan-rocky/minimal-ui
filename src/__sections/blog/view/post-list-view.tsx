@@ -7,10 +7,10 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
 
-import { useDebounce } from 'src/hooks/use-debounce';
+import { useDebounce } from 'src/hooks/use-debounce.hook';
 
 import { POST_SORT_OPTIONS } from 'src/__mock';
 import { useGetPosts, useSearchPosts } from 'src/__api/blog';

@@ -2,7 +2,7 @@ import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import { _mock } from 'src/__mock';
 import ComponentHero from 'src/__sections/_examples/component-hero';

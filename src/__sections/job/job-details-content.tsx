@@ -7,8 +7,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
 
-import { fDate } from 'src/utils/format-time';
-import { fCurrency } from 'src/utils/format-number';
+import { fDate } from 'src/utils/format-time.util';
+import { fCurrency } from 'src/utils/format-number.util';
 
 import Iconify from 'src/components/iconify';
 import Markdown from 'src/components/markdown';

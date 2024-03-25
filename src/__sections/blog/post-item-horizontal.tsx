@@ -6,14 +6,14 @@ import Avatar from '@mui/material/Avatar';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
-import { fDate } from 'src/utils/format-time';
-import { fShortenNumber } from 'src/utils/format-number';
+import { fDate } from 'src/utils/format-time.util';
+import { fShortenNumber } from 'src/utils/format-number.util';
 
 import Label from 'src/components/label';
 import Image from 'src/components/image';

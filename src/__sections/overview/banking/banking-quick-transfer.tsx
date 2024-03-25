@@ -17,9 +17,9 @@ import DialogActions from '@mui/material/DialogActions';
 import Dialog, { DialogProps } from '@mui/material/Dialog';
 import Input, { InputProps, inputClasses } from '@mui/material/Input';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
 
-import { fCurrency } from 'src/utils/format-number';
+import { fCurrency } from 'src/utils/format-number.util';
 
 import Iconify from 'src/components/iconify';
 import Carousel, { useCarousel, CarouselArrows } from 'src/components/carousel';

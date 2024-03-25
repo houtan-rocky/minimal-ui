@@ -5,10 +5,10 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
-import { useRouter, useSearchParams } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
+import { useRouter, useSearchParams } from 'src/routes/hooks/index.hook';
 
-import { useMockedUser } from 'src/hooks/use-mocked-user';
+import { useMockedUser } from 'src/hooks/use-mocked-user.hook';
 
 import { useGetContacts, useGetConversation, useGetConversations } from 'src/__api/chat';
 

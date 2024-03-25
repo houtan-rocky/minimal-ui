@@ -10,10 +10,10 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
-import { useDoubleClick } from 'src/hooks/use-double-click';
-import { useCopyToClipboard } from 'src/hooks/use-copy-to-clipboard';
+import { useDoubleClick } from 'src/hooks/use-double-click.hook';
+import { useCopyToClipboard } from 'src/hooks/use-copy-to-clipboard.hook';
 
 import ComponentHero from 'src/__sections/_examples/component-hero';
 

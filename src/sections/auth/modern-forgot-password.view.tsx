@@ -9,11 +9,11 @@ import { useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
-import { IRANIAN_MOBILE_NUMBER_REGEX, IRANIAN_NATIONAL_CODE_REGEX } from 'src/utils/regExp';
+import { IRANIAN_MOBILE_NUMBER_REGEX, IRANIAN_NATIONAL_CODE_REGEX } from 'src/utils/regExp.util';
 
 import { useTranslate } from 'src/locales';
 import { forgetPasswordApi } from 'src/api/forget-password.api';

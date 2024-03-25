@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Container from '@mui/material/Container';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import { _userAbout, _userPlans, _userPayment, _userInvoices, _userAddressBook } from 'src/__mock';
 

@@ -1,4 +1,4 @@
-import axiosInstance, { endpoints } from 'src/utils/axios';
+import axiosInstance, { endpoints } from 'src/utils/axios.util';
 
 // ----------------------------------------------------------------------
 

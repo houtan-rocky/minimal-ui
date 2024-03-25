@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 
-import { useCountdownDate } from 'src/hooks/use-countdown';
+import { useCountdownDate } from 'src/hooks/use-countdown.hook';
 
 import { _socials } from 'src/__mock';
 import { ComingSoonIllustration } from 'src/assets/illustrations';

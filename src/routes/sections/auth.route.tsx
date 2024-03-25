@@ -2,18 +2,18 @@ import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import AuthModernLayout from 'src/layouts/auth/modern';
-import VerifyRegisterPage from 'src/pages/auth/verify-register';
+import VerifyRegisterPage from 'src/pages/auth/verify-register.page';
 
 import { SplashScreen } from 'src/components/loading-screen';
 
 // ----------------------------------------------------------------------
 
 // JWT
-const LoginPage = lazy(() => import('src/pages/auth/login'));
-const RegisterPage = lazy(() => import('src/pages/auth/register'));
-const ForgotPasswordPage = lazy(() => import('src/pages/auth/forgot-password'));
-const NewPasswordPage = lazy(() => import('src/pages/auth/new-password'));
-const VerifyPage = lazy(() => import('src/pages/auth/verify'));
+const LoginPage = lazy(() => import('src/pages/auth/login.page'));
+const RegisterPage = lazy(() => import('src/pages/auth/register.page'));
+const ForgotPasswordPage = lazy(() => import('src/pages/auth/forgot-password.page'));
+const NewPasswordPage = lazy(() => import('src/pages/auth/new-password.page'));
+const VerifyPage = lazy(() => import('src/pages/auth/verify.page'));
 
 // ----------------------------------------------------------------------
 

@@ -3,9 +3,9 @@ import { useRef, useState, useCallback } from 'react';
 import { EventResizeDoneArg } from '@fullcalendar/interaction';
 import { EventDropArg, DateSelectArg, EventClickArg } from '@fullcalendar/core';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
-import { fTimestamp } from 'src/utils/format-time';
+import { fTimestamp } from 'src/utils/format-time.util';
 
 import { ICalendarView, ICalendarRange, ICalendarEvent } from 'src/types/calendar';
 

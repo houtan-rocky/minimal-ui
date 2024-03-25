@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
 import { alpha, useTheme } from '@mui/material/styles';
 
-import { fNumber, fPercent } from 'src/utils/format-number';
+import { fNumber, fPercent } from 'src/utils/format-number.util';
 
 import Iconify from 'src/components/iconify';
 import Chart, { useChart } from 'src/components/chart';

@@ -1,10 +1,10 @@
 import uniq from 'lodash/uniq';
 import { useMemo, useEffect, useCallback } from 'react';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
-import { getStorage, useLocalStorage } from 'src/hooks/use-local-storage';
+import { getStorage, useLocalStorage } from 'src/hooks/use-local-storage.hook';
 
 import { PRODUCT_CHECKOUT_STEPS } from 'src/__mock/_product';
 

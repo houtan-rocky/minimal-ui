@@ -6,10 +6,10 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-import { useDebounce } from 'src/hooks/use-debounce';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
+import { useDebounce } from 'src/hooks/use-debounce.hook';
 
 import { useGetProducts, useSearchProducts } from 'src/__api/product';
 import {

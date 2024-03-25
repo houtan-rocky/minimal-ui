@@ -8,7 +8,7 @@ import Drawer from '@mui/material/Drawer';
 import { useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
 import Iconify from 'src/components/iconify';
 

@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import { useParams } from 'src/routes/hooks';
+import { useParams } from 'src/routes/hooks/index.hook';
 
 import { PostEditView } from 'src/__sections/blog/view';
 

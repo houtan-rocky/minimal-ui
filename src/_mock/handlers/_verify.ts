@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
-import { endpoints } from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios.util';
 
 /* eslint-disable import/no-extraneous-dependencies */
 

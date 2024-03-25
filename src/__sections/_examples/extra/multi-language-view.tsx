@@ -14,9 +14,9 @@ import RadioGroup from '@mui/material/RadioGroup';
 import TablePagination from '@mui/material/TablePagination';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
-import { fData, fNumber, fPercent, fCurrency, fShortenNumber } from 'src/utils/format-number';
+import { fData, fNumber, fPercent, fCurrency, fShortenNumber } from 'src/utils/format-number.util';
 
 import { useLocales, useTranslate } from 'src/locales';
 import ComponentHero from 'src/__sections/_examples/component-hero';

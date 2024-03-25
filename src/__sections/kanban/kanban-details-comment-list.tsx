@@ -2,7 +2,7 @@ import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
-import { fToNow } from 'src/utils/format-time';
+import { fToNow } from 'src/utils/format-time.util';
 
 import Image from 'src/components/image';
 import Lightbox, { useLightBox } from 'src/components/lightbox';

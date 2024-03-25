@@ -6,11 +6,11 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
 
-import { fDateTime } from 'src/utils/format-time';
-import { fCurrency } from 'src/utils/format-number';
+import { fDateTime } from 'src/utils/format-time.util';
+import { fCurrency } from 'src/utils/format-number.util';
 
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';

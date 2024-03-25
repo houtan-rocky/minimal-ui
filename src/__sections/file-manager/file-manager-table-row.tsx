@@ -14,12 +14,12 @@ import TableRow, { tableRowClasses } from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import AvatarGroup, { avatarGroupClasses } from '@mui/material/AvatarGroup';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-import { useDoubleClick } from 'src/hooks/use-double-click';
-import { useCopyToClipboard } from 'src/hooks/use-copy-to-clipboard';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
+import { useDoubleClick } from 'src/hooks/use-double-click.hook';
+import { useCopyToClipboard } from 'src/hooks/use-copy-to-clipboard.hook';
 
-import { fData } from 'src/utils/format-number';
-import { fDate, fTime } from 'src/utils/format-time';
+import { fData } from 'src/utils/format-number.util';
+import { fDate, fTime } from 'src/utils/format-time.util';
 
 import Iconify from 'src/components/iconify';
 import { useSnackbar } from 'src/components/snackbar';

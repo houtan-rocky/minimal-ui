@@ -7,7 +7,7 @@ import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-import { fCurrency } from 'src/utils/format-number';
+import { fCurrency } from 'src/utils/format-number.util';
 
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';

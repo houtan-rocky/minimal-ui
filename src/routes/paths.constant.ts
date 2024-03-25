@@ -1,4 +1,4 @@
-import { paramCase } from 'src/utils/change-case';
+import { paramCase } from 'src/utils/change-case.util';
 
 import { _id, _postTitles } from 'src/__mock/assets';
 

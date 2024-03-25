@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/routes/components';
 
-import { fDateTime } from 'src/utils/format-time';
+import { fDateTime } from 'src/utils/format-time.util';
 
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';

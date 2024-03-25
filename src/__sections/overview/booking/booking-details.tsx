@@ -14,7 +14,7 @@ import Card, { CardProps } from '@mui/material/Card';
 import ListItemText from '@mui/material/ListItemText';
 import TableContainer from '@mui/material/TableContainer';
 
-import { fDate, fTime } from 'src/utils/format-time';
+import { fDate, fTime } from 'src/utils/format-time.util';
 
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';

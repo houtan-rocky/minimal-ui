@@ -18,11 +18,11 @@ import {
   GridColumnVisibilityModel,
 } from '@mui/x-data-grid';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
 
 import { useGetProducts } from 'src/__api/product';
 import { PRODUCT_STOCK_OPTIONS } from 'src/__mock';

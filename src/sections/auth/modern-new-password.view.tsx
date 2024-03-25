@@ -1,46 +1,63 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useState, ChangeEvent } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Alert } from '@mui/material';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
+import { Box, Alert } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
+
+import { StepIdEnum, passwordStrength } from 'src/utils/password-strength.util';
+import {
+  REGEX_CONTAIN_LETTERS,
+  REGEX_CONTAIN_NUMBERS,
+  REGEX_SPECIAL_CHARACTERS,
+} from 'src/utils/regExp.util';
 
 import { useTranslate } from 'src/locales';
-import { SentIcon } from 'src/assets/icons';
 import { setNewPasswordApi } from 'src/api/set-new-password.api';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
-// ----------------------------------------------------------------------
+import { PasswordStrengthStepper } from './password-strength-stepper.component';
 
-// const STEPS = ['weak', 'medium', 'strong']
+// ----------------------------------------------------------------------
 
 export default function ModernNewPasswordView() {
   const { t } = useTranslate();
   const password = useBoolean();
   const [errorMsg, setErrorMsg] = useState('');
-  // const [passwordStrengthState, setPasswordStrengthState] = useState(0)
+  const [activeStep, setActiveStep] = useState<StepIdEnum>(StepIdEnum.Weak);
+
+  // Function to update the active step based on some password strength criteria
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const pw = event.target.value;
+
+    const step: StepIdEnum = passwordStrength(pw);
+
+    setActiveStep(step);
+  };
+
   const router = useRouter();
 
   const NewPasswordSchema = Yup.object().shape({
     password: Yup.string()
       .required(t('password_is_required'))
-      .matches(/[a-zA-Z]/, t('password_must_contain_letters'))
-      .matches(/\d/, t('password_must_contain_numbers'))
-      .matches(/[@$!%*?&]/, t('password_must_contain_special_characters')),
+      .min(8, t('password_must_be_at_least_8_characters'))
+      .matches(REGEX_CONTAIN_LETTERS, t('password_must_contain_letters'))
+      .matches(REGEX_CONTAIN_NUMBERS, t('password_must_contain_numbers'))
+      .matches(REGEX_SPECIAL_CHARACTERS, t('password_must_contain_special_characters')),
     confirmPassword: Yup.string()
       .required(t('password_confirm_is_required'))
       .oneOf([Yup.ref('password')], t('passwords_must_match')),
@@ -78,29 +95,37 @@ export default function ModernNewPasswordView() {
   });
 
   const renderForm = (
-    <Stack spacing={3} alignItems="center">
-      <RHFTextField
+    <Stack spacing={2} alignItems="center">
+      <Controller
         name="password"
-        label={t('password')}
-        type={password.value ? 'text' : 'password'}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={password.onToggle} edge="end">
-                <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
+        control={methods.control}
+        render={({ field }) => (
+          <RHFTextField
+            {...field}
+            label={t('password')}
+            type={password.value ? 'text' : 'password'}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              // Call react-hook-form's onChange
+              field.onChange(event);
+              // Change stepper state
+              handlePasswordChange(event);
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={password.onToggle} edge="end">
+                    <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        )}
       />
 
-      {/* <Stepper alternativeLabel activeStep={passwordStrengthState} connector={<QontoConnector />}>
-        {STEPS.map((label) => (
-          <Step key={label}>
-            <StepLabel StepIconComponent={QontoStepIcon}>{t(label)}</StepLabel>
-          </Step>
-        ))}
-      </Stepper> */}
+      <Box sx={{ width: 300 }}>
+        <PasswordStrengthStepper activeStep={activeStep} setActiveStep={() => {}} />
+      </Box>
 
       <RHFTextField
         name="confirmPassword"
@@ -157,7 +182,7 @@ export default function ModernNewPasswordView() {
 
   const renderHead = (
     <>
-      <SentIcon sx={{ height: 96 }} />
+      {/* <SentIcon sx={{ height: 96 }} /> */}
 
       <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
         <Typography variant="h3">{t('new_password')}</Typography>

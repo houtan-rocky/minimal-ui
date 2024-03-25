@@ -13,11 +13,11 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import AvatarGroup, { avatarGroupClasses } from '@mui/material/AvatarGroup';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-import { useCopyToClipboard } from 'src/hooks/use-copy-to-clipboard';
+import { useBoolean } from 'src/hooks/use-boolean.hook';
+import { useCopyToClipboard } from 'src/hooks/use-copy-to-clipboard.hook';
 
-import { fData } from 'src/utils/format-number';
-import { fDateTime } from 'src/utils/format-time';
+import { fData } from 'src/utils/format-number.util';
+import { fDateTime } from 'src/utils/format-time.util';
 
 import Iconify from 'src/components/iconify';
 import { useSnackbar } from 'src/components/snackbar';

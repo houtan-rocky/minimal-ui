@@ -6,7 +6,7 @@ import Box, { BoxProps } from '@mui/material/Box';
 import CardHeader from '@mui/material/CardHeader';
 import ListItemText from '@mui/material/ListItemText';
 
-import { fDateTime } from 'src/utils/format-time';
+import { fDateTime } from 'src/utils/format-time.util';
 
 import Label from 'src/components/label';
 import Image from 'src/components/image';

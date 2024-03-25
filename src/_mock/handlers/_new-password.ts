@@ -2,7 +2,7 @@
 import { http, HttpResponse } from 'msw';
 import { passwordStrength } from 'check-password-strength';
 
-import { endpoints } from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios.util';
 
 // ----------------------CONSTANTS------------------------------------------------
 const MOCK_NEW_PASSWORD_API_RESPONSE_VALID = {

@@ -1,6 +1,6 @@
 import Container from '@mui/material/Container';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
 import { _jobs } from 'src/__mock';
 
