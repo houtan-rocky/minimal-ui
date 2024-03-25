@@ -2,33 +2,25 @@ name: Build
 
 on:
   push:
-    branches: [main, dev]
+    branches: [ main, dev ]
   pull_request:
-    branches: [main, dev]
+    branches: [ main, dev ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - uses: mathieu-bour/setup-sentry-cli@v1
-        with:
-          version: latest
-          url: https://sentry.yourcompany.com
-          token: ${{ SECRETS.SENTRY_TOKEN }}
-          organization: my-org
-          project: marginx-tt
-
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: path/to/your/build/directory
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm install
+    - name: Build
+      run: npm run build
+    - uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts
+        path: path/to/your/build/directory
