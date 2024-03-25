@@ -56,10 +56,6 @@ export default defineConfig({
         ],
       },
     }),
-    sentryVitePlugin({
-      org: 'houtan',
-      project: 'marginx-tt',
-    }),
   ],
 
   resolve: {
