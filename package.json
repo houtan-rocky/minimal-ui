@@ -42,8 +42,6 @@
     "@mui/x-data-grid": "^6.18.4",
     "@mui/x-date-pickers": "^6.18.4",
     "@react-pdf/renderer": "^3.1.14",
-    "@sentry/react": "^7.108.0",
-    "@sentry/vite-plugin": "^2.16.0",
     "@supabase/supabase-js": "^2.39.0",
     "apexcharts": "^3.44.2",
     "autosuggest-highlight": "^3.3.4",
