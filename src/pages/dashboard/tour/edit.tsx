@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useParams } from 'src/routes/hooks';
 
-import { TourEditView } from 'src/sections/tour/view';
+import { TourEditView } from 'src/__sections/tour/view';
 
 // ----------------------------------------------------------------------
 

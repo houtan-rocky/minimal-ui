@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import { MailView } from 'src/sections/mail/view';
+import { MailView } from 'src/__sections/mail/view';
 
 // ----------------------------------------------------------------------
 

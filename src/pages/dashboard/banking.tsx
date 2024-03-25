@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import { OverviewBankingView } from 'src/sections/overview/banking/view';
+import { OverviewBankingView } from 'src/__sections/overview/banking/view';
 
 // ----------------------------------------------------------------------
 

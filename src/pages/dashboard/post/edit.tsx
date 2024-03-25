@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useParams } from 'src/routes/hooks';
 
-import { PostEditView } from 'src/sections/blog/view';
+import { PostEditView } from 'src/__sections/blog/view';
 
 // ----------------------------------------------------------------------
 
