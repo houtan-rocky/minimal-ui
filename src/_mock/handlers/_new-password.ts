@@ -5,52 +5,53 @@ import { passwordStrength } from 'check-password-strength';
 import { endpoints } from 'src/utils/axios';
 
 // ----------------------CONSTANTS------------------------------------------------
-const RESPONSE_VALID = {
+const MOCK_NEW_PASSWORD_API_RESPONSE_VALID = {
   message: 'رمز عبور شما بازنشانی شد.',
   status: 'ok',
 } as const;
-const RESPONSE_INVALID = {
+const MOCK_NEW_PASSWORD_API_RESPONSE_INVALID = {
   message: 'رمز عبور وارد شده سختی کافی ندارد.',
   status: 'failed',
 } as const;
 // ------------------------Types----------------------------------------------
-type Status = 'ok' | 'failed';
-type Params = {
+type MockNewPasswordApiStatus = 'ok' | 'failed';
+type MockNewPasswordApiParams = {
   national_code: string;
   mobile_number: string;
 };
 
-type RequestBody = {
+type MockNewPasswordApiRequestBody = {
   password: string;
   confirm_password: string;
 };
 
-type ResponseBody = {
+type MockNewPasswordApiResponseBody = {
   message: string;
-  status: Status;
+  status: MockNewPasswordApiStatus;
 };
 
 // ------------------------Handlers----------------------------------------------
 
-export const mockSetNewPassword = http.post<Params, RequestBody, ResponseBody>(
-  endpoints.auth.newPassword,
-  async ({ params, request }) => {
-    const { password, confirm_password } = await request.json();
+export const mockSetNewPasswordApi = http.post<
+  MockNewPasswordApiParams,
+  MockNewPasswordApiRequestBody,
+  MockNewPasswordApiResponseBody
+>(endpoints.auth.newPassword, async ({ params, request }) => {
+  const { password, confirm_password } = await request.json();
 
-    const passwordData = passwordStrength(password);
-    if (
-      password !== confirm_password ||
-      !passwordData.contains.includes('number') ||
-      !passwordData.contains.includes('lowercase') ||
-      !passwordData.contains.includes('symbol') ||
-      password.length < 8
-    ) {
-      return HttpResponse.json(RESPONSE_INVALID, {
-        status: 401,
-        statusText: 'Unauthorized',
-      });
-    }
-
-    return HttpResponse.json(RESPONSE_VALID);
+  const passwordData = passwordStrength(password);
+  if (
+    password !== confirm_password ||
+    !passwordData.contains.includes('number') ||
+    !passwordData.contains.includes('lowercase') ||
+    !passwordData.contains.includes('symbol') ||
+    password.length < 8
+  ) {
+    return HttpResponse.json(MOCK_NEW_PASSWORD_API_RESPONSE_INVALID, {
+      status: 401,
+      statusText: 'Unauthorized',
+    });
   }
-);
+
+  return HttpResponse.json(MOCK_NEW_PASSWORD_API_RESPONSE_VALID);
+});

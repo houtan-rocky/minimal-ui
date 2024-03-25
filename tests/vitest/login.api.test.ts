@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { it, expect, describe } from 'vitest';
 
-import { REQUEST_VALID, REQUEST_INVALID } from 'src/_mock/handlers/_login';
+import { REQUEST_VALID, MOCK_LOGIN_API_REQUEST_INVALID } from 'src/_mock/handlers/_login';
 
 import { loginApi } from '../../src/api/login.api';
 
@@ -13,7 +13,10 @@ class LoginApiTest {
   }
 
   static async testLoginWithInvalidCredentials() {
-    const response = await loginApi(REQUEST_INVALID.email, REQUEST_INVALID.password);
+    const response = await loginApi(
+      MOCK_LOGIN_API_REQUEST_INVALID.email,
+      MOCK_LOGIN_API_REQUEST_INVALID.password
+    );
 
     expect(response.status).toBe(401);
   }

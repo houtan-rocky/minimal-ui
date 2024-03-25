@@ -4,65 +4,66 @@ import { http, HttpResponse } from 'msw';
 import { endpoints } from 'src/utils/axios';
 
 // ----------------------CONSTANTS------------------------------------------------
-const REQUEST_VALID = {
+const MOCK_REGISTER_API_REQUEST_VALID = {
   national_code: '1234567890',
   mobile_number: '09123456789',
   referrer_code: '123456',
 } as const;
 
-const RESPONSE_VALID = {
+const MOCK_REGISTER_API_RESPONSE_VALID = {
   message: 'کد بازیابی به شماره موبایل شما ارسال شد',
   status: 'ok',
 } as const;
-const RESPONSE_INVALID = {
+const MOCK_REGISTER_API_RESPONSE_INVALID = {
   message: 'کد ملی با شماره موبایل مطابقت ندارد',
   status: 'failed',
 } as const;
 // ------------------------Types----------------------------------------------
-type Status = 'ok' | 'failed';
-type Params = {
+type MockRegisterApiStatus = 'ok' | 'failed';
+type MockRegisterApiParams = {
   national_code: string;
   mobile_number: string;
 };
 
-type RequestBody = {
+type MockRegisterApiRequestBody = {
   national_code: string;
   mobile_number: string;
   referrer_code: string;
 };
 
-type ResponseBody = {
+type MockRegisterApiResponseBody = {
   message: string;
-  status: Status;
+  status: MockRegisterApiStatus;
 };
 
 // ------------------------Handlers----------------------------------------------
 
-export const mockRegister = http.post<Params, RequestBody, ResponseBody>(
-  endpoints.auth.register,
-  async ({ params, request }) => {
-    const { national_code, mobile_number, referrer_code } = await request.json();
+export const mockRegisterApi = http.post<
+  MockRegisterApiParams,
+  MockRegisterApiRequestBody,
+  MockRegisterApiResponseBody
+>(endpoints.auth.register, async ({ params, request }) => {
+  const { national_code, mobile_number, referrer_code } = await request.json();
 
-    console.log(
-      'national_code:',
-      national_code,
-      'mobile_number:',
-      mobile_number,
-      'referrer_code:',
-      referrer_code,
-      'slkdfjslkfa'
-    );
-    if (
-      national_code !== REQUEST_VALID.national_code ||
-      mobile_number !== REQUEST_VALID.mobile_number ||
-      (referrer_code !== undefined && referrer_code !== REQUEST_VALID.referrer_code)
-    ) {
-      return HttpResponse.json(RESPONSE_INVALID, {
-        status: 401,
-        statusText: 'Unauthorized',
-      });
-    }
-
-    return HttpResponse.json(RESPONSE_VALID);
+  console.log(
+    'national_code:',
+    national_code,
+    'mobile_number:',
+    mobile_number,
+    'referrer_code:',
+    referrer_code,
+    'slkdfjslkfa'
+  );
+  if (
+    national_code !== MOCK_REGISTER_API_REQUEST_VALID.national_code ||
+    mobile_number !== MOCK_REGISTER_API_REQUEST_VALID.mobile_number ||
+    (referrer_code !== undefined && referrer_code !== MOCK_REGISTER_API_REQUEST_VALID.referrer_code)
+  ) {
+    return HttpResponse.json(MOCK_REGISTER_API_RESPONSE_INVALID, {
+      status: 401,
+      statusText: 'Unauthorized',
+    });
   }
-);
+
+  return HttpResponse.json(MOCK_REGISTER_API_RESPONSE_VALID);
+});
