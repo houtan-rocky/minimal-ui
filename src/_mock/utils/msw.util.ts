@@ -21,10 +21,7 @@ export async function enableMockingServiceWorker() {
           url: '/mockServiceWorker.js',
         },
         findWorker(scriptUrl, mockServiceWorkerUrl) {
-          if (scriptUrl.includes(mockServiceWorkerUrl)) {
-            return true;
-          }
-          return false;
+          return scriptUrl.includes('mockServiceWorker');
         },
       })
       .then(() => setTimeout(resolve, 100));
