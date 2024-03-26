@@ -3,7 +3,11 @@ import { http, HttpResponse } from 'msw';
 
 import { endpoints } from 'src/utils/axios.util';
 
-import { ErrorScenarioConfig, handleCommonErrorScenarios } from './utils/handle-common-errors';
+import {
+  ErrorScenarioConfig,
+  CommonErrorScenarios,
+  handleCommonErrorScenarios,
+} from './utils/handle-common-errors.util';
 
 // ----------------------CONSTANTS------------------------------------------------
 // const MOCK_REGISTER_API_REQUEST_VALID = {
@@ -47,7 +51,7 @@ export const mockRegisterApi = http.post<
   MockRegisterApiResponseBody
 >(endpoints.auth.register, async ({ params, request }) => {
   const pageParams = new URLSearchParams(window.location.search);
-  const scenario = pageParams.get('scenario');
+  const scenario = pageParams.get('scenario') as unknown as CommonErrorScenarios;
 
   // -------------------- Error scenarios --------------------------------------
   const errorScenarios: ErrorScenarioConfig[] = [

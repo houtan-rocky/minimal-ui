@@ -2,7 +2,11 @@ import { http, HttpResponse } from 'msw';
 
 import { endpoints } from 'src/utils/axios.util';
 
-import { ErrorScenarioConfig, handleCommonErrorScenarios } from './utils/handle-common-errors';
+import {
+  ErrorScenarioConfig,
+  CommonErrorScenarios,
+  handleCommonErrorScenarios,
+} from './utils/handle-common-errors.util';
 
 /* eslint-disable import/no-extraneous-dependencies */
 
@@ -42,7 +46,7 @@ export const mockVerifyApi = http.post<
   MockVerifyApiResponseBody
 >(endpoints.auth.verify, async ({ params, request }) => {
   const pageParams = new URLSearchParams(window.location.search);
-  const scenario = pageParams.get('scenario');
+  const scenario = pageParams.get('scenario') as unknown as CommonErrorScenarios;
 
   // -------------------- Error scenarios --------------------------------------
   const errorScenarios: ErrorScenarioConfig[] = [

@@ -3,18 +3,31 @@ import { HttpResponse } from 'msw';
 
 export type ErrorScenarioConfig = {
   scenario: string;
-  response: any; // Adjust this type according to your response structure
+  response: any;
   responseStatus: {
     status: number;
     statusText: string;
   };
 };
 
-// Utility function to handle common error scenarios in mock APIs.
+export type CommonErrorScenarios =
+  | 'network_error'
+  | 'error'
+  | 'invalid'
+  | 'valid'
+  | 'not_found'
+  | 'unauthorized';
+
+/**
+ * Handle common error scenarios in mock APIs.
+ * @param {CommonErrorScenarios} currentScenario Current scenario to match.
+ * @param {ErrorScenarioConfig[]}  scenarios Error scenarios to match.
+ * @returns {any}
+ */
 export function handleCommonErrorScenarios(
-  currentScenario: string | null,
+  currentScenario: CommonErrorScenarios,
   scenarios: ErrorScenarioConfig[]
-) {
+): any {
   for (const { scenario, response, responseStatus } of scenarios) {
     if (scenario === 'network_error') {
       return HttpResponse.error() as any;
