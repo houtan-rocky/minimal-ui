@@ -2,6 +2,8 @@ import { http, HttpResponse } from 'msw';
 
 import { endpoints } from 'src/utils/axios.util';
 
+import { ErrorScenarioConfig, handleCommonErrorScenarios } from './utils/handle-common-errors';
+
 /* eslint-disable import/no-extraneous-dependencies */
 
 // ----------------------CONSTANTS------------------------------------------------
@@ -42,14 +44,21 @@ export const mockVerifyApi = http.post<
   const pageParams = new URLSearchParams(window.location.search);
   const scenario = pageParams.get('scenario');
 
-  // const { code } = await request.json();
+  // -------------------- Error scenarios --------------------------------------
+  const errorScenarios: ErrorScenarioConfig[] = [
+    {
+      scenario: 'error',
+      response: MOCK_VERIFY_API_RESPONSE_INVALID, // Specific mock response for this error
+      responseStatus: { status: 401, statusText: 'Unauthorized' },
+    },
+  ];
 
-  if (scenario === 'error') {
-    return HttpResponse.json(MOCK_VERIFY_API_RESPONSE_INVALID, {
-      status: 401,
-      statusText: 'Unauthorized',
-    });
+  const commonErrorResponse = handleCommonErrorScenarios(scenario, errorScenarios);
+
+  if (commonErrorResponse !== null) {
+    return commonErrorResponse;
   }
 
+  // ----------------------Success scenarios-------------------------------------
   return HttpResponse.json(MOCK_VERIFY_API_RESPONSE_VALID);
 });

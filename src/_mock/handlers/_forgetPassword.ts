@@ -3,6 +3,8 @@ import { http, HttpResponse } from 'msw';
 
 import { endpoints } from 'src/utils/axios.util';
 
+import { ErrorScenarioConfig, handleCommonErrorScenarios } from './utils/handle-common-errors';
+
 // ----------------------CONSTANTS------------------------------------------------
 // const MOCK_FORGET_PASSWORD_API_REQUEST_VALID = {
 //   national_code: '1234567890',
@@ -43,14 +45,22 @@ export const mockForgetPasswordApi = http.post<
 >(endpoints.auth.forgetPassword, async ({ params, request }) => {
   const pageParams = new URLSearchParams(window.location.search);
   const scenario = pageParams.get('scenario');
-  // const { national_code, mobile_number } = await request.json();
 
-  if (scenario === 'error') {
-    return HttpResponse.json(MOCK_FORGET_PASSWORD_API_RESPONSE_INVALID, {
-      status: 401,
-      statusText: 'Unauthorized',
-    });
+  // -------------------- Error scenarios --------------------------------------
+  const errorScenarios: ErrorScenarioConfig[] = [
+    {
+      scenario: 'error',
+      response: MOCK_FORGET_PASSWORD_API_RESPONSE_INVALID,
+      responseStatus: { status: 401, statusText: 'Unauthorized' },
+    },
+  ];
+
+  const commonErrorResponse = handleCommonErrorScenarios(scenario, errorScenarios);
+
+  if (commonErrorResponse !== null) {
+    return commonErrorResponse;
   }
 
+  // ----------------------Success scenarios-------------------------------------
   return HttpResponse.json(MOCK_FORGET_PASSWORD_API_RESPONSE_VALID);
 });

@@ -3,6 +3,8 @@ import { http, HttpResponse } from 'msw';
 
 import { endpoints } from 'src/utils/axios.util';
 
+import { ErrorScenarioConfig, handleCommonErrorScenarios } from './utils/handle-common-errors';
+
 // ----------------------CONSTANTS------------------------------------------------
 const MOCK_NEW_PASSWORD_API_RESPONSE_VALID = {
   message: 'رمز عبور شما بازنشانی شد.',
@@ -38,15 +40,22 @@ export const mockSetNewPasswordApi = http.post<
 >(endpoints.auth.newPassword, async ({ params, request }) => {
   const pageParams = new URLSearchParams(window.location.search);
   const scenario = pageParams.get('scenario');
-  // const { password, confirm_password } = await request.json();
 
-  // const passwordData = passwordStrength(password);
-  if (scenario === 'error') {
-    return HttpResponse.json(MOCK_NEW_PASSWORD_API_RESPONSE_INVALID, {
-      status: 401,
-      statusText: 'Unauthorized',
-    });
+  // -------------------- Error scenarios --------------------------------------
+  const errorScenarios: ErrorScenarioConfig[] = [
+    {
+      scenario: 'error',
+      response: MOCK_NEW_PASSWORD_API_RESPONSE_INVALID,
+      responseStatus: { status: 401, statusText: 'Unauthorized' },
+    },
+  ];
+
+  const commonErrorResponse = handleCommonErrorScenarios(scenario, errorScenarios);
+
+  if (commonErrorResponse !== null) {
+    return commonErrorResponse;
   }
 
+  // ----------------------Success scenarios-------------------------------------
   return HttpResponse.json(MOCK_NEW_PASSWORD_API_RESPONSE_VALID);
 });

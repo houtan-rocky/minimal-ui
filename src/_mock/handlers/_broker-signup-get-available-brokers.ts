@@ -2,6 +2,8 @@ import { http, HttpResponse } from 'msw';
 
 import { endpoints } from 'src/utils/axios.util';
 
+import { ErrorScenarioConfig, handleCommonErrorScenarios } from './utils/handle-common-errors';
+
 /* eslint-disable import/no-extraneous-dependencies */
 
 // ----------------------CONSTANTS------------------------------------------------
@@ -66,15 +68,22 @@ export const mockGetAvailableBrokersApi = http.get<
 >(endpoints.users.getAvailableBrokers(), async ({ params }) => {
   const pageParams = new URLSearchParams(window.location.search);
   const scenario = pageParams.get('scenario');
-  // const { userId } = params;
-  // const isValidUserId = true || userId === MOCK_GET_AVAILABLE_BROKERS_API_REQUEST_VALID.userId;
 
-  if (scenario === 'error') {
-    return HttpResponse.json(MOCK_GET_AVAILABLE_BROKERS_API_RESPONSE_INVALID, {
-      status: 401,
-      statusText: 'Unauthorized',
-    });
+  // -------------------- Error scenarios --------------------------------------
+  const errorScenarios: ErrorScenarioConfig[] = [
+    {
+      scenario: 'error',
+      response: MOCK_GET_AVAILABLE_BROKERS_API_RESPONSE_INVALID,
+      responseStatus: { status: 401, statusText: 'Unauthorized' },
+    },
+  ];
+
+  const commonErrorResponse = handleCommonErrorScenarios(scenario, errorScenarios);
+
+  if (commonErrorResponse !== null) {
+    return commonErrorResponse;
   }
 
+  // ----------------------Success scenarios-------------------------------------
   return HttpResponse.json(MOCK_GET_AVAILABLE_BROKERS_API_RESPONSE_VALID);
 });

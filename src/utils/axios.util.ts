@@ -3,8 +3,7 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import i18n from 'src/locales/i18n';
 import { HOST_API } from 'src/config-global';
 
-// ----------------------------------------------------------------------
-
+// ------------------------ Types and Classes -----------------------------------
 interface ApiErrorResponse {
   message?: string;
 }
@@ -18,12 +17,13 @@ class ApiError extends Error {
     this.statusCode = statusCode;
   }
 }
-
+// ----------------------- Utilities --------------------------------------------
 // Type guard to check if the error response matches the `ApiErrorResponse` structure
 function isErrorWithMessage(error: unknown): error is ApiErrorResponse {
   return (error as ApiErrorResponse).message !== undefined;
 }
 
+// ----------------------- Axios Config -----------------------------------------
 const axiosInstance = axios.create({ baseURL: HOST_API });
 
 // Setup interceptors to handle responses and errors
@@ -44,7 +44,7 @@ axiosInstance.interceptors.response.use(
     }
 
     // Map status codes to i18n keys
-    const statusMessageKeyMap: { [key: number]: string } = {
+    const statusMessageKeyMap: Record<number, string> = {
       400: 'errors.bad_request',
       401: 'errors.unauthorized',
       403: 'errors.forbidden',
@@ -71,7 +71,7 @@ axiosInstance.interceptors.response.use(
 
 export default axiosInstance;
 
-// ----------------------------------------------------------------------
+// --------------------------- Fetcher -------------------------------------------
 
 export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
   const [url, config] = Array.isArray(args) ? args : [args, {}];
@@ -79,7 +79,7 @@ export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
   return res.data;
 };
 
-// ----------------------------------------------------------------------
+// -------------------------- Endpoints --------------------------------------------
 
 export const endpoints = {
   chat: '/api/chat',
