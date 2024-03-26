@@ -17,7 +17,6 @@ import { IRANIAN_MOBILE_NUMBER_REGEX } from 'src/utils/regExp.util';
 
 import { useTranslate } from 'src/locales';
 import { useAuthContext } from 'src/auth/hooks';
-import { EmailInboxIcon } from 'src/assets/icons';
 import { verifyLoginApi } from 'src/api/verify-login.api';
 
 import FormProvider, { RHFCode } from 'src/components/hook-form';
@@ -141,19 +140,15 @@ export default function ModernVerifyLoginView() {
   );
 
   const renderHead = (
-    <>
-      <EmailInboxIcon sx={{ height: 96 }} />
+    <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
+      <Typography variant="h3">{t('enter_the_verification_code')}</Typography>
 
-      <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h3">{t('enter_the_verification_code')}</Typography>
-
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {t('the_verification_code_has_been_sent_to_the_following_mobile_number', {
-            mobile_number: searchParams.get('mobile_number'),
-          })}
-        </Typography>
-      </Stack>
-    </>
+      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        {t('the_verification_code_has_been_sent_to_the_following_mobile_number', {
+          mobile_number: searchParams.get('mobile_number'),
+        })}
+      </Typography>
+    </Stack>
   );
 
   return (

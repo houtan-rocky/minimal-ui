@@ -107,6 +107,7 @@ export default function ModernRegisterSetUsernamePasswordView() {
       <RHFTextField
         error={!!errorMsg || !!errors.username}
         name="username"
+        size="medium"
         autoComplete="off"
         placeholder={t('username_placeholder')}
         label={t('username')}
@@ -175,15 +176,7 @@ export default function ModernRegisterSetUsernamePasswordView() {
   const renderHead = (
     <Stack alignItems="end">
       {/* <PasswordIcon sx={{ height: 96 }} /> */}
-      <Iconify
-        justifySelf="end"
-        sx={{ cursor: 'pointer' }}
-        onClick={() => router.push(paths.auth.jwt.login)}
-        icon="eva:arrow-back-fill"
-        width={30}
-      />
-
-      <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
+      <Stack spacing={1} sx={{ mt: 1, mb: 1 }}>
         <Typography variant="h3">{t('set_password')}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
