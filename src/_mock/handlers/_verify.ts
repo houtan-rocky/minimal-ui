@@ -5,9 +5,9 @@ import { endpoints } from 'src/utils/axios.util';
 /* eslint-disable import/no-extraneous-dependencies */
 
 // ----------------------CONSTANTS------------------------------------------------
-const MOCK_VERIFY_API_REQUEST_VALID = {
-  code: '1376',
-} as const;
+// const MOCK_VERIFY_API_REQUEST_VALID = {
+//   code: '1376',
+// } as const;
 
 const MOCK_VERIFY_API_RESPONSE_VALID = {
   status: 'ok',
@@ -39,9 +39,12 @@ export const mockVerifyApi = http.post<
   MockVerifyApiRequestBody,
   MockVerifyApiResponseBody
 >(endpoints.auth.verify, async ({ params, request }) => {
-  const { code } = await request.json();
+  const pageParams = new URLSearchParams(window.location.search);
+  const scenario = pageParams.get('scenario');
 
-  if (code !== MOCK_VERIFY_API_REQUEST_VALID.code) {
+  // const { code } = await request.json();
+
+  if (scenario === 'error') {
     return HttpResponse.json(MOCK_VERIFY_API_RESPONSE_INVALID, {
       status: 401,
       statusText: 'Unauthorized',

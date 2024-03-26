@@ -40,7 +40,19 @@ export const endpoints = {
     verifyRegister: '/api/auth/register-verify',
     forgetPassword: '/api/auth/forget-password',
     verify: '/api/auth/verify',
+    verifyLogin: '/api/auth/verify-login',
     newPassword: '/api/auth/new-password',
+    registerSetUsernamePassword: '/api/auth/register-set-username-password',
+  },
+  users: {
+    getActiveBrokers: (userId?: string) => {
+      if (userId) return `/api/users/${userId}/brokers/active`;
+      return `/api/users/*/brokers/active`;
+    },
+    getAvailableBrokers: (userId?: string) => {
+      if (userId) return `/api/users/${userId}/brokers/available`;
+      return `/api/users/*/brokers/available`;
+    },
   },
   mail: {
     list: '/api/mail/list',

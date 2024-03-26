@@ -7,19 +7,19 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // ----------------------------------------------------------------------
 
-function excludeMsw() {
-  return {
-    name: 'exclude-msw',
-    resolveId(source: any) {
-      return source === 'virtual-module' ? source : null;
-    },
-    renderStart(outputOptions: any, _inputOptions: any) {
-      const outDir = outputOptions.dir;
-      const msWorker = path.resolve(outDir, 'mockServiceWorker.js');
-      fs.rm(msWorker, () => console.log(`Deleted ${msWorker}`));
-    },
-  };
-}
+// function excludeMsw() {
+//   return {
+//     name: 'exclude-msw',
+//     resolveId(source: any) {
+//       return source === 'virtual-module' ? source : null;
+//     },
+//     renderStart(outputOptions: any, _inputOptions: any) {
+//       const outDir = outputOptions.dir;
+//       const msWorker = path.resolve(outDir, 'mockServiceWorker.js');
+//       fs.rm(msWorker, () => console.log(`Deleted ${msWorker}`));
+//     },
+//   };
+// }
 
 export default defineConfig({
   build: {
@@ -33,7 +33,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    excludeMsw(),
+    // excludeMsw(),
     checker({
       typescript: true,
       eslint: {
@@ -43,27 +43,27 @@ export default defineConfig({
         initialIsOpen: false,
       },
     }),
-    VitePWA({
-      registerType: 'autoUpdate',
-      devOptions: {
-        enabled: true,
-      },
-      manifest: {
-        name: 'test-app',
-        short_name: 'TA',
-        start_url: '',
-        display: 'fullscreen',
-        theme_color: '#000',
-        background_color: '#fff',
-        icons: [
-          {
-            src: 'pwa-icon-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-        ],
-      },
-    }),
+    // VitePWA({
+    //   registerType: 'autoUpdate',
+    //   devOptions: {
+    //     enabled: true,
+    //   },
+    //   manifest: {
+    //     name: 'test-app',
+    //     short_name: 'TA',
+    //     start_url: '',
+    //     display: 'fullscreen',
+    //     theme_color: '#000',
+    //     background_color: '#fff',
+    //     icons: [
+    //       {
+    //         src: 'pwa-icon-512.png',
+    //         sizes: '512x512',
+    //         type: 'image/png',
+    //       },
+    //     ],
+    //   },
+    // }),
   ],
 
   resolve: {

@@ -22,6 +22,8 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 // ----------------------------------------------------------------------
 
 export default function ModernRegisterView() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const referralCode = searchParams.get('referral_code');
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState('');
   const { t } = useTranslate();
@@ -39,7 +41,7 @@ export default function ModernRegisterView() {
   const defaultValues = {
     nationalCode: '',
     mobileNumber: '',
-    referralCode: '',
+    referralCode: referralCode || '',
   };
 
   const methods = useForm({
@@ -119,6 +121,7 @@ export default function ModernRegisterView() {
         error={!!errorMsg || !!errors.referralCode}
         name="referralCode"
         placeholder={t('referral_code_placeholder')}
+        disabled={!!referralCode}
         label={t('referral_code')}
       />
 
@@ -140,7 +143,7 @@ export default function ModernRegisterView() {
     <>
       {errorMsg && (
         <Stack spacing={2} sx={{ mb: 5 }}>
-          <Typography variant="h4" color="error">
+          <Typography variant="h6" color="error">
             {errorMsg}
           </Typography>
         </Stack>

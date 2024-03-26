@@ -4,49 +4,49 @@ import { http, HttpResponse } from 'msw';
 import { endpoints } from 'src/utils/axios.util';
 
 // ----------------------CONSTANTS------------------------------------------------
-const MOCK_NEW_PASSWORD_API_RESPONSE_VALID = {
+const MOCK_SET_USERNAME_PASSWORD_API_RESPONSE_VALID = {
   message: 'رمز عبور شما بازنشانی شد.',
   status: 'ok',
 } as const;
-const MOCK_NEW_PASSWORD_API_RESPONSE_INVALID = {
+const MOCK_SET_USERNAME_PASSWORD_API_RESPONSE_INVALID = {
   message: 'رمز عبور وارد شده سختی کافی ندارد.',
   status: 'failed',
 } as const;
 // ------------------------Types----------------------------------------------
-type MockNewPasswordApiStatus = 'ok' | 'failed';
-type MockNewPasswordApiParams = {
+type MockSetUsernamePasswordApiStatus = 'ok' | 'failed';
+type MockSetUsernamePasswordApiParams = {
   national_code: string;
   mobile_number: string;
 };
 
-type MockNewPasswordApiRequestBody = {
+type MockSetUsernamePasswordApiRequestBody = {
   password: string;
   confirm_password: string;
 };
 
-type MockNewPasswordApiResponseBody = {
+type MockSetUsernamePasswordApiResponseBody = {
   message: string;
-  status: MockNewPasswordApiStatus;
+  status: MockSetUsernamePasswordApiStatus;
 };
 
 // ------------------------Handlers----------------------------------------------
 
-export const mockSetNewPasswordApi = http.post<
-  MockNewPasswordApiParams,
-  MockNewPasswordApiRequestBody,
-  MockNewPasswordApiResponseBody
->(endpoints.auth.newPassword, async ({ params, request }) => {
+export const mockRegisterSetUsernamePasswordApi = http.post<
+  MockSetUsernamePasswordApiParams,
+  MockSetUsernamePasswordApiRequestBody,
+  MockSetUsernamePasswordApiResponseBody
+>(endpoints.auth.registerSetUsernamePassword, async ({ params, request }) => {
   const pageParams = new URLSearchParams(window.location.search);
   const scenario = pageParams.get('scenario');
   // const { password, confirm_password } = await request.json();
 
   // const passwordData = passwordStrength(password);
   if (scenario === 'error') {
-    return HttpResponse.json(MOCK_NEW_PASSWORD_API_RESPONSE_INVALID, {
+    return HttpResponse.json(MOCK_SET_USERNAME_PASSWORD_API_RESPONSE_INVALID, {
       status: 401,
       statusText: 'Unauthorized',
     });
   }
 
-  return HttpResponse.json(MOCK_NEW_PASSWORD_API_RESPONSE_VALID);
+  return HttpResponse.json(MOCK_SET_USERNAME_PASSWORD_API_RESPONSE_VALID);
 });

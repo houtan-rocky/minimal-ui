@@ -56,9 +56,18 @@ export const paths = {
       register: `${ROOTS.AUTH}/register`,
       forgotPassword: `${ROOTS.AUTH}/forgot-password`,
       newPassword: `${ROOTS.AUTH}/new-password`,
+      registerSetUsernamePassword: `${ROOTS.AUTH}/register-set-username-password`,
       verify: (mobileNumber: string) => `${ROOTS.AUTH}/verify?mobile_number=${mobileNumber}`,
-      verifyRegister: (mobileNumber: string) =>
-        `${ROOTS.AUTH}/verify-register?mobile_number=${mobileNumber}`,
+      verifyRegister: (mobileNumber?: string) => {
+        if (mobileNumber) {
+          return `${ROOTS.AUTH}/verify-register?mobile_number=${mobileNumber}`;
+        }
+        return `${ROOTS.AUTH}/verify-register`;
+      },
+      verifyLogin: (phoneNumber: string) =>
+        `${ROOTS.AUTH}/verify-login?mobile_number=${phoneNumber}`,
+      brokerSelect: `${ROOTS.AUTH}/broker-select`,
+      brokerSingUp: `${ROOTS.AUTH}/broker-sign-up`,
     },
   },
   // DASHBOARD

@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Link from '@mui/material/Link';
@@ -18,19 +17,18 @@ import { IRANIAN_MOBILE_NUMBER_REGEX } from 'src/utils/regExp.util';
 
 import { useTranslate } from 'src/locales';
 import { useAuthContext } from 'src/auth/hooks';
-import { verifyRegisterApi } from 'src/api/verify-register.api';
+import { verifyLoginApi } from 'src/api/verify-login.api';
 
 import FormProvider, { RHFCode } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export default function ModernVerifyRegisterView() {
+export default function ModernVerifyLoginView() {
   const { palette } = useTheme();
   const router = useRouter();
   const { loginWithToken } = useAuthContext();
   const { t } = useTranslate();
-  const searchParams = useSearchParams();
-
+  const searchParams = new URLSearchParams(window.location.search);
   const [errorMsg, setErrorMsg] = useState('');
 
   const VerifySchema = Yup.object().shape({
@@ -40,7 +38,7 @@ export default function ModernVerifyRegisterView() {
   /**
    * If the mobile number is not valid, redirect to the forgot password page
    */
-  const mobile_number = searchParams[0].get('mobile_number');
+  const mobile_number = searchParams.get('mobile_number');
   useEffect(() => {
     if (
       !mobile_number ||
@@ -77,11 +75,11 @@ export default function ModernVerifyRegisterView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const verifyRegisterResponse = await verifyRegisterApi(data.code);
+      const verifyRegisterResponse = await verifyLoginApi(data.code);
       const { accessToken } = verifyRegisterResponse;
       if (verifyRegisterResponse.status === 'ok') {
         await loginWithToken(accessToken);
-        router.push(paths.auth.jwt.registerSetUsernamePassword);
+        router.push(paths.auth.jwt.brokerSelect);
       }
     } catch (error) {
       console.error(error);
@@ -136,7 +134,7 @@ export default function ModernVerifyRegisterView() {
           display: 'inline-flex',
         }}
       >
-        {t('edit_information')}
+        {t('return_to_previous_page')}
       </Link>
     </Stack>
   );
@@ -147,7 +145,7 @@ export default function ModernVerifyRegisterView() {
 
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
         {t('the_verification_code_has_been_sent_to_the_following_mobile_number', {
-          mobile_number: searchParams[0].get('mobile_number'),
+          mobile_number: searchParams.get('mobile_number'),
         })}
       </Typography>
     </Stack>

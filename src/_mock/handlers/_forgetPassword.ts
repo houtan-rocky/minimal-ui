@@ -4,10 +4,10 @@ import { http, HttpResponse } from 'msw';
 import { endpoints } from 'src/utils/axios.util';
 
 // ----------------------CONSTANTS------------------------------------------------
-const MOCK_FORGET_PASSWORD_API_REQUEST_VALID = {
-  national_code: '1234567890',
-  mobile_number: '09123456789',
-} as const;
+// const MOCK_FORGET_PASSWORD_API_REQUEST_VALID = {
+//   national_code: '1234567890',
+//   mobile_number: '09123456789',
+// } as const;
 
 const MOCK_FORGET_PASSWORD_API_RESPONSE_VALID = {
   message: 'کد بازیابی به شماره موبایل شما ارسال شد',
@@ -41,12 +41,11 @@ export const mockForgetPasswordApi = http.post<
   ForgetPasswordRequestApiBody,
   ForgetPasswordResponseApiBody
 >(endpoints.auth.forgetPassword, async ({ params, request }) => {
-  const { national_code, mobile_number } = await request.json();
+  const pageParams = new URLSearchParams(window.location.search);
+  const scenario = pageParams.get('scenario');
+  // const { national_code, mobile_number } = await request.json();
 
-  if (
-    national_code !== MOCK_FORGET_PASSWORD_API_REQUEST_VALID.national_code ||
-    mobile_number !== MOCK_FORGET_PASSWORD_API_REQUEST_VALID.mobile_number
-  ) {
+  if (scenario === 'error') {
     return HttpResponse.json(MOCK_FORGET_PASSWORD_API_RESPONSE_INVALID, {
       status: 401,
       statusText: 'Unauthorized',
