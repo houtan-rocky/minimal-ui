@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
+import { CardContent } from '@mui/material';
 
 import { useResponsive } from 'src/hooks/use-responsive.hook';
 
@@ -22,16 +23,9 @@ export default function AuthModernLayout({ children, image }: Props) {
         width: 1,
         mx: 'auto',
         maxWidth: 480,
-        px: { xs: 2, md: 8 },
+        px: { xs: 0, md: 8 },
       }}
     >
-      <Logo
-        sx={{
-          mt: { xs: 2, md: 6 },
-          mb: { xs: 8, md: 6 },
-        }}
-      />
-
       <Card
         sx={{
           py: { xs: 5, md: 0 },
@@ -41,7 +35,13 @@ export default function AuthModernLayout({ children, image }: Props) {
           bgcolor: { md: 'background.default' },
         }}
       >
-        {children}
+        <Logo
+          sx={{
+            mt: { xs: 2, md: 6 },
+            mb: { xs: 8, md: 6 },
+          }}
+        />
+        <CardContent>{children}</CardContent>
       </Card>
     </Stack>
   );
@@ -53,12 +53,10 @@ export default function AuthModernLayout({ children, image }: Props) {
         alt="auth"
         src={image || '/assets/background/overlay_3.jpg'}
         sx={{
-          top: 16,
-          left: 16,
           objectFit: 'cover',
           position: 'absolute',
-          width: 'calc(100% - 32px)',
-          height: 'calc(100% - 32px)',
+          width: '100%',
+          height: '100%',
         }}
       />
     </Stack>
