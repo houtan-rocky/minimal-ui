@@ -74,6 +74,9 @@ export const mockLoginApi = http.post<
 
   // const { email, password } = await request.json();
 
+  if (scenario === 'network_error') {
+    return HttpResponse.error() as any;
+  }
   if (scenario === 'error') {
     return HttpResponse.json(MOCK_LOGIN_API_RESPONSE_INVALID, {
       status: 401,
