@@ -139,7 +139,7 @@ export default function ModernVerifyView() {
           display: 'inline-flex',
         }}
       >
-        {t('return_to_previous_page')}
+        {t('return_to_first_page')}
       </Link>
     </Stack>
   );
