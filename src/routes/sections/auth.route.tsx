@@ -2,7 +2,11 @@ import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import AuthModernLayout from 'src/layouts/auth/modern';
+import VerifyLoginPage from 'src/pages/auth/verify-login.page';
+import BrokerSelectPage from 'src/pages/auth/broker-select.page';
+import BrokerSignUpPage from 'src/pages/auth/broker-signup.page';
 import VerifyRegisterPage from 'src/pages/auth/verify-register.page';
+import RegisterSetUsernamePasswordPage from 'src/pages/auth/register-set-username-password.page';
 
 import { SplashScreen } from 'src/components/loading-screen';
 
@@ -50,7 +54,11 @@ const auth = {
       children: [
         { path: 'forgot-password', element: <ForgotPasswordPage /> },
         { path: 'new-password', element: <NewPasswordPage /> },
+        { path: 'register-set-username-password', element: <RegisterSetUsernamePasswordPage /> },
+        { path: 'broker-select', element: <BrokerSelectPage /> },
+        { path: 'broker-sign-up', element: <BrokerSignUpPage /> },
         { path: 'verify', element: <VerifyPage /> },
+        { path: 'verify-login', element: <VerifyLoginPage /> },
         { path: 'verify-register', element: <VerifyRegisterPage /> },
       ],
     },

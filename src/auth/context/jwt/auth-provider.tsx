@@ -136,16 +136,24 @@ export function AuthProvider({ children }: Props) {
     async (email: string, password: string, rememberMe: boolean): Promise<undefined> => {
       const res = await loginApi(email, password);
 
-      const { accessToken, user } = res;
+      const { accessToken, user, has2fa } = res;
 
       setSession(accessToken);
 
+      const userData = {
+        ...user,
+        accessToken,
+        has2fa,
+      };
+
+      console.log(userData, 'sdlkfjwlk32');
       dispatch({
         type: Types.LOGIN,
         payload: {
           user: {
             ...user,
             accessToken,
+            has2fa,
           },
         },
       });
@@ -155,6 +163,9 @@ export function AuthProvider({ children }: Props) {
       } else {
         sessionStorage.setItem(STORAGE_KEY, accessToken);
       }
+
+      // await new Promise((resolve) => setTimeout(resolve, 10000))
+      return userData;
     },
     []
   );

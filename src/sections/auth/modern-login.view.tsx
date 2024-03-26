@@ -14,7 +14,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
-import { useRouter, useSearchParams } from 'src/routes/hooks/index.hook';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
 import { useBoolean } from 'src/hooks/use-boolean.hook';
 
@@ -32,11 +32,11 @@ export default function ModernLoginView() {
   const { t } = useTranslate();
   // using theme colors
 
-  const { login } = useAuthContext();
+  const auth = useAuthContext();
   const password = useBoolean();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const returnTo = searchParams.get('returnTo');
+  // const searchParams = useSearchParams();
+  // const returnTo = searchParams.get('returnTo');
   const [errorMsg, setErrorMsg] = useState('');
 
   const LoginSchema = Yup.object().shape({
@@ -64,8 +64,18 @@ export default function ModernLoginView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await login?.(data.username, data.password, data.rememberMe);
-      router.push(returnTo || PATH_AFTER_LOGIN);
+      const res = (await auth.login?.(
+        data.username,
+        data.password,
+        data.rememberMe
+      )) as unknown as { has2fa: boolean; phone_number: string };
+
+      console.log(res, 'sdfsdfaew');
+      if (res.has2fa) {
+        router.push(paths.auth.jwt.verifyLogin(res.phone_number || ''));
+        return;
+      }
+      router.push(PATH_AFTER_LOGIN);
     } catch (error) {
       console.error(error);
       reset();

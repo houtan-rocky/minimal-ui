@@ -44,8 +44,12 @@
   "code_is_required": "کد تایید اجباری است",
   "resend": "ارسال مجدد",
   "return_to_previous_page": "بازگشت به صفحه قبلی",
+  "edit_information": "ویرایش اطلاعات",
   "forget_password": "فراموشی رمز عبور",
   "forget_password_description": "جهت بازنشانی رمز عبور کد ملی و شماره موبایل خود را وارد کنید",
+  "set_password": "تعیین رمز عبور",
+  "set_password_description_2": "نام کاربری باید با حروف انگلیسی باشد.",
+  "set_password_description_1": "رمز عبور باید شامل حداقل 8 کارکتر و ترکیبی از اعداد،حروف و کارکتر های خاص(@،#،% و ...) باشد.",
   "new_password": "تعیین رمز عبور",
   "new_password_description": "رمز عبور باید شامل حداقل 8 کارکتر و ترکیبی از اعداد،حروف و کارکتر های خاص(@،#،% و ...) باشد.",
   "apply": "تایید",
@@ -56,5 +60,10 @@
   "strong": "قوی",
   "national_code_is_invalid": "کد ملی نامعتبر است",
   "mobile_number_is_invalid": "شماره موبایل نامعتبر است",
-  "something_went_wrong": "مشکلی پیش آمده است"
+  "something_went_wrong": "مشکلی پیش آمده است",
+  "brokers": {
+    "broker_agah": "آگاه",
+    "broker_mofid": "مفید",
+    "broker_hafez": "حافظ"
+  }
 }
