@@ -1,5 +1,5 @@
 /* eslint-disable perfectionist/sort-imports */
-import 'src/utils/highlight';
+import 'src/utils/highlight.util';
 
 // markdown plugins
 import rehypeRaw from 'rehype-raw';

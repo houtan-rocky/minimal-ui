@@ -1,6 +1,6 @@
 import { useMemo, useEffect, useReducer, useCallback } from 'react';
 
-import axios, { endpoints } from 'src/utils/axios';
+import axios, { endpoints } from 'src/utils/axios.util';
 
 import { loginApi } from 'src/api/login.api';
 

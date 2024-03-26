@@ -1,21 +1,21 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { http, HttpResponse } from 'msw';
 
-import { endpoints } from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios.util';
 
 // ----------------------CONSTANTS------------------------------------------------
-const ACCESS_TOKEN =
+const MOCK_LOGIN_API_ACCESS_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE4OTM0NTYwMDAsInVzZXIiOiJleGFtcGxlX3VzZXIifQ.UywE7SiVKaTs93c1-yF1zPA8TjznF-l0VJoQ8IqU_hY';
 export const REQUEST_VALID = {
   email: 'demo@minimals.cc',
   password: 'demo1234',
 };
-export const REQUEST_INVALID = {
+export const MOCK_LOGIN_API_REQUEST_INVALID = {
   email: '',
   password: '',
 };
-export const RESPONSE_VALID = {
-  access_token: ACCESS_TOKEN,
+export const MOCK_LOGIN_API_RESPONSE_VALID = {
+  access_token: MOCK_LOGIN_API_ACCESS_TOKEN,
   message: 'Logged In',
   user: {
     email: REQUEST_VALID.email,
@@ -24,20 +24,20 @@ export const RESPONSE_VALID = {
     role: 'admin',
   },
 };
-export const RESPONSE_INVALID = {
+export const MOCK_LOGIN_API_RESPONSE_INVALID = {
   message: 'نام کاربری یا رمز عبور اشتباه است',
 };
 // ------------------------Types----------------------------------------------
 
-type Params = {};
+type MockLoginApiParams = {};
 
-type RequestBody = {
+type MockLoginApiRequestBody = {
   email: string;
   password: string;
 };
 
-type ResponseBody = {
-  access_token?: AccessToken;
+type MockLoginApiResponseBody = {
+  access_token?: MockLoginApiAccessToken;
   message: string;
   user?: {
     email: string;
@@ -46,22 +46,23 @@ type ResponseBody = {
     role: string;
   };
 };
-type AccessToken = string;
+type MockLoginApiAccessToken = string;
 
 // ------------------------Handlers----------------------------------------------
 
-export const mockLogin = http.post<Params, RequestBody, ResponseBody>(
-  endpoints.auth.login,
-  async ({ params, request }) => {
-    const { email, password } = await request.json();
+export const mockLoginApi = http.post<
+  MockLoginApiParams,
+  MockLoginApiRequestBody,
+  MockLoginApiResponseBody
+>(endpoints.auth.login, async ({ params, request }) => {
+  const { email, password } = await request.json();
 
-    if (email !== REQUEST_VALID.email || password !== REQUEST_VALID.password) {
-      return HttpResponse.json(RESPONSE_INVALID, {
-        status: 401,
-        statusText: 'Unauthorized',
-      });
-    }
-
-    return HttpResponse.json(RESPONSE_VALID);
+  if (email !== REQUEST_VALID.email || password !== REQUEST_VALID.password) {
+    return HttpResponse.json(MOCK_LOGIN_API_RESPONSE_INVALID, {
+      status: 401,
+      statusText: 'Unauthorized',
+    });
   }
-);
+
+  return HttpResponse.json(MOCK_LOGIN_API_RESPONSE_VALID);
+});

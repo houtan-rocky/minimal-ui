@@ -1,6 +1,6 @@
 import Box, { BoxProps } from '@mui/material/Box';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
 import { useSettingsContext } from 'src/components/settings';
 

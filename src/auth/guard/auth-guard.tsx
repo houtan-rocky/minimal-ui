@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths.constant';
+import { useRouter } from 'src/routes/hooks/index.hook';
 
 import { SplashScreen } from 'src/components/loading-screen';
 

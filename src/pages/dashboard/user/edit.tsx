@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 
-import { useParams } from 'src/routes/hooks';
+import { useParams } from 'src/routes/hooks/index.hook';
 
-import { UserEditView } from 'src/sections/user/view';
+import { UserEditView } from 'src/__sections/user/view';
 
 // ----------------------------------------------------------------------
 

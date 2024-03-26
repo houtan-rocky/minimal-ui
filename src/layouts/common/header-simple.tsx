@@ -4,10 +4,10 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { useTheme } from '@mui/material/styles';
 
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 import { RouterLink } from 'src/routes/components';
 
-import { useOffSetTop } from 'src/hooks/use-off-set-top';
+import { useOffSetTop } from 'src/hooks/use-off-set-top.hook';
 
 import { bgBlur } from 'src/theme/css';
 import { useTranslate } from 'src/locales';

@@ -1,4 +1,4 @@
-import { flattenArray } from 'src/utils/flatten-array';
+import { flattenArray } from 'src/utils/flatten-array.util';
 
 import { NavProps, NavItemBaseProps } from 'src/components/nav-section';
 

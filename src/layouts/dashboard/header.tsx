@@ -4,8 +4,8 @@ import Toolbar from '@mui/material/Toolbar';
 import { useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 
-import { useOffSetTop } from 'src/hooks/use-off-set-top';
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useOffSetTop } from 'src/hooks/use-off-set-top.hook';
+import { useResponsive } from 'src/hooks/use-responsive.hook';
 
 import { bgBlur } from 'src/theme/css';
 

@@ -1,8 +1,8 @@
-import { paths } from 'src/routes/paths';
+import { paths } from 'src/routes/paths.constant';
 
-import { removeStorage } from 'src/hooks/use-local-storage';
+import { removeStorage } from 'src/hooks/use-local-storage.hook';
 
-import axios from 'src/utils/axios';
+import axios from 'src/utils/axios.util';
 
 // ----------------------------------------------------------------------
 

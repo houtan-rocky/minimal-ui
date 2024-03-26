@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 
-import { useParams } from 'src/routes/hooks';
+import { useParams } from 'src/routes/hooks/index.hook';
 
-import { JobDetailsView } from 'src/sections/job/view';
+import { JobDetailsView } from 'src/__sections/job/view';
 
 // ----------------------------------------------------------------------
 

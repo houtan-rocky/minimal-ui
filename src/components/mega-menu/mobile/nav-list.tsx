@@ -11,7 +11,7 @@ import { alpha, useTheme } from '@mui/material/styles';
 import ListItemButton from '@mui/material/ListItemButton';
 
 import { RouterLink } from 'src/routes/components';
-import { usePathname, useActiveLink } from 'src/routes/hooks';
+import { usePathname, useActiveLink } from 'src/routes/hooks/index.hook';
 
 import NavItem from './nav-item';
 import Iconify from '../../iconify';
