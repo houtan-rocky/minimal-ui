@@ -38,7 +38,7 @@ export default function AuthModernLayout({ children, image }: Props) {
         <Logo
           sx={{
             mt: { xs: 2, md: 6 },
-            mb: { xs: 8, md: 6 },
+            mb: { xs: 3, md: 5 },
           }}
         />
         <CardContent>{children}</CardContent>

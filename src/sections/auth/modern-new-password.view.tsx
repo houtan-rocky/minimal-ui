@@ -101,6 +101,7 @@ export default function ModernNewPasswordView() {
         render={({ field }) => (
           <RHFTextField
             {...field}
+            autoComplete="off"
             label={t('password')}
             type={password.value ? 'text' : 'password'}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -128,6 +129,7 @@ export default function ModernNewPasswordView() {
 
       <RHFTextField
         name="confirmPassword"
+        autoComplete="off"
         label={t('password_confirm')}
         type={password.value ? 'text' : 'password'}
         InputProps={{
