@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { http, HttpResponse } from 'msw';
 
 import { endpoints } from 'src/utils/axios.util';
@@ -6,45 +7,41 @@ import {
   ErrorScenarioConfig,
   CommonErrorScenarios,
   handleCommonErrorScenarios,
-} from '../utils/handle-common-errors.util';
-
-/* eslint-disable import/no-extraneous-dependencies */
+} from '../../utils/handle-common-errors.util';
 
 // ----------------------CONSTANTS------------------------------------------------
-// const MOCK_VERIFY_API_REQUEST_VALID = {
-//   code: '1376',
-// } as const;
-
-const MOCK_VERIFY_API_RESPONSE_VALID = {
+const MOCK_NEW_PASSWORD_API_RESPONSE_VALID = {
+  message: 'رمز عبور شما بازنشانی شد.',
   status: 'ok',
 } as const;
-
-const MOCK_VERIFY_API_RESPONSE_INVALID = {
-  message: 'کد درست نیست!',
+const MOCK_NEW_PASSWORD_API_RESPONSE_INVALID = {
+  message: 'رمز عبور وارد شده سختی کافی ندارد.',
   status: 'failed',
 } as const;
-
 // ------------------------Types----------------------------------------------
-type MockVerifyApiStatus = 'ok' | 'failed';
-type VerifyParams = {
-  code: string;
+type MockNewPasswordApiStatus = 'ok' | 'failed';
+type MockNewPasswordApiParams = {
+  national_code: string;
+  mobile_number: string;
 };
 
-type MockVerifyApiRequestBody = {
-  code: string;
+type MockNewPasswordApiRequestBody = {
+  password: string;
+  confirm_password: string;
 };
 
-type MockVerifyApiResponseBody = {
-  status: MockVerifyApiStatus;
+type MockNewPasswordApiResponseBody = {
+  message: string;
+  status: MockNewPasswordApiStatus;
 };
 
 // ------------------------Handlers----------------------------------------------
 
-export const mockVerifyApi = http.post<
-  VerifyParams,
-  MockVerifyApiRequestBody,
-  MockVerifyApiResponseBody
->(endpoints.auth.verify, async ({ params, request }) => {
+export const mockSetNewPasswordApi = http.post<
+  MockNewPasswordApiParams,
+  MockNewPasswordApiRequestBody,
+  MockNewPasswordApiResponseBody
+>(endpoints.auth.newPassword, async ({ params, request }) => {
   const pageParams = new URLSearchParams(window.location.search);
   const scenario = pageParams.get('scenario') as unknown as CommonErrorScenarios;
 
@@ -52,7 +49,7 @@ export const mockVerifyApi = http.post<
   const errorScenarios: ErrorScenarioConfig[] = [
     {
       scenario: 'error',
-      response: MOCK_VERIFY_API_RESPONSE_INVALID, // Specific mock response for this error
+      response: MOCK_NEW_PASSWORD_API_RESPONSE_INVALID,
       responseStatus: { status: 401, statusText: 'Unauthorized' },
     },
   ];
@@ -64,5 +61,5 @@ export const mockVerifyApi = http.post<
   }
 
   // ----------------------Success scenarios-------------------------------------
-  return HttpResponse.json(MOCK_VERIFY_API_RESPONSE_VALID);
+  return HttpResponse.json(MOCK_NEW_PASSWORD_API_RESPONSE_VALID);
 });

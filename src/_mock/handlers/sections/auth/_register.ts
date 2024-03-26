@@ -7,7 +7,7 @@ import {
   ErrorScenarioConfig,
   CommonErrorScenarios,
   handleCommonErrorScenarios,
-} from '../utils/handle-common-errors.util';
+} from '../../utils/handle-common-errors.util';
 
 // ----------------------CONSTANTS------------------------------------------------
 // const MOCK_REGISTER_API_REQUEST_VALID = {
