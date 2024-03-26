@@ -7,49 +7,41 @@ import {
   ErrorScenarioConfig,
   CommonErrorScenarios,
   handleCommonErrorScenarios,
-} from './utils/handle-common-errors.util';
+} from '../utils/handle-common-errors.util';
 
 // ----------------------CONSTANTS------------------------------------------------
-// const MOCK_REGISTER_API_REQUEST_VALID = {
-//   national_code: '1234567890',
-//   mobile_number: '09123456789',
-//   referrer_code: '123456',
-// } as const;
-
-const MOCK_REGISTER_API_RESPONSE_VALID = {
-  message: 'کد بازیابی به شماره موبایل شما ارسال شد',
+const MOCK_NEW_PASSWORD_API_RESPONSE_VALID = {
+  message: 'رمز عبور شما بازنشانی شد.',
   status: 'ok',
 } as const;
-
-const MOCK_REGISTER_API_RESPONSE_INVALID = {
-  message: 'کد ملی با شماره موبایل مطابقت ندارد',
+const MOCK_NEW_PASSWORD_API_RESPONSE_INVALID = {
+  message: 'رمز عبور وارد شده سختی کافی ندارد.',
   status: 'failed',
 } as const;
 // ------------------------Types----------------------------------------------
-type MockRegisterApiStatus = 'ok' | 'failed';
-type MockRegisterApiParams = {
+type MockNewPasswordApiStatus = 'ok' | 'failed';
+type MockNewPasswordApiParams = {
   national_code: string;
   mobile_number: string;
 };
 
-type MockRegisterApiRequestBody = {
-  national_code: string;
-  mobile_number: string;
-  referrer_code: string;
+type MockNewPasswordApiRequestBody = {
+  password: string;
+  confirm_password: string;
 };
 
-type MockRegisterApiResponseBody = {
+type MockNewPasswordApiResponseBody = {
   message: string;
-  status: MockRegisterApiStatus;
+  status: MockNewPasswordApiStatus;
 };
 
 // ------------------------Handlers----------------------------------------------
 
-export const mockRegisterApi = http.post<
-  MockRegisterApiParams,
-  MockRegisterApiRequestBody,
-  MockRegisterApiResponseBody
->(endpoints.auth.register, async ({ params, request }) => {
+export const mockSetNewPasswordApi = http.post<
+  MockNewPasswordApiParams,
+  MockNewPasswordApiRequestBody,
+  MockNewPasswordApiResponseBody
+>(endpoints.auth.newPassword, async ({ params, request }) => {
   const pageParams = new URLSearchParams(window.location.search);
   const scenario = pageParams.get('scenario') as unknown as CommonErrorScenarios;
 
@@ -57,7 +49,7 @@ export const mockRegisterApi = http.post<
   const errorScenarios: ErrorScenarioConfig[] = [
     {
       scenario: 'error',
-      response: MOCK_REGISTER_API_RESPONSE_INVALID,
+      response: MOCK_NEW_PASSWORD_API_RESPONSE_INVALID,
       responseStatus: { status: 401, statusText: 'Unauthorized' },
     },
   ];
@@ -69,5 +61,5 @@ export const mockRegisterApi = http.post<
   }
 
   // ----------------------Success scenarios-------------------------------------
-  return HttpResponse.json(MOCK_REGISTER_API_RESPONSE_VALID);
+  return HttpResponse.json(MOCK_NEW_PASSWORD_API_RESPONSE_VALID);
 });

@@ -6,7 +6,7 @@ import {
   ErrorScenarioConfig,
   CommonErrorScenarios,
   handleCommonErrorScenarios,
-} from './utils/handle-common-errors.util';
+} from '../utils/handle-common-errors.util';
 
 /* eslint-disable import/no-extraneous-dependencies */
 
