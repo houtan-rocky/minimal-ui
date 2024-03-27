@@ -20,6 +20,7 @@ import { useTranslate } from 'src/locales';
 import { useAuthContext } from 'src/auth/hooks';
 import { verifyRegisterApi } from 'src/api/verify-register.api';
 
+import Iconify from 'src/components/iconify';
 import FormProvider, { RHFCode } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
@@ -128,15 +129,18 @@ export default function ModernRegisterVerifyView() {
 
       <Link
         component={RouterLink}
-        href={paths.auth.jwt.forgotPassword}
+        href={paths.auth.jwt.register}
         color="inherit"
+        underline="always"
         variant="subtitle2"
         sx={{
           alignItems: 'center',
           display: 'inline-flex',
+          fontSize: 14,
         }}
       >
         {t('edit_information')}
+        <Iconify icon="material-symbols:arrow-back-ios" width="0.8em" height="0.8em" />
       </Link>
     </Stack>
   );
