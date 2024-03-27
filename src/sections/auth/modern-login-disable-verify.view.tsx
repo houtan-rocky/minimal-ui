@@ -86,9 +86,9 @@ const ModernLoginDisableVerifyView: React.FC = () => {
     }
   });
 
-  const handleRefreshSecurityCode = () => {
-    // Logic to refresh security code
-  };
+  // const handleRefreshSecurityCode = () => {
+  //   // Logic to refresh security code
+  // };
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
