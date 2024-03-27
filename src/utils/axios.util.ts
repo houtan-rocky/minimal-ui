@@ -88,6 +88,7 @@ export const endpoints = {
   auth: {
     me: '/api/auth/me',
     login: '/api/auth/login',
+    loginVerifyDisable: '/api/auth/login-verify-disable',
     register: '/api/auth/register',
     verifyRegister: '/api/auth/register-verify',
     forgetPassword: '/api/auth/forget-password',

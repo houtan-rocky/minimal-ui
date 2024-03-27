@@ -1,13 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import AuthModernLayout from 'src/layouts/auth/modern';
-import LoginVerifyPage from 'src/pages/auth/login-verify.page';
-import BrokerSelectPage from 'src/pages/auth/broker-select.page';
-import BrokerSignUpPage from 'src/pages/auth/broker-signup.page';
-import RegisterVerifyPage from 'src/pages/auth/register-verify.page';
-import RegisterNewCredentialsPage from 'src/pages/auth/register-new-credentials-page.page';
-
 import { SplashScreen } from 'src/components/loading-screen';
 
 // ----------------------------------------------------------------------
@@ -20,6 +13,15 @@ const ForgetPasswordNewCredentialsPage = lazy(
   () => import('src/pages/auth/forget-password-new-credentials.page')
 );
 const ForgetPasswordVerifyPage = lazy(() => import('src/pages/auth/forget-password-verify.page'));
+const AuthModernLayout = lazy(() => import('src/layouts/auth/modern'));
+const LoginVerifyPage = lazy(() => import('src/pages/auth/login-verify.page'));
+const BrokerSelectPage = lazy(() => import('src/pages/auth/broker-select.page'));
+const BrokerSignUpPage = lazy(() => import('src/pages/auth/broker-signup.page'));
+const RegisterVerifyPage = lazy(() => import('src/pages/auth/register-verify.page'));
+const LoginVerifyDisabledPage = lazy(() => import('src/pages/auth/login-verify-disabled.page'));
+const RegisterNewCredentialsPage = lazy(
+  () => import('src/pages/auth/register-new-credentials-page.page')
+);
 
 // ----------------------------------------------------------------------
 
@@ -55,6 +57,7 @@ const auth = {
       ),
       children: [
         { path: 'login-verify', element: <LoginVerifyPage /> },
+        { path: 'login-verify-disabled', element: <LoginVerifyDisabledPage /> },
         { path: 'register-verify', element: <RegisterVerifyPage /> },
         { path: 'register-new-credentials', element: <RegisterNewCredentialsPage /> },
         { path: 'forget-password', element: <ForgetPasswordPage /> },

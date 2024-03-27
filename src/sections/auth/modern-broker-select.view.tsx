@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
-import * as React from 'react';
 
 import { styled } from '@mui/material/styles';
 import { Box, Card, Button, Typography } from '@mui/material';

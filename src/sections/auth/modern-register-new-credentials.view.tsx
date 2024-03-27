@@ -66,7 +66,6 @@ export default function ModernRegisterNewCredentialsView() {
     const pw = event.target.value;
 
     const step: StepIdEnum = passwordStrength(pw);
-    console.log(step, 'rsa_dfs');
 
     setActiveStep(step);
   };
