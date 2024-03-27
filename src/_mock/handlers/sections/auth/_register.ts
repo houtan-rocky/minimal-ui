@@ -19,6 +19,12 @@ import {
 const MOCK_REGISTER_API_RESPONSE_VALID = {
   message: 'کد بازیابی به شماره موبایل شما ارسال شد',
   status: 'ok',
+  user: {
+    time: 30,
+    mobile_number: '09123456789',
+    photo_url: '/static/mock-images/avatars/avatar_default.jpg',
+  },
+  has2fa: true,
 } as const;
 
 const MOCK_REGISTER_API_RESPONSE_INVALID = {

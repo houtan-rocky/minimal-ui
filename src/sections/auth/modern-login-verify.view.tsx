@@ -49,6 +49,7 @@ export default function ModernLoginVerifyView() {
 
   // State to keep track of remaining time
   const [time, setTime] = useState(calculateInitialTime);
+  const isDisabled = time <= 0;
 
   useEffect(() => {
     // Decrease time every second
@@ -132,6 +133,7 @@ export default function ModernLoginVerifyView() {
       )}
 
       <LoadingButton
+        disabled={isDisabled}
         fullWidth
         size="large"
         type="submit"

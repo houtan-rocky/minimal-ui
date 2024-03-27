@@ -3,6 +3,7 @@ import { useMemo, useEffect, useReducer, useCallback } from 'react';
 import axios, { endpoints } from 'src/utils/axios.util';
 
 import { loginApi } from 'src/api/login.api';
+import { registerApi } from 'src/api/register.api';
 import { forgetPasswordApi } from 'src/api/forget-password.api';
 
 import { AuthContext } from './auth-context';
@@ -226,29 +227,21 @@ export function AuthProvider({ children }: Props) {
 
   // REGISTER
   const register = useCallback(
-    async (email: string, password: string, firstName: string, lastName: string) => {
-      const data = {
-        email,
-        password,
-        firstName,
-        lastName,
-      };
+    async (nationalCode: string, mobileNumber: string, referralCode?: string) => {
+      const res = await registerApi(nationalCode, mobileNumber, referralCode);
 
-      const res = await axios.post(endpoints.auth.register, data);
-
-      const { accessToken, user } = res.data;
-
-      sessionStorage.setItem(STORAGE_KEY, accessToken);
+      const { user } = res.data;
 
       dispatch({
         type: Types.REGISTER,
         payload: {
           user: {
             ...user,
-            accessToken,
           },
         },
       });
+
+      return res;
     },
     []
   );

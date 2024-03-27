@@ -30,12 +30,7 @@ type CanRemove = {
   login?: (email: string, password: string, rememberMe: boolean) => Promise<void>;
   loginWithToken?: (accessToken: string) => Promise<void>;
   forgetPasswordCall?: (nationalCode: string, mobileNumber: string) => Promise<void>;
-  register?: (
-    email: string,
-    password: string,
-    firstName: string,
-    lastName: string
-  ) => Promise<void>;
+  register: (nationalCode: string, mobileNumber: string, referralCode?: string) => Promise<any>;
   //
   loginWithGoogle?: () => Promise<void>;
   loginWithGithub?: () => Promise<void>;
@@ -60,7 +55,7 @@ export type JWTContextType = CanRemove & {
   login: (email: string, password: string, rememberMe: boolean) => Promise<void>;
   loginWithToken: (accessToken: string) => Promise<void>;
   forgetPasswordCall?: (nationalCode: string, mobileNumber: string) => Promise<void>;
-  register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
+  register: (nationalCode: string, mobileNumber: string, referralCode?: string) => Promise<any>;
   logout: () => Promise<void>;
 };
 
@@ -78,7 +73,7 @@ export type FirebaseContextType = CanRemove & {
   login: (email: string, password: string) => Promise<void>;
   loginWithToken: (accessToken: string) => Promise<void>;
   forgetPasswordCall?: (nationalCode: string, mobileNumber: string) => Promise<void>;
-  register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
+  register: (nationalCode: string, mobileNumber: string, referralCode?: string) => Promise<any>;
 };
 
 export type AmplifyContextType = CanRemove & {
@@ -121,7 +116,7 @@ export type SupabaseContextType = CanRemove & {
   authenticated: boolean;
   unauthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
+  register: (nationalCode: string, mobileNumber: string, referralCode?: string) => Promise<any>;
   logout: () => Promise<void>;
   forgotPassword: (email: string) => Promise<void>;
   updatePassword: (password: string) => Promise<void>;

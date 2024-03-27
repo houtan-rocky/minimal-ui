@@ -15,13 +15,14 @@ import { useRouter } from 'src/routes/hooks/index.hook';
 import { IRANIAN_MOBILE_NUMBER_REGEX, IRANIAN_NATIONAL_CODE_REGEX } from 'src/utils/regExp.util';
 
 import { useTranslate } from 'src/locales';
-import { registerApi } from 'src/api/register.api';
+import { useAuthContext } from 'src/auth/hooks';
 
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function ModernRegisterView() {
+  const { register } = useAuthContext();
   const searchParams = new URLSearchParams(window.location.search);
   const referralCode = searchParams.get('referral_code');
   const router = useRouter();
@@ -56,8 +57,10 @@ export default function ModernRegisterView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const res = await registerApi(data.nationalCode, data.mobileNumber, data.referralCode || '');
-      if (res.status === 'ok') {
+      // const res = await registerApi(data.nationalCode, data.mobileNumber, data.referralCode || '');
+      const res = await register(data.nationalCode, data.mobileNumber);
+      console.log(res, 'sdfsdfsadfsf');
+      if (res.data.status === 'ok') {
         router.push(paths.auth.jwt.registerVerify(data.mobileNumber));
       }
     } catch (error) {

@@ -40,7 +40,7 @@ export default function ModernRegisterVerifyView() {
 
   const { user } = useAuthContext();
   const otpExpirationTime = user?.time || null;
-  const mobileNumber = user?.mobileNumber;
+  const mobileNumber = user?.mobile_number;
 
   // ---------------------------- Timer ----------------------------
   // Calculate the time difference to set the initial countdown
@@ -53,6 +53,7 @@ export default function ModernRegisterVerifyView() {
 
   // State to keep track of remaining time
   const [time, setTime] = useState(calculateInitialTime);
+  const isDisabled = time <= 0;
 
   useEffect(() => {
     // Decrease time every second
@@ -87,13 +88,7 @@ export default function ModernRegisterVerifyView() {
       !mobileNumber.match(IRANIAN_MOBILE_NUMBER_REGEX) ||
       mobileNumber === 'null'
     ) {
-      console.log(
-        !mobileNumber,
-        !mobileNumber?.match(IRANIAN_MOBILE_NUMBER_REGEX),
-        mobileNumber === 'null',
-        'googooli'
-      );
-      router.push(paths.auth.jwt.forgotPassword);
+      router.push(paths.auth.jwt.register);
     }
   }, [mobileNumber, router]);
 
@@ -149,6 +144,7 @@ export default function ModernRegisterVerifyView() {
       </Box>
 
       <LoadingButton
+        disabled={isDisabled}
         fullWidth
         size="large"
         type="submit"
