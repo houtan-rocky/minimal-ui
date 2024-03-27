@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import { ModernBrokerSignUp } from 'src/sections/auth';
+import ModernBrokerSignUpView from 'src/sections/auth/modern-broker-signup.view';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (
@@ -38,7 +38,7 @@ export default function BrokerSignUpPage() {
           </title>
         </Helmet>
 
-        <ModernBrokerSignUp />
+        <ModernBrokerSignUpView />
       </>
     </Profiler>
   );

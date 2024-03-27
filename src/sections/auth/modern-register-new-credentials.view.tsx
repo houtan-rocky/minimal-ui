@@ -3,13 +3,10 @@ import { useState, ChangeEvent } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import { Box, Alert } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
-import InputAdornment from '@mui/material/InputAdornment';
+import { Box, List, ListItem, useTheme, IconButton, InputAdornment } from '@mui/material';
 
 import { paths } from 'src/routes/paths.constant';
 import { useRouter } from 'src/routes/hooks/index.hook';
@@ -24,7 +21,7 @@ import {
 } from 'src/utils/regExp.util';
 
 import { useTranslate } from 'src/locales';
-import { setNewPasswordApi } from 'src/api/set-new-password.api';
+import { registerSetUsernamePasswordApi } from 'src/api/register-set-username-password.api';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
@@ -33,68 +30,90 @@ import { PasswordStrengthStepper } from './password-strength-stepper.component';
 
 // ----------------------------------------------------------------------
 
-export default function ModernNewPasswordView() {
-  const { t } = useTranslate();
+export default function ModernRegisterNewCredentialsView() {
+  const { palette } = useTheme();
+  const router = useRouter();
   const password = useBoolean();
+  const { t } = useTranslate();
   const [errorMsg, setErrorMsg] = useState('');
   const [activeStep, setActiveStep] = useState<StepIdEnum>(StepIdEnum.Weak);
 
-  // Function to update the active step based on some password strength criteria
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const pw = event.target.value;
-
-    const step: StepIdEnum = passwordStrength(pw);
-
-    setActiveStep(step);
-  };
-
-  const router = useRouter();
-
-  const NewPasswordSchema = Yup.object().shape({
+  const registerSetUsernamePasswordSchema = Yup.object().shape({
+    username: Yup.string().required(t('username_is_required')),
     password: Yup.string()
       .required(t('password_is_required'))
       .min(8, t('password_must_be_at_least_8_characters'))
       .matches(REGEX_CONTAIN_LETTERS, t('password_must_contain_letters'))
       .matches(REGEX_CONTAIN_NUMBERS, t('password_must_contain_numbers'))
       .matches(REGEX_SPECIAL_CHARACTERS, t('password_must_contain_special_characters')),
-    confirmPassword: Yup.string()
+    password_confirm: Yup.string()
       .required(t('password_confirm_is_required'))
       .oneOf([Yup.ref('password')], t('passwords_must_match')),
   });
 
   const defaultValues = {
+    username: '',
     password: '',
-    confirmPassword: '',
+    password_confirm: '',
   };
 
   const methods = useForm({
-    mode: 'onChange',
-    resolver: yupResolver(NewPasswordSchema),
+    resolver: yupResolver(registerSetUsernamePasswordSchema),
     defaultValues,
   });
 
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const pw = event.target.value;
+
+    const step: StepIdEnum = passwordStrength(pw);
+    console.log(step, 'rsa_dfs');
+
+    setActiveStep(step);
+  };
+
   const {
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const res = await setNewPasswordApi(data.password, data.confirmPassword);
+      const res = await registerSetUsernamePasswordApi(
+        data.username,
+        data.password,
+        data.password_confirm
+      );
 
       if (res.status === 'ok') {
-        console.info('MESSAGE', res.message);
-        router.push(paths.auth.jwt.login);
+        router.push(paths.dashboard.root);
       }
-      console.info('DATA', data);
     } catch (error) {
-      setErrorMsg(error.message);
       console.error(error);
+      setErrorMsg(error.message);
     }
   });
 
   const renderForm = (
-    <Stack spacing={2} alignItems="center">
+    <Stack spacing={3} alignItems="center">
+      {!!errorMsg && (
+        <Typography
+          color={palette.error.main}
+          fontSize={14}
+          fontWeight={400}
+          sx={{ mb: 3, textAlign: 'center' }}
+        >
+          {errorMsg}
+        </Typography>
+      )}
+      <RHFTextField
+        error={!!errorMsg || !!errors.username}
+        name="username"
+        size="medium"
+        autoComplete="off"
+        placeholder={t('username_placeholder')}
+        label={t('username')}
+      />
+
       <Controller
         name="password"
         control={methods.control}
@@ -111,6 +130,7 @@ export default function ModernNewPasswordView() {
               handlePasswordChange(event);
             }}
             InputProps={{
+              autoComplete: 'new-password', // disable autocomplete,
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={password.onToggle} edge="end">
@@ -122,15 +142,13 @@ export default function ModernNewPasswordView() {
           />
         )}
       />
-
       <Box sx={{ width: 300 }}>
         <PasswordStrengthStepper activeStep={activeStep} setActiveStep={() => {}} />
       </Box>
-
       <RHFTextField
-        name="confirmPassword"
-        autoComplete="off"
+        name="password_confirm"
         label={t('password_confirm')}
+        autoComplete="off"
         type={password.value ? 'text' : 'password'}
         InputProps={{
           endAdornment: (
@@ -149,51 +167,35 @@ export default function ModernNewPasswordView() {
         type="submit"
         variant="contained"
         loading={isSubmitting}
+        sx={{ justifyContent: 'center', pl: 2, pr: 1.5 }}
       >
-        {t('apply')}
+        {t('continue')}
       </LoadingButton>
-
-      <Typography variant="body2">
-        {t('do_not_have_a_code')}
-        &nbsp;
-        <Link
-          variant="subtitle2"
-          sx={{
-            cursor: 'pointer',
-          }}
-        >
-          {t('resend')}
-        </Link>
-      </Typography>
     </Stack>
   );
 
   const renderHead = (
-    <>
-      {/* <SentIcon sx={{ height: 96 }} /> */}
-
-      <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h3">{t('new_password')}</Typography>
+    <Stack alignItems="end">
+      {/* <PasswordIcon sx={{ height: 96 }} /> */}
+      <Stack spacing={1} sx={{ mt: 1, mb: 1 }}>
+        <Typography variant="h3">{t('set_password')}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {t('new_password_description')}
+          <List>
+            <ListItem>{t('set_password_description_1')}</ListItem>
+
+            <ListItem>{t('set_password_description_2')}</ListItem>
+          </List>
         </Typography>
       </Stack>
-    </>
+    </Stack>
   );
 
   return (
-    <>
-      {!!errorMsg && (
-        <Alert severity="error" sx={{ mb: 3 }}>
-          {errorMsg}
-        </Alert>
-      )}
-      <FormProvider methods={methods} onSubmit={onSubmit}>
-        {renderHead}
+    <FormProvider methods={methods} onSubmit={onSubmit}>
+      {renderHead}
 
-        {renderForm}
-      </FormProvider>
-    </>
+      {renderForm}
+    </FormProvider>
   );
 }

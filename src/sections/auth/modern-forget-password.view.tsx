@@ -21,7 +21,7 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export default function ModernForgotPasswordView() {
+export default function ModernForgetPasswordView() {
   const { palette } = useTheme();
   const router = useRouter();
   const { t } = useTranslate();

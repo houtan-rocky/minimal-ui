@@ -2,11 +2,11 @@ import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import AuthModernLayout from 'src/layouts/auth/modern';
-import VerifyLoginPage from 'src/pages/auth/verify-login.page';
+import LoginVerifyPage from 'src/pages/auth/login-verify.page';
 import BrokerSelectPage from 'src/pages/auth/broker-select.page';
 import BrokerSignUpPage from 'src/pages/auth/broker-signup.page';
-import VerifyRegisterPage from 'src/pages/auth/verify-register.page';
-import RegisterSetUsernamePasswordPage from 'src/pages/auth/register-set-username-password.page';
+import RegisterVerifyPage from 'src/pages/auth/register-verify.page';
+import RegisterNewCredentialsPage from 'src/pages/auth/register-new-credentials-page.page';
 
 import { SplashScreen } from 'src/components/loading-screen';
 
@@ -15,9 +15,11 @@ import { SplashScreen } from 'src/components/loading-screen';
 // JWT
 const LoginPage = lazy(() => import('src/pages/auth/login.page'));
 const RegisterPage = lazy(() => import('src/pages/auth/register.page'));
-const ForgotPasswordPage = lazy(() => import('src/pages/auth/forgot-password.page'));
-const NewPasswordPage = lazy(() => import('src/pages/auth/new-password.page'));
-const VerifyPage = lazy(() => import('src/pages/auth/verify.page'));
+const ForgetPasswordPage = lazy(() => import('src/pages/auth/forget-password.page'));
+const ForgetPasswordNewCredentialsPage = lazy(
+  () => import('src/pages/auth/forget-password-new-credentials.page')
+);
+const ForgetPasswordVerifyPage = lazy(() => import('src/pages/auth/forget-password-verify.page'));
 
 // ----------------------------------------------------------------------
 
@@ -52,14 +54,14 @@ const auth = {
         </AuthModernLayout>
       ),
       children: [
-        { path: 'forgot-password', element: <ForgotPasswordPage /> },
-        { path: 'new-password', element: <NewPasswordPage /> },
-        { path: 'register-set-username-password', element: <RegisterSetUsernamePasswordPage /> },
+        { path: 'login-verify', element: <LoginVerifyPage /> },
+        { path: 'register-verify', element: <RegisterVerifyPage /> },
+        { path: 'register-new-credentials', element: <RegisterNewCredentialsPage /> },
+        { path: 'forget-password', element: <ForgetPasswordPage /> },
+        { path: 'forget-password-new-credentials', element: <ForgetPasswordNewCredentialsPage /> },
+        { path: 'forget-password-verify', element: <ForgetPasswordVerifyPage /> },
         { path: 'broker-select', element: <BrokerSelectPage /> },
         { path: 'broker-sign-up', element: <BrokerSignUpPage /> },
-        { path: 'verify', element: <VerifyPage /> },
-        { path: 'verify-login', element: <VerifyLoginPage /> },
-        { path: 'verify-register', element: <VerifyRegisterPage /> },
       ],
     },
   ],

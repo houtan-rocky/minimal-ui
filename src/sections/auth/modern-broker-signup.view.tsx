@@ -46,7 +46,7 @@ interface BrokerageItemProps {
   isActive: boolean;
 }
 
-export default function ModernBrokerSignUp() {
+export default function ModernBrokerSignUpView() {
   const router = useRouter();
   const { t } = useTranslate();
   const { user } = useAuthContext();
