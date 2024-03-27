@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as Yup from 'yup';
 import * as React from 'react';
-import Recaptcha from 'react-recaptcha';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -40,7 +39,7 @@ const StyledSecurityCodeImage = styled('img')({
   width: '250px',
 });
 
-const ModernLoginDisableVerifyView: React.FC = () => {
+const ModernLoginVerifyDisableView: React.FC = () => {
   // ---------------------- Util setup ------------------------
   const { t } = useTranslate();
 
@@ -71,6 +70,17 @@ const ModernLoginDisableVerifyView: React.FC = () => {
     handleSubmit,
     formState: { isSubmitting, errors },
   } = methods;
+
+  const recaptchaRef = React.useRef(null);
+
+  // create a reset function
+  const resetRecaptcha = () => {
+    if (recaptchaRef.current) {
+      // @ts-ignore
+      recaptchaRef.current?.reset();
+      console.log('first', recaptchaRef.current);
+    }
+  };
 
   // ----------------------- handlers -----------------------
   const onSubmit = handleSubmit(async (data) => {
@@ -153,13 +163,15 @@ const ModernLoginDisableVerifyView: React.FC = () => {
           <SecurityCodeImage src="/_mock/captcha.svg" />
           <RefreshButtonWrapper>
             <Iconify icon="mdi:speakerphone" width="2em" height="2em" />
-            <Iconify icon="iconoir:refresh" width="1.5em" height="1.5em" />
+            <Iconify
+              sx={{ cursor: 'pointer' }}
+              onClick={resetRecaptcha}
+              icon="iconoir:refresh"
+              width="1.5em"
+              height="1.5em"
+            />
           </RefreshButtonWrapper>
         </SecurityCodeWrapper>
-
-        {/* captch */}
-        <Recaptcha sitekey="xxxxxxxxxxxxxxxxxxxx" theme="dark" />
-
         <RHFTextField
           error={!!errorMsg || !!errors.username}
           name="captcha"
@@ -224,4 +236,4 @@ const RefreshButtonWrapper = styled(Box)({
   gap: '8px',
 });
 
-export default ModernLoginDisableVerifyView;
+export default ModernLoginVerifyDisableView;

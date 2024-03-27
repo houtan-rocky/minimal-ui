@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import ModernLoginDisableVerifyView from 'src/sections/auth/modern-login-disable-verify.view';
+import ModernLoginVerifyDisableView from 'src/sections/auth/modern-login-verify-disable.view';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (
@@ -39,7 +39,7 @@ export default function LoginVerifyDisabledPage() {
           </title>
         </Helmet>
 
-        <ModernLoginDisableVerifyView />
+        <ModernLoginVerifyDisableView />
       </>
     </Profiler>
   );
