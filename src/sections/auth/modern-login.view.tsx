@@ -32,7 +32,7 @@ export default function ModernLoginView() {
   const { t } = useTranslate();
   // using theme colors
 
-  const auth = useAuthContext();
+  const { login } = useAuthContext();
   const password = useBoolean();
   const router = useRouter();
   // const searchParams = useSearchParams();
@@ -64,13 +64,11 @@ export default function ModernLoginView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const res = (await auth.login?.(
-        data.username,
-        data.password,
-        data.rememberMe
-      )) as unknown as { has2fa: boolean; phone_number: string };
+      const res = (await login?.(data.username, data.password, data.rememberMe)) as unknown as {
+        has2fa: boolean;
+        phone_number: string;
+      };
 
-      console.log(res, 'sdfsdfaew');
       if (res.has2fa) {
         router.push(paths.auth.jwt.loginVerify(res.phone_number || ''));
         return;

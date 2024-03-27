@@ -83,6 +83,7 @@
   "national_code_is_invalid": "کد ملی نامعتبر است",
   "mobile_number_is_invalid": "شماره موبایل نامعتبر است",
   "something_went_wrong": "مشکلی پیش آمده است",
+  "code_validity_time": "مدت اعتبار کد",
   "brokers": {
     "broker_agah": "آگاه",
     "broker_mofid": "مفید",

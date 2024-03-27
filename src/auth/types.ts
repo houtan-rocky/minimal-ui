@@ -19,6 +19,9 @@ export type AuthStateType = {
   status?: string;
   loading: boolean;
   user: AuthUserType;
+  nationalCode?: string;
+  mobileNumber?: string;
+  time?: number;
 };
 
 // ----------------------------------------------------------------------
@@ -26,6 +29,7 @@ export type AuthStateType = {
 type CanRemove = {
   login?: (email: string, password: string, rememberMe: boolean) => Promise<void>;
   loginWithToken?: (accessToken: string) => Promise<void>;
+  forgetPasswordCall?: (nationalCode: string, mobileNumber: string) => Promise<void>;
   register?: (
     email: string,
     password: string,
@@ -55,6 +59,7 @@ export type JWTContextType = CanRemove & {
   unauthenticated: boolean;
   login: (email: string, password: string, rememberMe: boolean) => Promise<void>;
   loginWithToken: (accessToken: string) => Promise<void>;
+  forgetPasswordCall?: (nationalCode: string, mobileNumber: string) => Promise<void>;
   register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
   logout: () => Promise<void>;
 };
@@ -72,6 +77,7 @@ export type FirebaseContextType = CanRemove & {
   forgotPassword?: (email: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   loginWithToken: (accessToken: string) => Promise<void>;
+  forgetPasswordCall?: (nationalCode: string, mobileNumber: string) => Promise<void>;
   register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
 };
 

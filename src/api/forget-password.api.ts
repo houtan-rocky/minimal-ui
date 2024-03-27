@@ -7,7 +7,13 @@ export async function forgetPasswordApi(national_code: string, mobile_number: st
     national_code,
     mobile_number,
   });
-  const { data } = response;
+  const { data } = response as {
+    data: {
+      message: string;
+      status: string;
+      time: string;
+    };
+  };
 
   return data;
 }

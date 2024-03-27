@@ -3,6 +3,7 @@ import { useMemo, useEffect, useReducer, useCallback } from 'react';
 import axios, { endpoints } from 'src/utils/axios.util';
 
 import { loginApi } from 'src/api/login.api';
+import { forgetPasswordApi } from 'src/api/forget-password.api';
 
 import { AuthContext } from './auth-context';
 import { setSession, setStorage, isValidToken } from './utils';
@@ -21,6 +22,7 @@ enum Types {
   LOGIN = 'LOGIN',
   REGISTER = 'REGISTER',
   LOGOUT = 'LOGOUT',
+  VERIFY = 'VERIFY',
 }
 
 type Payload = {
@@ -34,6 +36,11 @@ type Payload = {
     user: AuthUserType;
   };
   [Types.LOGOUT]: undefined;
+  [Types.VERIFY]: {
+    nationalCode: string;
+    mobileNumber: string;
+    time: number;
+  };
 };
 
 type ActionsType = ActionMapType<Payload>[keyof ActionMapType<Payload>];
@@ -68,6 +75,16 @@ const reducer = (state: AuthStateType, action: ActionsType) => {
     return {
       ...state,
       user: null,
+    };
+  }
+  if (action.type === Types.VERIFY) {
+    return {
+      ...state,
+      user: {
+        nationalCode: action.payload.nationalCode,
+        mobileNumber: action.payload.mobileNumber,
+        time: action.payload.time,
+      },
     };
   }
   return state;
@@ -132,40 +149,58 @@ export function AuthProvider({ children }: Props) {
   }, [initialize]);
 
   // LOGIN
-  const login = useCallback(
-    async (email: string, password: string, rememberMe: boolean): Promise<undefined> => {
-      const res = await loginApi(email, password);
+  const login = useCallback(async (email: string, password: string, rememberMe: boolean) => {
+    const res = await loginApi(email, password);
 
-      const { accessToken, user, has2fa } = res;
+    const { accessToken, user, has2fa } = res;
 
-      setSession(accessToken);
+    setSession(accessToken);
 
-      const userData = {
-        ...user,
-        accessToken,
-        has2fa,
-      };
+    const userData = {
+      ...user,
+      accessToken,
+      has2fa,
+    };
 
-      console.log(userData, 'sdlkfjwlk32');
+    dispatch({
+      type: Types.LOGIN,
+      payload: {
+        user: {
+          ...user,
+          mobileNumber: res.user.mobile_number,
+          accessToken,
+          has2fa,
+        },
+      },
+    });
+
+    if (rememberMe) {
+      localStorage.setItem(STORAGE_KEY, accessToken);
+    } else {
+      sessionStorage.setItem(STORAGE_KEY, accessToken);
+    }
+
+    // await new Promise((resolve) => setTimeout(resolve, 10000))
+    return userData;
+  }, []);
+
+  const forgetPasswordCall = useCallback(
+    async (nationalCode: string, mobileNumber: string): Promise<void> => {
+      const res = await forgetPasswordApi(nationalCode, mobileNumber);
+
+      const { message, status, time } = res;
+
       dispatch({
-        type: Types.LOGIN,
+        type: Types.VERIFY,
         payload: {
-          user: {
-            ...user,
-            accessToken,
-            has2fa,
-          },
+          mobileNumber,
+          nationalCode,
+          time: Number(time),
         },
       });
 
-      if (rememberMe) {
-        localStorage.setItem(STORAGE_KEY, accessToken);
-      } else {
-        sessionStorage.setItem(STORAGE_KEY, accessToken);
-      }
-
-      // await new Promise((resolve) => setTimeout(resolve, 10000))
-      return userData;
+      // @ts-ignore
+      return { message, status, time };
     },
     []
   );
@@ -245,8 +280,9 @@ export function AuthProvider({ children }: Props) {
       loginWithToken,
       register,
       logout,
+      forgetPasswordCall,
     }),
-    [login, loginWithToken, logout, register, state.user, status]
+    [state.user, status, login, loginWithToken, register, logout, forgetPasswordCall]
   );
 
   return <AuthContext.Provider value={memoizedValue}>{children}</AuthContext.Provider>;
