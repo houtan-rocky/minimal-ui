@@ -56,7 +56,7 @@ export default function ModernForgetPasswordView() {
       const res = await forgetPasswordApi(data.national_code, data.mobile_number);
 
       if (res.status === 'ok') {
-        router.push(`${paths.auth.jwt.verify(data.mobile_number)}`);
+        router.push(`${paths.auth.jwt.forgetPasswordVerify(data.mobile_number)}`);
       }
     } catch (error) {
       console.error(error);

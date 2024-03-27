@@ -81,7 +81,7 @@ export default function ModernRegisterVerifyView() {
       const { accessToken } = verifyRegisterResponse;
       if (verifyRegisterResponse.status === 'ok') {
         await loginWithToken(accessToken);
-        router.push(paths.auth.jwt.registerSetUsernamePassword);
+        router.push(paths.auth.jwt.registerNewCredentials);
       }
     } catch (error) {
       console.error(error);

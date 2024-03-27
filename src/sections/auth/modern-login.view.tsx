@@ -72,7 +72,7 @@ export default function ModernLoginView() {
 
       console.log(res, 'sdfsdfaew');
       if (res.has2fa) {
-        router.push(paths.auth.jwt.verifyLogin(res.phone_number || ''));
+        router.push(paths.auth.jwt.loginVerify(res.phone_number || ''));
         return;
       }
       router.push(PATH_AFTER_LOGIN);

@@ -55,17 +55,18 @@ export const paths = {
       login: `${ROOTS.AUTH}/login`,
       register: `${ROOTS.AUTH}/register`,
       forgotPassword: `${ROOTS.AUTH}/forget-password`,
-      newPassword: `${ROOTS.AUTH}/new-password`,
-      registerSetUsernamePassword: `${ROOTS.AUTH}/register-set-username-password`,
-      verify: (mobileNumber: string) => `${ROOTS.AUTH}/verify?mobile_number=${mobileNumber}`,
-      verifyRegister: (mobileNumber?: string) => {
+      forgetPasswordNewCredentials: `${ROOTS.AUTH}/forget-password-new-credentials`,
+      registerNewCredentials: `${ROOTS.AUTH}/register-new-credentials`,
+      forgetPasswordVerify: (mobileNumber: string) =>
+        `${ROOTS.AUTH}/forget-password-verify?mobile_number=${mobileNumber}`,
+      registerVerify: (mobileNumber?: string) => {
         if (mobileNumber) {
-          return `${ROOTS.AUTH}/verify-register?mobile_number=${mobileNumber}`;
+          return `${ROOTS.AUTH}/register-verify?mobile_number=${mobileNumber}`;
         }
-        return `${ROOTS.AUTH}/verify-register`;
+        return `${ROOTS.AUTH}/register-verify`;
       },
-      verifyLogin: (phoneNumber: string) =>
-        `${ROOTS.AUTH}/verify-login?mobile_number=${phoneNumber}`,
+      loginVerify: (phoneNumber: string) =>
+        `${ROOTS.AUTH}/login-verify?mobile_number=${phoneNumber}`,
       brokerSelect: `${ROOTS.AUTH}/broker-select`,
       brokerSingUp: `${ROOTS.AUTH}/broker-sign-up`,
     },

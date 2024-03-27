@@ -83,7 +83,7 @@ export default function ModernForgetPasswordVerifyView() {
           // await login?.(data.username, data.password, data.rememberMe)
           // router.push(returnTo || PATH_AFTER_LOGIN)
         } else {
-          router.push(paths.auth.jwt.newPassword);
+          router.push(paths.auth.jwt.forgetPasswordNewCredentials);
         }
       }
     } catch (error) {
