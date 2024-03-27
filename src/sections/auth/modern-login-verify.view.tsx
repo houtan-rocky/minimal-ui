@@ -113,7 +113,7 @@ export default function ModernLoginVerifyView() {
 
       <Link
         component={RouterLink}
-        href={paths.auth.jwt.forgotPassword}
+        href={paths.auth.jwt.loginVerifyDisable}
         color="inherit"
         underline="always"
         variant="subtitle2"

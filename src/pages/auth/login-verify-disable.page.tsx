@@ -27,7 +27,7 @@ const onRenderCallback = (
   });
 };
 
-export default function LoginVerifyDisabledPage() {
+export default function LoginVerifyDisablePage() {
   const { t } = useTranslate();
 
   return (

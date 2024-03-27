@@ -69,6 +69,7 @@ export const paths = {
         `${ROOTS.AUTH}/login-verify?mobile_number=${phoneNumber}`,
       brokerSelect: `${ROOTS.AUTH}/broker-select`,
       brokerSingUp: `${ROOTS.AUTH}/broker-sign-up`,
+      loginVerifyDisable: `${ROOTS.AUTH}/login-verify-disable`,
     },
   },
   // DASHBOARD

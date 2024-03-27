@@ -18,7 +18,7 @@ const LoginVerifyPage = lazy(() => import('src/pages/auth/login-verify.page'));
 const BrokerSelectPage = lazy(() => import('src/pages/auth/broker-select.page'));
 const BrokerSignUpPage = lazy(() => import('src/pages/auth/broker-signup.page'));
 const RegisterVerifyPage = lazy(() => import('src/pages/auth/register-verify.page'));
-const LoginVerifyDisabledPage = lazy(() => import('src/pages/auth/login-verify-disabled.page'));
+const LoginVerifyDisabledPage = lazy(() => import('src/pages/auth/login-verify-disable.page'));
 const RegisterNewCredentialsPage = lazy(
   () => import('src/pages/auth/register-new-credentials-page.page')
 );
@@ -57,7 +57,7 @@ const auth = {
       ),
       children: [
         { path: 'login-verify', element: <LoginVerifyPage /> },
-        { path: 'login-verify-disabled', element: <LoginVerifyDisabledPage /> },
+        { path: 'login-verify-disable', element: <LoginVerifyDisabledPage /> },
         { path: 'register-verify', element: <RegisterVerifyPage /> },
         { path: 'register-new-credentials', element: <RegisterNewCredentialsPage /> },
         { path: 'forget-password', element: <ForgetPasswordPage /> },

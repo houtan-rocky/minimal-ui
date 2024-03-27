@@ -7,7 +7,7 @@ import { mockVerifyLoginApi } from './sections/auth/_verify-login';
 import { mockSetNewPasswordApi } from './sections/auth/_new-password';
 import { mockForgetPasswordApi } from './sections/auth/_forgetPassword';
 import { mockVerifyRegisterApi } from './sections/auth/_verify-register';
-import { mockLoginDisableVerify } from './sections/auth/_login-disable-verify';
+import { mockLoginVerifyDisable } from './sections/auth/_login-verify-disable';
 import { mockGetActiveBrokersApi } from './sections/auth/_broker-select-get-user-active-brokers';
 import { mockGetAvailableBrokersApi } from './sections/auth/_broker-signup-get-available-brokers';
 import { mockRegisterSetUsernamePasswordApi } from './sections/auth/_register-set-username-password';
@@ -16,7 +16,7 @@ export const handlers = [
   mockGetActiveBrokersApi,
   mockGetAvailableBrokersApi,
   mockLoginApi,
-  mockLoginDisableVerify,
+  mockLoginVerifyDisable,
   mockForgetPasswordApi,
   mockVerifyApi,
   mockVerifyLoginApi,
