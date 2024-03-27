@@ -132,6 +132,12 @@ export default function ModernLoginVerifyView() {
         </Typography>
       )}
 
+      <Box sx={{ display: 'flex', width: '100%', justifyContent: 'start' }}>
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          {otpExpirationTime ? `${t('code_validity_time')} : ${formatTime()}` : null}
+        </Typography>
+      </Box>
+
       <LoadingButton
         disabled={isDisabled}
         fullWidth
@@ -142,12 +148,6 @@ export default function ModernLoginVerifyView() {
       >
         {t('verify')}
       </LoadingButton>
-
-      <Box sx={{ display: 'flex', width: '100%', justifyContent: 'start' }}>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {otpExpirationTime ? `${t('code_validity_time')} : ${formatTime()}` : null}
-        </Typography>
-      </Box>
 
       <Link
         component={RouterLink}
