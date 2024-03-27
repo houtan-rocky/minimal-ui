@@ -70,7 +70,7 @@ export default function ModernLoginView() {
       };
 
       if (res.has2fa) {
-        router.push(paths.auth.jwt.loginVerify(res.phone_number || ''));
+        router.push(paths.auth.jwt.loginVerify);
         return;
       }
       router.push(PATH_AFTER_LOGIN);

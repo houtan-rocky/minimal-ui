@@ -60,7 +60,7 @@ export default function ModernForgetPasswordView() {
       await forgetPasswordCall(data.national_code, data.mobile_number);
 
       if (res.status === 'ok') {
-        router.push(`${paths.auth.jwt.forgetPasswordVerify(data.mobile_number)}`);
+        router.push(`${paths.auth.jwt.forgetPasswordVerify}`);
       }
     } catch (error) {
       console.error(error);

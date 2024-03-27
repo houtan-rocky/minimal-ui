@@ -61,7 +61,7 @@ export default function ModernRegisterView() {
       const res = await register(data.nationalCode, data.mobileNumber);
       console.log(res, 'sdfsdfsadfsf');
       if (res.data.status === 'ok') {
-        router.push(paths.auth.jwt.registerVerify(data.mobileNumber));
+        router.push(paths.auth.jwt.registerVerify);
       }
     } catch (error) {
       console.error(error);
