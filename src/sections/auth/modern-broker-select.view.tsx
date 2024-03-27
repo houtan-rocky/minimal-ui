@@ -10,6 +10,8 @@ import { useRouter } from 'src/routes/hooks/use-router.hook';
 
 import { useTranslate } from 'src/locales';
 import { useAuthContext } from 'src/auth/hooks';
+import PlusSignIcon from 'src/assets/icons/plus-sign-icon.svg';
+import ExclamationIcon from 'src/assets/icons/exclamation-icon.svg';
 import { useActiveBrokers } from 'src/api/broker-select-get-user-active-brokers.api';
 
 const BrokerageItem = styled(Button)<{ isActive?: boolean }>(({ theme, isActive }) => ({
@@ -74,7 +76,7 @@ export default function ModernBrokerSelectView() {
       </Typography>
       <Box
         component="img"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/c82d1b3a0b109a853eabfb8a8220119ef2fc3b318b6b18301892c854ebf92818?apiKey=27b612e9acb645b2a27d487a421e7c74&"
+        src={ExclamationIcon}
         alt=""
         sx={{
           alignSelf: 'center',
@@ -127,7 +129,7 @@ export default function ModernBrokerSelectView() {
       >
         <Box
           component="img"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/bf096bfb1720c5864481f6242defde038ea3f1eadd3e28a50ba061ed1f31c9ac?apiKey=27b612e9acb645b2a27d487a421e7c74&"
+          src={PlusSignIcon}
           alt=""
           sx={{
             flexShrink: 0,

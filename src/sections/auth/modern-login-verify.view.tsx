@@ -111,30 +111,19 @@ export default function ModernLoginVerifyView() {
         {t('verify')}
       </LoadingButton>
 
-      <Typography variant="body2">
-        {t('do_not_have_a_code')}
-        &nbsp;
-        <Link
-          variant="subtitle2"
-          sx={{
-            cursor: 'pointer',
-          }}
-        >
-          {t('resend')}
-        </Link>
-      </Typography>
-
       <Link
         component={RouterLink}
         href={paths.auth.jwt.forgotPassword}
         color="inherit"
+        underline="always"
         variant="subtitle2"
         sx={{
           alignItems: 'center',
+          mt: 4,
           display: 'inline-flex',
         }}
       >
-        {t('return_to_previous_page')}
+        {t('do_not_have_a_code')}
       </Link>
     </Stack>
   );

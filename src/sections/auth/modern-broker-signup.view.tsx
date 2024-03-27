@@ -10,6 +10,7 @@ import { useRouter } from 'src/routes/hooks/use-router.hook';
 
 import { useTranslate } from 'src/locales';
 import { useAuthContext } from 'src/auth/hooks';
+import ExclamationIcon from 'src/assets/icons/exclamation-icon.svg';
 import { useAvailableBrokers } from 'src/api/broker-signup-get-available-brokers.api';
 
 import Iconify from 'src/components/iconify';
@@ -75,7 +76,7 @@ export default function ModernBrokerSignUpView() {
       </Typography>
       <Box
         component="img"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/c82d1b3a0b109a853eabfb8a8220119ef2fc3b318b6b18301892c854ebf92818?apiKey=27b612e9acb645b2a27d487a421e7c74&"
+        src={ExclamationIcon}
         alt=""
         sx={{
           alignSelf: 'center',
