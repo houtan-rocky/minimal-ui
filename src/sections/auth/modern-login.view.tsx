@@ -46,8 +46,8 @@ export default function ModernLoginView() {
   });
 
   const defaultValues = {
-    username: 'demo@minimals.cc',
-    password: 'demo1234',
+    username: '',
+    password: '',
     rememberMe: false,
   };
 
