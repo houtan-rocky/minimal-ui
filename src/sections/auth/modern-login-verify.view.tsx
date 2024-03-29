@@ -82,7 +82,7 @@ export default function ModernLoginVerifyView() {
       !mobileNumber.match(IRANIAN_MOBILE_NUMBER_REGEX) ||
       mobileNumber === 'null'
     ) {
-      router.push(paths.auth.jwt.forgotPassword);
+      router.push(paths.auth.jwt.login);
     }
   }, [mobileNumber, router]);
 
