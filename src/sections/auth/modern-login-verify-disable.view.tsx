@@ -88,7 +88,6 @@ const ModernLoginVerifyDisableView: React.FC = () => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       const res = await LoginVerifyDisable(data.username, data.password, data.captcha);
-      await auth.login(data.username, data.password, false);
 
       if (res.status === 'ok') {
         router.push(paths.dashboard.root);
