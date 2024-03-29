@@ -2,13 +2,18 @@ import axiosInstance, { endpoints } from 'src/utils/axios.util';
 
 // ----------------------------------------------------------------------
 
-export async function LoginVerifyDisable(username: string, password: string, captcha: string) {
+export async function LoginVerifyDisableApi(username: string, password: string, captcha: string) {
   const response = await axiosInstance.post(endpoints.auth.loginVerifyDisable, {
     username,
     password,
     captcha,
   });
-  const { message, status } = response.data;
+  const { access_token: accessToken, user, mobile_number, status } = response.data;
 
-  return { message, status };
+  return {
+    accessToken: accessToken || '',
+    user,
+    status,
+    mobile_number,
+  };
 }

@@ -29,6 +29,7 @@ export type AuthStateType = {
 type CanRemove = {
   login?: (email: string, password: string, rememberMe: boolean) => Promise<void>;
   loginWithToken?: (accessToken: string) => Promise<void>;
+  loginVerifyDisable?: (username: string, password: string, captcha: string) => Promise<any>;
   forgetPasswordCall?: (nationalCode: string, mobileNumber: string) => Promise<void>;
   register: (nationalCode: string, mobileNumber: string, referralCode?: string) => Promise<any>;
   //
@@ -54,6 +55,7 @@ export type JWTContextType = CanRemove & {
   unauthenticated: boolean;
   login: (email: string, password: string, rememberMe: boolean) => Promise<void>;
   loginWithToken: (accessToken: string) => Promise<void>;
+  loginVerifyDisable: (username: string, password: string, captcha: string) => Promise<any>;
   forgetPasswordCall?: (nationalCode: string, mobileNumber: string) => Promise<void>;
   register: (nationalCode: string, mobileNumber: string, referralCode?: string) => Promise<any>;
   logout: () => Promise<void>;
@@ -72,6 +74,7 @@ export type FirebaseContextType = CanRemove & {
   forgotPassword?: (email: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   loginWithToken: (accessToken: string) => Promise<void>;
+  loginVerifyDisable: (username: string, password: string, captcha: string) => Promise<any>;
   forgetPasswordCall?: (nationalCode: string, mobileNumber: string) => Promise<void>;
   register: (nationalCode: string, mobileNumber: string, referralCode?: string) => Promise<any>;
 };

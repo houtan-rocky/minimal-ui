@@ -5,6 +5,7 @@ import axios, { endpoints } from 'src/utils/axios.util';
 import { loginApi } from 'src/api/login.api';
 import { registerApi } from 'src/api/register.api';
 import { forgetPasswordApi } from 'src/api/forget-password.api';
+import { LoginVerifyDisableApi as loginVerifyDisableApi } from 'src/api/login-verify-disable.api';
 
 import { AuthContext } from './auth-context';
 import { setSession, setStorage, isValidToken } from './utils';
@@ -185,6 +186,40 @@ export function AuthProvider({ children }: Props) {
     return userData;
   }, []);
 
+  const loginVerifyDisable = useCallback(
+    async (username: string, password: string, captcha: string) => {
+      const res = await loginVerifyDisableApi(username, password, captcha);
+
+      const { user, status, mobile_number, accessToken } = res;
+
+      setSession(accessToken);
+
+      const userData = {
+        ...user,
+        status,
+        mobile_number,
+        accessToken,
+      };
+
+      dispatch({
+        type: Types.LOGIN,
+        payload: {
+          user: {
+            ...user,
+            mobileNumber: res.user.mobile_number,
+            accessToken,
+          },
+        },
+      });
+
+      sessionStorage.setItem(STORAGE_KEY, accessToken);
+
+      // await new Promise((resolve) => setTimeout(resolve, 10000))
+      return userData;
+    },
+    []
+  );
+
   const forgetPasswordCall = useCallback(
     async (nationalCode: string, mobileNumber: string): Promise<void> => {
       const res = await forgetPasswordApi(nationalCode, mobileNumber);
@@ -270,12 +305,22 @@ export function AuthProvider({ children }: Props) {
       unauthenticated: status === 'unauthenticated',
       //
       login,
+      loginVerifyDisable,
       loginWithToken,
       register,
       logout,
       forgetPasswordCall,
     }),
-    [state.user, status, login, loginWithToken, register, logout, forgetPasswordCall]
+    [
+      state.user,
+      status,
+      login,
+      loginVerifyDisable,
+      loginWithToken,
+      register,
+      logout,
+      forgetPasswordCall,
+    ]
   );
 
   return <AuthContext.Provider value={memoizedValue}>{children}</AuthContext.Provider>;
