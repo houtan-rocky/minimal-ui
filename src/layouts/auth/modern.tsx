@@ -29,7 +29,8 @@ export default function AuthModernLayout({ children, image }: Props) {
       <Card
         sx={{
           py: { xs: 5, md: 0 },
-          px: { xs: 2, md: 0 },
+          px: { xs: 3, md: 0 },
+          height: '100%',
           boxShadow: { md: 'none' },
           overflow: { md: 'unset' },
           bgcolor: { md: 'background.default' },
