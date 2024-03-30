@@ -12,9 +12,7 @@ const onRenderCallback = (
   actualDuration: number,
   baseDuration: number,
   startTime: number,
-  commitTime: number,
-  interactions: any
-  // interactions: Set<React.ProfilerInteraction> // the Set of interactions belonging to this update
+  commitTime: number
 ) => {
   console.log('Profiling data for verify_register_page:', {
     id,
@@ -23,7 +21,6 @@ const onRenderCallback = (
     baseDuration,
     startTime,
     commitTime,
-    interactions,
   });
 };
 
