@@ -76,7 +76,6 @@ export default function ModernForgetPasswordNewCredentials() {
   const {
     handleSubmit,
     formState: { isSubmitting },
-    getValues,
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
