@@ -55,5 +55,6 @@
     "unordered_map": "cpp",
     "variant": "cpp",
     "vector": "cpp"
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
