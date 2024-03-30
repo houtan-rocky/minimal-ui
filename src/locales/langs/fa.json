@@ -4,7 +4,7 @@
     "network_error": "خطا در اتصال به اینترنت",
     "unauthorized": "اطلاعات ورودی اشتباه است",
     "forbidden": "دسترسی غیر مجاز",
-    "not_found": "صفحه مورد نظر یافت نشد",
+    "not_found": "یافت نشد",
     "internal_server_error": "خطای سرور",
     "bad_gateway": "خطای سرور",
     "service_unavailable": "سرویس در دسترس نیست",

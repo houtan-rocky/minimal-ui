@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import ModernBrokerSignUpView from 'src/sections/auth/modern-broker-signup.view';
+import ModernBrokerSignUpView from 'src/sections/auth/view/modern-broker-signup.view';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (
