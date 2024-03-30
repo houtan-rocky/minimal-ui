@@ -36,11 +36,11 @@ export const MOCK_LOGIN_API_RESPONSE_VALID = {
   access_token: MOCK_LOGIN_API_ACCESS_TOKEN,
   message: 'Logged In',
   status: 'ok',
-  time: 30,
   user: {
     email: MOCK_LOGIN_API_REQUEST_VALID.email,
     display_name: 'Demo User',
-    phone_number: '09123456789',
+    mobile_number: '09123456789',
+    time: 30,
     photo_url: '/static/mock-images/avatars/avatar_default.jpg',
     role: 'admin',
   },

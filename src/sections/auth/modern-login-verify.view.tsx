@@ -24,6 +24,7 @@ import FormProvider, { RHFCode } from 'src/components/hook-form';
 // ----------------------------------------------------------------------
 
 export default function ModernLoginVerifyView() {
+  const { login } = useAuthContext();
   const { palette } = useTheme();
   const router = useRouter();
   const { loginWithToken } = useAuthContext();
@@ -49,6 +50,7 @@ export default function ModernLoginVerifyView() {
 
   // State to keep track of remaining time
   const [time, setTime] = useState(calculateInitialTime);
+  const isOtpExpired = time <= 0;
   const isDisabled = time <= 0;
 
   useEffect(() => {
@@ -65,7 +67,7 @@ export default function ModernLoginVerifyView() {
 
     // Cleanup the interval on component unmount
     return () => clearInterval(interval);
-  }, []);
+  }, [time]);
 
   // Format the time in minutes and seconds
   const formatTime = () => {
@@ -76,11 +78,12 @@ export default function ModernLoginVerifyView() {
 
   // ----------------------------------------------------------------------
 
+  // Redirect to login if the mobile number is not valid
   useEffect(() => {
     if (
       !mobileNumber ||
       !mobileNumber.match(IRANIAN_MOBILE_NUMBER_REGEX) ||
-      mobileNumber === 'null'
+      mobileNumber === null
     ) {
       router.push(paths.auth.jwt.login);
     }
@@ -102,7 +105,10 @@ export default function ModernLoginVerifyView() {
   const {
     handleSubmit,
     formState: { isSubmitting },
+    reset,
   } = methods;
+
+  // -------------------Handlers-------------------
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -117,6 +123,19 @@ export default function ModernLoginVerifyView() {
       setErrorMsg(error.message);
     }
   });
+
+  const resendCode = async () => {
+    try {
+      const res = await login();
+      setTime(res.time);
+
+      reset();
+    } catch (error) {
+      console.error(error);
+      // reset()
+      setErrorMsg(typeof error === 'string' ? error : error.message);
+    }
+  };
 
   const renderForm = (
     <Stack spacing={3} alignItems="center">
@@ -136,6 +155,21 @@ export default function ModernLoginVerifyView() {
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {otpExpirationTime ? `${t('code_validity_time')} : ${formatTime()}` : null}
         </Typography>
+        {isOtpExpired && (
+          <Link
+            component="button"
+            onClick={resendCode}
+            variant="subtitle2"
+            color={palette.primary.main}
+            underline="always"
+            sx={{
+              cursor: 'pointer',
+              ml: 1,
+            }}
+          >
+            {t('resend')}
+          </Link>
+        )}
       </Box>
 
       <LoadingButton

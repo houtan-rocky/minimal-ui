@@ -151,40 +151,55 @@ export function AuthProvider({ children }: Props) {
   }, [initialize]);
 
   // LOGIN
-  const login = useCallback(async (email: string, password: string, rememberMe: boolean) => {
-    const res = await loginApi(email, password);
+  const login = useCallback(
+    async (
+      email: string = state?.user?.email || '',
+      password: string = state?.user?.password || '',
+      rememberMe: boolean = false
+    ) => {
+      const res = await loginApi(email, password);
 
-    const { accessToken, user, has2fa } = res;
+      const { accessToken, user, has2fa, status } = res;
 
-    setSession(accessToken);
+      setSession(accessToken);
 
-    const userData = {
-      ...user,
-      accessToken,
-      has2fa,
-    };
+      const toReturn = {
+        ...user,
+        mobileNumber: res.user.mobile_number,
+        password,
+        accessToken,
+        has2fa,
+        status,
+      };
 
-    dispatch({
-      type: Types.LOGIN,
-      payload: {
-        user: {
-          ...user,
-          mobileNumber: res.user.mobile_number,
-          accessToken,
-          has2fa,
+      const userData = {
+        ...user,
+        mobileNumber: res.user.mobile_number,
+        password,
+        accessToken,
+        has2fa,
+      };
+
+      dispatch({
+        type: Types.LOGIN,
+        payload: {
+          user: {
+            ...userData,
+          },
         },
-      },
-    });
+      });
 
-    if (rememberMe) {
-      localStorage.setItem(STORAGE_KEY, accessToken);
-    } else {
-      sessionStorage.setItem(STORAGE_KEY, accessToken);
-    }
+      if (rememberMe) {
+        localStorage.setItem(STORAGE_KEY, accessToken);
+      } else {
+        sessionStorage.setItem(STORAGE_KEY, accessToken);
+      }
 
-    // await new Promise((resolve) => setTimeout(resolve, 10000))
-    return userData;
-  }, []);
+      // await new Promise((resolve) => setTimeout(resolve, 10000))
+      return toReturn;
+    },
+    [state?.user?.email, state?.user?.password]
+  );
 
   const loginVerifyDisable = useCallback(
     async (username: string, password: string, captcha: string) => {

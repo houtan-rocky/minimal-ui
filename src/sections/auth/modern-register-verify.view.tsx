@@ -53,6 +53,7 @@ export default function ModernRegisterVerifyView() {
 
   // State to keep track of remaining time
   const [time, setTime] = useState(calculateInitialTime);
+  const isOtpExpired = time <= 0;
   const isDisabled = time <= 0;
 
   useEffect(() => {
@@ -138,8 +139,21 @@ export default function ModernRegisterVerifyView() {
         </Typography>
       )}
       <Box sx={{ display: 'flex', width: '100%', justifyContent: 'start' }}>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {otpExpirationTime ? `${t('code_validity_time')} : ${formatTime()}` : null}
+        <Typography variant="body2" sx={{ color: 'text.primary' }}>
+          {`${t('code_validity_time')} : ${formatTime()}`}
+          {isOtpExpired && (
+            <Link
+              variant="subtitle2"
+              color={palette.primary.main}
+              underline="always"
+              sx={{
+                cursor: 'pointer',
+                ml: 1,
+              }}
+            >
+              {t('resend')}
+            </Link>
+          )}
         </Typography>
       </Box>
 
@@ -154,18 +168,7 @@ export default function ModernRegisterVerifyView() {
         {t('verify')}
       </LoadingButton>
 
-      <Typography variant="body2">
-        {t('do_not_have_a_code')}
-        &nbsp;
-        <Link
-          variant="subtitle2"
-          sx={{
-            cursor: 'pointer',
-          }}
-        >
-          {t('resend')}
-        </Link>
-      </Typography>
+      <Typography variant="body2" />
 
       <Link
         component={RouterLink}
