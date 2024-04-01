@@ -1,4 +1,11 @@
 {
+  "home": "خانه",
+  "score_records": "سوابق امتیازی",
+  "credit": "اعتبار",
+  "brokerages": "کارگزاری ها",
+  "transactions": "صورتحساب ها",
+  "performance_reports": "گزارش عملکرد",
+  "introduce_to_friends": "معرفی به دوستان",
   "auth_pages": {},
   "app_name": "مارجینکس",
   "are_you_not_a_member": "عضو نیستید؟",
@@ -66,5 +73,7 @@
     "broker_agah": "آگاه",
     "broker_mofid": "مفید",
     "broker_hafez": "حافظ"
-  }
+  },
+  "broker": "کارگزار",
+  "support": "پشتیبانی"
 }

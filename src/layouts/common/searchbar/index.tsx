@@ -72,7 +72,7 @@ function Searchbar() {
   }, []);
 
   const dataFiltered = applyFilter({
-    inputData: getAllItems({ data: navData }),
+    inputData: getAllItems({ data: navData.mainNavigation }),
     query: searchQuery,
   });
 
