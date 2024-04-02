@@ -1,17 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 
-import { FileManagerView } from 'src/sections/file-manager/view';
+import MemberHomeView from 'src/sections/member/home/view/home.view';
 
 // ----------------------------------------------------------------------
 
-export default function FileManagerPage() {
+export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard: File Manager</title>
+        <title> Dashboard: Home</title>
       </Helmet>
 
-      <FileManagerView />
+      <MemberHomeView />
     </>
   );
 }

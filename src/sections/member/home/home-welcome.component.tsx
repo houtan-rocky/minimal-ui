@@ -2,8 +2,6 @@ import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Stack, { StackProps } from '@mui/material/Stack';
 
-import { bgGradient } from 'src/theme/css';
-
 // ----------------------------------------------------------------------
 
 type Props = StackProps & {
@@ -13,22 +11,18 @@ type Props = StackProps & {
   action?: React.ReactNode;
 };
 
-export default function AppWelcome({ title, description, action, img, ...other }: Props) {
+export default function HomeWelcome({ title, description, action, img, ...other }: Props) {
   const theme = useTheme();
 
   return (
     <Stack
       flexDirection={{ xs: 'column', md: 'row' }}
       sx={{
-        ...bgGradient({
-          direction: '135deg',
-        }),
-        height: { md: 1 },
         borderRadius: 2,
+        boxShadow: theme.customShadows.z8,
         position: 'relative',
         color: 'primary.darker',
         backgroundColor: 'common.white',
-        boxShadow: theme.customShadows.z8,
       }}
       {...other}
     >

@@ -19,14 +19,14 @@ import Scrollbar from 'src/components/scrollbar';
 import { UploadBox } from 'src/components/upload';
 import { useSettingsContext } from 'src/components/settings';
 
-import FileWidget from '../../../../sections/file-manager/file-widget';
-import FileUpgrade from '../../../../sections/file-manager/file-upgrade';
-import FileRecentItem from '../../../../sections/file-manager/file-recent-item';
-import FileDataActivity from '../../../../sections/file-manager/file-data-activity';
-import FileManagerPanel from '../../../../sections/file-manager/file-manager-panel';
-import FileStorageOverview from '../../../../sections/file-manager/file-storage-overview';
-import FileManagerFolderItem from '../../../../sections/file-manager/file-manager-folder-item';
-import FileManagerNewFolderDialog from '../../../../sections/file-manager/file-manager-new-folder-dialog';
+import FileWidget from '../../../file-manager/file-widget';
+import FileUpgrade from '../../../file-manager/file-upgrade';
+import FileRecentItem from '../../../file-manager/file-recent-item';
+import FileDataActivity from '../../../file-manager/file-data-activity';
+import FileManagerPanel from '../../../file-manager/file-manager-panel';
+import FileStorageOverview from '../../../file-manager/file-storage-overview';
+import FileManagerFolderItem from '../../../file-manager/file-manager-folder-item';
+import FileManagerNewFolderDialog from '../../../file-manager/file-manager-new-folder-dialog';
 
 // ----------------------------------------------------------------------
 
