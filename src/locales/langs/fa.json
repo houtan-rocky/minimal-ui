@@ -1,4 +1,11 @@
 {
+  "home": "خانه",
+  "score_records": "سوابق امتیازی",
+  "credit": "اعتبار",
+  "brokerages": "کارگزاری ها",
+  "transactions": "صورتحساب ها",
+  "performance_reports": "گزارش عملکرد",
+  "introduce_to_friends": "معرفی به دوستان",
   "auth_pages": {},
   "errors": {
     "network_error": "خطا در اتصال به اینترنت",
@@ -88,5 +95,23 @@
     "broker_agah": "آگاه",
     "broker_mofid": "مفید",
     "broker_hafez": "حافظ"
+  },
+  "broker": "کارگزار",
+  "support": "پشتیبانی",
+  "ask_for_credit": "درخواست اعتبار",
+  "date": "تاریخ",
+  "hour": "ساعت",
+  "status": "وضعیت",
+  "toman": "تومان",
+  "rial": "ریال",
+  "pages": {},
+  "home_page": {
+    "welcome_title": "کسب سود بیشتر \n مدیریت بهتر پورتفو",
+    "welcome_description": "هوش مصنوعی مارجینکس به شما کمک می کند تا بهترین و مناسب ترین بسته اعتباری را انتخاب کنید و به سود بیشتر برسید.",
+    "requests_records": "سوابق درخواست ها",
+    "request_type": "نوع درخواست",
+    "monthly_finance_charge": "هزینه ماهانه اعتبار",
+    "monthly_transaction_sum": "جمع تراکنش های ماهانه",
+    "guaranteed_value": "ارزش تضمینی"
   }
 }

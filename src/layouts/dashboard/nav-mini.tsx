@@ -46,11 +46,13 @@ export default function NavMini() {
         <Logo sx={{ mx: 'auto', my: 2 }} />
 
         <NavSectionMini
-          data={navData}
+          data={navData.mainNavigation}
           slotProps={{
             currentRole: user?.role,
           }}
         />
+        <Box flex={1} />
+        <NavSectionMini data={navData.bottomNavigation} />
       </Stack>
     </Box>
   );

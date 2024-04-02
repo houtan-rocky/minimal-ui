@@ -1,5 +1,5 @@
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { alpha, useTheme } from '@mui/material/styles';
 import Stack, { StackProps } from '@mui/material/Stack';
 
 import { bgGradient } from 'src/theme/css';
@@ -22,14 +22,13 @@ export default function AppWelcome({ title, description, action, img, ...other }
       sx={{
         ...bgGradient({
           direction: '135deg',
-          startColor: alpha(theme.palette.primary.light, 0.2),
-          endColor: alpha(theme.palette.primary.main, 0.2),
         }),
         height: { md: 1 },
         borderRadius: 2,
         position: 'relative',
         color: 'primary.darker',
         backgroundColor: 'common.white',
+        boxShadow: theme.customShadows.z8,
       }}
       {...other}
     >

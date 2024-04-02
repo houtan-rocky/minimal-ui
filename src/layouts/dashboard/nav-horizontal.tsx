@@ -46,7 +46,7 @@ function NavHorizontal() {
           }}
         >
           <NavSectionHorizontal
-            data={navData}
+            data={navData.bottomNavigation}
             slotProps={{
               currentRole: user?.role,
             }}

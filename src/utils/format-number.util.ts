@@ -49,11 +49,11 @@ export function fCurrency(inputValue: InputValue) {
   const number = Number(inputValue);
 
   const fm = new Intl.NumberFormat(code, {
-    style: 'currency',
     currency,
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(number);
+  console.log(currency, 'sdfda');
 
   return fm;
 }
