@@ -18,6 +18,7 @@ import {
 const MOCK_FORGET_PASSWORD_API_RESPONSE_VALID = {
   message: 'کد بازیابی به شماره موبایل شما ارسال شد',
   status: 'ok',
+  time: 30,
 } as const;
 const MOCK_FORGET_PASSWORD_API_RESPONSE_INVALID = {
   message: 'کد ملی با شماره موبایل مطابقت ندارد',
@@ -37,6 +38,7 @@ type ForgetPasswordRequestApiBody = {
 
 type ForgetPasswordResponseApiBody = {
   message: string;
+  time: number;
   status: MockForgetPasswordApiStatus;
 };
 

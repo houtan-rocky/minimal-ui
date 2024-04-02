@@ -5,7 +5,6 @@ import { endpoints } from 'src/utils/axios.util';
 
 import {
   ErrorScenarioConfig,
-  CommonErrorScenarios,
   handleCommonErrorScenarios,
 } from '../../utils/handle-common-errors.util';
 
@@ -26,7 +25,8 @@ const MOCK_LOGIN_API_RESPONSE_HAS_2FA = {
   user: {
     email: MOCK_LOGIN_API_REQUEST_VALID.email,
     display_name: 'Demo User',
-    phone_number: '09123456789',
+    time: 30,
+    mobile_number: '09123456789',
     photo_url: '/static/mock-images/avatars/avatar_default.jpg',
     role: 'admin',
   },
@@ -35,6 +35,8 @@ const MOCK_LOGIN_API_RESPONSE_HAS_2FA = {
 export const MOCK_LOGIN_API_RESPONSE_VALID = {
   access_token: MOCK_LOGIN_API_ACCESS_TOKEN,
   message: 'Logged In',
+  status: 'ok',
+  time: 30,
   user: {
     email: MOCK_LOGIN_API_REQUEST_VALID.email,
     display_name: 'Demo User',
@@ -59,6 +61,9 @@ type MockLoginApiResponseBody = {
   access_token?: MockLoginApiAccessToken;
   message: string;
   has2fA?: boolean;
+  phone_number: string;
+  status: string;
+  time: number;
   user?: {
     email: string;
     display_name: string;
@@ -76,7 +81,7 @@ export const mockLoginApi = http.post<
   MockLoginApiResponseBody
 >(endpoints.auth.login, async ({ params, request }) => {
   const pageParams = new URLSearchParams(window.location.search);
-  const scenario = pageParams.get('scenario') as unknown as CommonErrorScenarios;
+  const scenario = pageParams.get('scenario') as any;
 
   // -------------------- Error scenarios --------------------------------------
   const errorScenarios: ErrorScenarioConfig[] = [
@@ -99,5 +104,8 @@ export const mockLoginApi = http.post<
   }
 
   // ----------------------Success scenarios-------------------------------------
+  if (scenario === 'has2fa') {
+    return HttpResponse.json(MOCK_LOGIN_API_RESPONSE_HAS_2FA);
+  }
   return HttpResponse.json(MOCK_LOGIN_API_RESPONSE_VALID);
 });

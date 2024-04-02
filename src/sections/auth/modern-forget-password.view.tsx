@@ -14,6 +14,7 @@ import { useRouter } from 'src/routes/hooks/index.hook';
 import { IRANIAN_MOBILE_NUMBER_REGEX, IRANIAN_NATIONAL_CODE_REGEX } from 'src/utils/regExp.util';
 
 import { useTranslate } from 'src/locales';
+import { useAuthContext } from 'src/auth/hooks';
 import { forgetPasswordApi } from 'src/api/forget-password.api';
 
 import Iconify from 'src/components/iconify';
@@ -22,6 +23,7 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 // ----------------------------------------------------------------------
 
 export default function ModernForgetPasswordView() {
+  const { forgetPasswordCall } = useAuthContext();
   const { palette } = useTheme();
   const router = useRouter();
   const { t } = useTranslate();
@@ -53,7 +55,9 @@ export default function ModernForgetPasswordView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      if (forgetPasswordCall === undefined) throw new Error('forgetPasswordApi is not defined');
       const res = await forgetPasswordApi(data.national_code, data.mobile_number);
+      await forgetPasswordCall(data.national_code, data.mobile_number);
 
       if (res.status === 'ok') {
         router.push(`${paths.auth.jwt.forgetPasswordVerify(data.mobile_number)}`);

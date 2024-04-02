@@ -18,6 +18,8 @@ export type CommonErrorScenarios =
   | 'not_found'
   | 'unauthorized';
 
+export type CommonScenarios = 'has2fa' | 'has2fa_phone_number' | CommonErrorScenarios;
+
 /**
  * Handle common error scenarios in mock APIs.
  * @param {CommonErrorScenarios} currentScenario Current scenario to match.
