@@ -33,7 +33,7 @@ import { PasswordStrengthStepper } from './password-strength-stepper.component';
 
 // ----------------------------------------------------------------------
 
-export default function ModernNewPasswordView() {
+export default function ModernForgetPasswordNewCredentials() {
   const { t } = useTranslate();
   const password = useBoolean();
   const [errorMsg, setErrorMsg] = useState('');

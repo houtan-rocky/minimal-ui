@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import { ModernVerifyLoginView } from 'src/sections/auth';
+import { ModernLoginVerifyView } from 'src/sections/auth';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (
@@ -27,7 +27,7 @@ const onRenderCallback = (
   });
 };
 
-export default function VerifyLoginPage() {
+export default function LoginVerifyPage() {
   const { t } = useTranslate();
 
   return (
@@ -39,7 +39,7 @@ export default function VerifyLoginPage() {
           </title>
         </Helmet>
 
-        <ModernVerifyLoginView />
+        <ModernLoginVerifyView />
       </>
     </Profiler>
   );

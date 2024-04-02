@@ -17,15 +17,18 @@ import { useRouter } from 'src/routes/hooks/index.hook';
 import { IRANIAN_MOBILE_NUMBER_REGEX } from 'src/utils/regExp.util';
 
 import { useTranslate } from 'src/locales';
-import { verifyApi } from 'src/api/verify.api';
+import { useAuthContext } from 'src/auth/hooks';
+import { verifyRegisterApi } from 'src/api/verify-register.api';
 
+import Iconify from 'src/components/iconify';
 import FormProvider, { RHFCode } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export default function ModernVerifyView() {
+export default function ModernRegisterVerifyView() {
   const { palette } = useTheme();
   const router = useRouter();
+  const { loginWithToken } = useAuthContext();
   const { t } = useTranslate();
   const searchParams = useSearchParams();
 
@@ -39,7 +42,6 @@ export default function ModernVerifyView() {
    * If the mobile number is not valid, redirect to the forgot password page
    */
   const mobile_number = searchParams[0].get('mobile_number');
-  const is_register = searchParams[0].get('is_register');
   useEffect(() => {
     if (
       !mobile_number ||
@@ -76,15 +78,11 @@ export default function ModernVerifyView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const res = await verifyApi(data.code);
-      console.log(res, 'sdlfkjewlk');
-      if (res.status === 'ok') {
-        if (is_register === 'true') {
-          // await login?.(data.username, data.password, data.rememberMe)
-          // router.push(returnTo || PATH_AFTER_LOGIN)
-        } else {
-          router.push(paths.auth.jwt.newPassword);
-        }
+      const verifyRegisterResponse = await verifyRegisterApi(data.code);
+      const { accessToken } = verifyRegisterResponse;
+      if (verifyRegisterResponse.status === 'ok') {
+        await loginWithToken(accessToken);
+        router.push(paths.auth.jwt.registerNewCredentials);
       }
     } catch (error) {
       console.error(error);
@@ -100,7 +98,7 @@ export default function ModernVerifyView() {
           color={palette.error.main}
           fontSize={14}
           fontWeight={400}
-          sx={{ mb: 3, alignSelf: 'start' }}
+          sx={{ mb: 3, textAlign: 'center' }}
         >
           {errorMsg}
         </Typography>
@@ -131,33 +129,32 @@ export default function ModernVerifyView() {
 
       <Link
         component={RouterLink}
-        href={paths.auth.jwt.forgotPassword}
+        href={paths.auth.jwt.register}
         color="inherit"
+        underline="always"
         variant="subtitle2"
         sx={{
           alignItems: 'center',
           display: 'inline-flex',
+          fontSize: 14,
         }}
       >
-        {t('return_to_first_page')}
+        {t('edit_information')}
+        <Iconify icon="material-symbols:arrow-back-ios" width="0.8em" height="0.8em" />
       </Link>
     </Stack>
   );
 
   const renderHead = (
-    <>
-      {/* <EmailInboxIcon sx={{ height: 96 }} /> */}
+    <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
+      <Typography variant="h3">{t('enter_the_verification_code')}</Typography>
 
-      <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h5">{t('enter_the_verification_code')}</Typography>
-
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {t('the_verification_code_has_been_sent_to_the_following_mobile_number', {
-            mobile_number: searchParams[0].get('mobile_number'),
-          })}
-        </Typography>
-      </Stack>
-    </>
+      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        {t('the_verification_code_has_been_sent_to_the_following_mobile_number', {
+          mobile_number: searchParams[0].get('mobile_number'),
+        })}
+      </Typography>
+    </Stack>
   );
 
   return (

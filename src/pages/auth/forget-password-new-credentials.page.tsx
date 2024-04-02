@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import { ModernVerifyView } from 'src/sections/auth';
+import { ModernNewPasswordView } from 'src/sections/auth';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (
@@ -16,7 +16,7 @@ const onRenderCallback = (
   interactions: any
   // interactions: Set<React.ProfilerInteraction> // the Set of interactions belonging to this update
 ) => {
-  console.log('Profiling data for verify_page:', {
+  console.log('Profiling data for new_password_page:', {
     id,
     phase,
     actualDuration,
@@ -26,20 +26,19 @@ const onRenderCallback = (
     interactions,
   });
 };
-
-export default function VerifyPage() {
+export default function ForgetPasswordNewCredentialsPage() {
   const { t } = useTranslate();
 
   return (
-    <Profiler id="verify_page_profiler" onRender={onRenderCallback}>
+    <Profiler id="new_password_page_profiler" onRender={onRenderCallback}>
       <>
         <Helmet>
           <title>
-            {t('app_name')} - {t('verify')}
+            {t('app_name')} - {t('new_password')}
           </title>
         </Helmet>
 
-        <ModernVerifyView />
+        <ModernNewPasswordView />
       </>
     </Profiler>
   );

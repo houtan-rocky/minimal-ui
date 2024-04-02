@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import ModernBrokerSignUpView from 'src/sections/auth/modern-broker-signup.view';
+import ModernLoginVerifyDisableView from 'src/sections/auth/modern-login-verify-disable.view';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (
@@ -16,7 +16,7 @@ const onRenderCallback = (
   interactions: any
   // interactions: Set<React.ProfilerInteraction> // the Set of interactions belonging to this update
 ) => {
-  console.log('Profiling data for broker_sign_up_page:', {
+  console.log('Profiling data for verify_login_page:', {
     id,
     phase,
     actualDuration,
@@ -26,19 +26,20 @@ const onRenderCallback = (
     interactions,
   });
 };
-export default function BrokerSignUpPage() {
+
+export default function LoginVerifyDisablePage() {
   const { t } = useTranslate();
 
   return (
-    <Profiler id="broker_sign_up_page_profiler" onRender={onRenderCallback}>
+    <Profiler id="verify_login_page_profiler" onRender={onRenderCallback}>
       <>
         <Helmet>
           <title>
-            {t('app_name')} - {t('new_password')}
+            {t('app_name')} - {t('verify')}
           </title>
         </Helmet>
 
-        <ModernBrokerSignUpView />
+        <ModernLoginVerifyDisableView />
       </>
     </Profiler>
   );

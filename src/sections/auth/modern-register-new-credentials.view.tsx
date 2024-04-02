@@ -30,7 +30,7 @@ import { PasswordStrengthStepper } from './password-strength-stepper.component';
 
 // ----------------------------------------------------------------------
 
-export default function ModernRegisterSetUsernamePasswordView() {
+export default function ModernRegisterNewCredentialsView() {
   const { palette } = useTheme();
   const router = useRouter();
   const password = useBoolean();
@@ -66,7 +66,6 @@ export default function ModernRegisterSetUsernamePasswordView() {
     const pw = event.target.value;
 
     const step: StepIdEnum = passwordStrength(pw);
-    console.log(step, 'rsa_dfs');
 
     setActiveStep(step);
   };

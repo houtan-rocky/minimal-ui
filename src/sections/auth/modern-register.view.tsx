@@ -58,7 +58,7 @@ export default function ModernRegisterView() {
     try {
       const res = await registerApi(data.nationalCode, data.mobileNumber, data.referralCode || '');
       if (res.status === 'ok') {
-        router.push(paths.auth.jwt.verifyRegister(data.mobileNumber));
+        router.push(paths.auth.jwt.registerVerify(data.mobileNumber));
       }
     } catch (error) {
       console.error(error);

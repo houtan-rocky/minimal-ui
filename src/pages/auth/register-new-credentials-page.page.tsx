@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import { ModernNewPasswordView } from 'src/sections/auth';
+import ModernRegisterNewCredentialsView from 'src/sections/auth/modern-register-new-credentials.view';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (
@@ -16,7 +16,7 @@ const onRenderCallback = (
   interactions: any
   // interactions: Set<React.ProfilerInteraction> // the Set of interactions belonging to this update
 ) => {
-  console.log('Profiling data for new_password_page:', {
+  console.log('Profiling data for register_set_new_username_password:', {
     id,
     phase,
     actualDuration,
@@ -26,19 +26,19 @@ const onRenderCallback = (
     interactions,
   });
 };
-export default function NewPasswordPage() {
+export default function RegisterNewCredentialsPage() {
   const { t } = useTranslate();
 
   return (
-    <Profiler id="new_password_page_profiler" onRender={onRenderCallback}>
+    <Profiler id="register_set_new_username_password_page_profiler" onRender={onRenderCallback}>
       <>
         <Helmet>
           <title>
-            {t('app_name')} - {t('new_password')}
+            {t('app_name')} - {t('register_set_new_username_password')}
           </title>
         </Helmet>
 
-        <ModernNewPasswordView />
+        <ModernRegisterNewCredentialsView />
       </>
     </Profiler>
   );

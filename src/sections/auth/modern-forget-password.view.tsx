@@ -21,7 +21,7 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export default function ModernForgotPasswordView() {
+export default function ModernForgetPasswordView() {
   const { palette } = useTheme();
   const router = useRouter();
   const { t } = useTranslate();
@@ -56,7 +56,7 @@ export default function ModernForgotPasswordView() {
       const res = await forgetPasswordApi(data.national_code, data.mobile_number);
 
       if (res.status === 'ok') {
-        router.push(`${paths.auth.jwt.verify(data.mobile_number)}`);
+        router.push(`${paths.auth.jwt.forgetPasswordVerify(data.mobile_number)}`);
       }
     } catch (error) {
       console.error(error);

@@ -40,7 +40,7 @@ export default function ModernLoginView() {
   const [errorMsg, setErrorMsg] = useState('');
 
   const LoginSchema = Yup.object().shape({
-    username: Yup.string().email(t('email_invalid')).required(t('username_is_required')),
+    username: Yup.string().required(t('username_is_required')),
     password: Yup.string().required(t('password_is_required')),
     rememberMe: Yup.boolean().required(),
   });
@@ -72,7 +72,7 @@ export default function ModernLoginView() {
 
       console.log(res, 'sdfsdfaew');
       if (res.has2fa) {
-        router.push(paths.auth.jwt.verifyLogin(res.phone_number || ''));
+        router.push(paths.auth.jwt.loginVerify(res.phone_number || ''));
         return;
       }
       router.push(PATH_AFTER_LOGIN);
@@ -134,7 +134,7 @@ export default function ModernLoginView() {
       />
 
       <Box display="flex" justifyContent="space-between" alignItems="flex-center">
-        <RHFCheckbox name="rememberMe" label={t('remember_me')} />
+        <RHFCheckbox name="rememberMe" label={t('remember_me')} data-testid="remember_me_input" />
         <Link
           component={RouterLink}
           href={paths.auth.jwt.forgotPassword}
@@ -142,6 +142,7 @@ export default function ModernLoginView() {
           color={palette.primary.light}
           underline="always"
           sx={{ alignSelf: 'center' }}
+          data-testid="forget_password_link"
         >
           {t('forget_password')}
         </Link>

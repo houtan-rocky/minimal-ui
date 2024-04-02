@@ -4,7 +4,7 @@ import { it, expect, describe } from 'vitest';
 import {
   MOCK_LOGIN_API_REQUEST_VALID,
   MOCK_LOGIN_API_REQUEST_INVALID,
-} from 'src/_mock/handlers/_login';
+} from 'src/_mock/handlers/sections/auth/_login';
 
 import { loginApi } from '../../src/api/login.api';
 
