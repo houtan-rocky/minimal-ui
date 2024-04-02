@@ -106,7 +106,7 @@ const CreditScore: React.FC<CreditScoreProps> = ({
             alt="Credit History Icon"
             style={{
               aspectRatio: 1,
-              objectFit: 'fill',
+              objectFit: 'scale-down',
               objectPosition: 'center',
               margin: '0 28px',
             }}
