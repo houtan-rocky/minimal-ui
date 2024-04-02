@@ -1,95 +1,51 @@
-import { m } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import * as React from 'react';
 
-import { alpha } from '@mui/material/styles';
-import Box, { BoxProps } from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 
-import Logo from '../logo';
+import { SplashLogo } from '../logo';
 
-// ----------------------------------------------------------------------
+const Container = styled('main')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  background: 'linear-gradient(180deg, #3b7b62 0%, #224537 99.24%)',
+  width: '100%',
+  height: '100%',
+  fontSize: '16px',
+  color: '#fff',
+  fontWeight: 400,
+  textAlign: 'center',
+  lineHeight: '150%',
+  margin: '0 auto',
+  padding: '76px 60px',
+});
 
-export default function SplashScreen({ sx, ...other }: BoxProps) {
-  const [mounted, setMounted] = useState(false);
+const LogoWrapper = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginBottom: 200,
+  width: '158px',
+  maxWidth: '100%',
+});
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
+const VersionText = styled(Typography)({
+  fontFamily: 'Bonyade Koodak FaNum, -apple-system, Roboto, Helvetica, sans-serif',
+  position: 'absolute',
+  bottom: 50,
+});
+// ----------------------- Constants ----------------------------
+const version = '1.0.0' as const;
+function SplashScreen() {
   return (
-    <Box
-      sx={{
-        right: 0,
-        width: 1,
-        bottom: 0,
-        height: 1,
-        zIndex: 9998,
-        display: 'flex',
-        position: 'absolute',
-        alignItems: 'center',
-        justifyContent: 'center',
-        bgcolor: 'background.default',
-        ...sx,
-      }}
-      {...other}
-    >
-      <>
-        <m.div
-          animate={{
-            scale: [1, 0.9, 0.9, 1, 1],
-            opacity: [1, 0.48, 0.48, 1, 1],
-          }}
-          transition={{
-            duration: 2,
-            ease: 'easeInOut',
-            repeatDelay: 1,
-            repeat: Infinity,
-          }}
-        >
-          <Logo disabledLink sx={{ width: 64, height: 64 }} />
-        </m.div>
-
-        <Box
-          component={m.div}
-          animate={{
-            scale: [1.6, 1, 1, 1.6, 1.6],
-            rotate: [270, 0, 0, 270, 270],
-            opacity: [0.25, 1, 1, 1, 0.25],
-            borderRadius: ['25%', '25%', '50%', '50%', '25%'],
-          }}
-          transition={{ ease: 'linear', duration: 3.2, repeat: Infinity }}
-          sx={{
-            width: 100,
-            height: 100,
-            position: 'absolute',
-            border: (theme) => `solid 3px ${alpha(theme.palette.primary.dark, 0.24)}`,
-          }}
-        />
-
-        <Box
-          component={m.div}
-          animate={{
-            scale: [1, 1.2, 1.2, 1, 1],
-            rotate: [0, 270, 270, 0, 0],
-            opacity: [1, 0.25, 0.25, 0.25, 1],
-            borderRadius: ['25%', '25%', '50%', '50%', '25%'],
-          }}
-          transition={{
-            ease: 'linear',
-            duration: 3.2,
-            repeat: Infinity,
-          }}
-          sx={{
-            width: 120,
-            height: 120,
-            position: 'absolute',
-            border: (theme) => `solid 8px ${alpha(theme.palette.primary.dark, 0.24)}`,
-          }}
-        />
-      </>
-    </Box>
+    <Container>
+      <LogoWrapper>
+        <SplashLogo disabledLink sx={{ width: 64, height: 64 }} />
+        <VersionText>{version}</VersionText>
+      </LogoWrapper>
+    </Container>
   );
 }
+
+export default SplashScreen;

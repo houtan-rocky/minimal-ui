@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import { ModernLoginView } from 'src/sections/auth';
+import { ModernLoginView } from 'src/sections/auth/view';
 
 // ----------------------------------------------------------------------
 
