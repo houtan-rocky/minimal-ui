@@ -16,7 +16,6 @@ import { NavSectionVertical } from 'src/components/nav-section';
 import { NAV } from '../config-layout';
 import NavProfile from '../common/nav-profile';
 import { useNavData } from './config-navigation';
-import NavToggleButton from '../common/nav-toggle-button';
 
 // ----------------------------------------------------------------------
 
@@ -80,7 +79,7 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
         width: { lg: NAV.W_VERTICAL },
       }}
     >
-      <NavToggleButton />
+      {/* <NavToggleButton /> */}
 
       {lgUp ? (
         <Stack
@@ -88,7 +87,7 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
             height: 1,
             position: 'fixed',
             width: NAV.W_VERTICAL,
-            borderRight: (theme) => `dashed 1px ${theme.palette.divider}`,
+            // borderRight: (theme) => `dashed 1px ${theme.palette.divider}`,
           }}
         >
           {renderContent}

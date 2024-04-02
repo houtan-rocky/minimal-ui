@@ -52,6 +52,7 @@ export default function HomeSuggestedPackage({ list, sx }: Props) {
           color: alpha('#7B61FF', 0.8),
           imgUrl: '/assets/background/overlay_2.jpg',
         }),
+        width: '100%',
         height: 262,
         borderRadius: 2,
         position: 'relative',
