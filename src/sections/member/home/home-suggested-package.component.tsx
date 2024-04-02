@@ -4,9 +4,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
-import { Theme, alpha, SxProps, useTheme } from '@mui/material/styles';
-
-import { useBoolean } from 'src/hooks/use-boolean.hook';
+import { Theme, alpha, SxProps } from '@mui/material/styles';
 
 import { fCurrency } from 'src/utils/format-number.util';
 
@@ -34,8 +32,6 @@ type Props = {
 };
 
 export default function HomeSuggestedPackage({ list, sx }: Props) {
-  const theme = useTheme();
-
   const carousel = useCarousel({
     fade: true,
     speed: 100,
@@ -100,13 +96,11 @@ type CardItemProps = {
 };
 
 function CardItem({ card }: CardItemProps) {
-  const { id, cardType, balance, refundDeadlineInDays, cardNumber, cardValid } = card;
+  const { id, cardType, balance, refundDeadlineInDays } = card;
 
   const refundDeadlineContent = `${refundDeadlineInDays} روزه`;
 
   const { t } = useTranslate();
-
-  const currency = useBoolean();
 
   const popover = usePopover();
 
