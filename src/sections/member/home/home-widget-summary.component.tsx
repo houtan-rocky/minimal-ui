@@ -94,9 +94,8 @@ export default function HomeWidgetSummary({ title, percent, total, chart, sx, ..
           />
 
           <Typography component="div" variant="subtitle2">
-            {percent > 0 && '+'}
-
             {fPercent(percent)}
+            {percent > 0 && '+'}
           </Typography>
         </Stack>
 
