@@ -148,7 +148,7 @@ const CreditScore: React.FC<CreditScoreProps> = ({
         <Grid container spacing={2} justifyContent="center">
           {creditLevels.map(({ label, color }) => (
             <Grid item key={label}>
-              <Box sx={{ display: 'flex', gap: '8px' }}>
+              <Box sx={{ display: 'flex', gap: '8px', py: 1 }}>
                 <Typography
                   sx={{
                     fontFamily:

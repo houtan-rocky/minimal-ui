@@ -13,7 +13,7 @@ import HomeWelcome from '../home-welcome.component';
 import CreditScore from '../home-credit-score.component';
 import HomeNewInvoice from '../home-new-invoice.component';
 import HomeWidgetSummary from '../home-widget-summary.component';
-import BankingCurrentBalance from '../../banking/banking-current-balance';
+import HomeSuggestedPackage from '../home-suggested-package.component';
 
 // ----------------------------------------------------------------------
 
@@ -43,10 +43,10 @@ export default function OverviewAppView() {
             }
           />
 
-          <BankingCurrentBalance
+          <HomeSuggestedPackage
             list={[
               {
-                cardHolder: 'موجودی کل',
+                refundDeadlineInDays: 3,
                 balance: 1000000,
                 cardNumber: '12345',
                 cardType: 'visa',
