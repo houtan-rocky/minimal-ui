@@ -54,20 +54,15 @@ export const paths = {
     jwt: {
       login: `${ROOTS.AUTH}/login`,
       register: `${ROOTS.AUTH}/register`,
-      forgotPassword: `${ROOTS.AUTH}/forgot-password`,
-      newPassword: `${ROOTS.AUTH}/new-password`,
-      registerSetUsernamePassword: `${ROOTS.AUTH}/register-set-username-password`,
-      verify: (mobileNumber: string) => `${ROOTS.AUTH}/verify?mobile_number=${mobileNumber}`,
-      verifyRegister: (mobileNumber?: string) => {
-        if (mobileNumber) {
-          return `${ROOTS.AUTH}/verify-register?mobile_number=${mobileNumber}`;
-        }
-        return `${ROOTS.AUTH}/verify-register`;
-      },
-      verifyLogin: (phoneNumber: string) =>
-        `${ROOTS.AUTH}/verify-login?mobile_number=${phoneNumber}`,
+      forgotPassword: `${ROOTS.AUTH}/forget-password`,
+      forgetPasswordNewCredentials: `${ROOTS.AUTH}/forget-password-new-credentials`,
+      registerNewCredentials: `${ROOTS.AUTH}/register-new-credentials`,
+      forgetPasswordVerify: `${ROOTS.AUTH}/forget-password-verify`,
+      registerVerify: `${ROOTS.AUTH}/register-verify`,
+      loginVerify: `${ROOTS.AUTH}/login-verify`,
       brokerSelect: `${ROOTS.AUTH}/broker-select`,
       brokerSingUp: `${ROOTS.AUTH}/broker-sign-up`,
+      loginVerifyDisable: `${ROOTS.AUTH}/login-verify-disable`,
     },
   },
   // DASHBOARD

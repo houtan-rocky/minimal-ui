@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import { ModernRegisterView } from 'src/sections/auth';
+import { ModernRegisterView } from 'src/sections/auth/view';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (
@@ -12,9 +12,7 @@ const onRenderCallback = (
   actualDuration: number,
   baseDuration: number,
   startTime: number,
-  commitTime: number,
-  interactions: any
-  // interactions: Set<React.ProfilerInteraction> // the Set of interactions belonging to this update
+  commitTime: number
 ) => {
   console.log('Profiling data for register_page:', {
     id,
@@ -23,7 +21,6 @@ const onRenderCallback = (
     baseDuration,
     startTime,
     commitTime,
-    interactions,
   });
 };
 

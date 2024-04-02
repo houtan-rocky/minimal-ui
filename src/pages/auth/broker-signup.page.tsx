@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import { ModernBrokerSignUp } from 'src/sections/auth';
+import ModernBrokerSignUpView from 'src/sections/auth/view/modern-broker-signup.view';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (
@@ -12,9 +12,7 @@ const onRenderCallback = (
   actualDuration: number,
   baseDuration: number,
   startTime: number,
-  commitTime: number,
-  interactions: any
-  // interactions: Set<React.ProfilerInteraction> // the Set of interactions belonging to this update
+  commitTime: number
 ) => {
   console.log('Profiling data for broker_sign_up_page:', {
     id,
@@ -23,7 +21,6 @@ const onRenderCallback = (
     baseDuration,
     startTime,
     commitTime,
-    interactions,
   });
 };
 export default function BrokerSignUpPage() {
@@ -38,7 +35,7 @@ export default function BrokerSignUpPage() {
           </title>
         </Helmet>
 
-        <ModernBrokerSignUp />
+        <ModernBrokerSignUpView />
       </>
     </Profiler>
   );
