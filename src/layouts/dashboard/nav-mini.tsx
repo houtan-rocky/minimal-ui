@@ -51,6 +51,8 @@ export default function NavMini() {
             currentRole: user?.role,
           }}
         />
+        <Box flex={1} />
+        <NavSectionMini data={navData.bottomNavigation} />
       </Stack>
     </Box>
   );
