@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 
+import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import { Box, Card, Button, Typography } from '@mui/material';
 
 import { paths } from 'src/routes/paths.constant';
+import { RouterLink } from 'src/routes/components';
 import { useRouter } from 'src/routes/hooks/use-router.hook';
 
 import { useTranslate } from 'src/locales';
@@ -12,6 +14,8 @@ import { useAuthContext } from 'src/auth/hooks';
 import PlusSignIcon from 'src/assets/icons/plus-sign-icon.svg';
 import ExclamationIcon from 'src/assets/icons/exclamation-icon.svg';
 import { useActiveBrokers } from 'src/api/broker-select-get-user-active-brokers.api';
+
+import Iconify from 'src/components/iconify';
 
 const BrokerageItem = styled(Button)<{ isActive?: boolean }>(({ theme, isActive }) => ({
   display: 'flex',
@@ -180,6 +184,27 @@ export default function ModernBrokerSelectView() {
                 </Box>
               </Card>
             </Box>
+            <Link
+              component={RouterLink}
+              color="text.primary"
+              href={paths.auth.jwt.brokerSingUp}
+              variant="body2"
+            >
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  display: 'flex',
+                  gap: 1,
+                  textAlign: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  mt: 4,
+                }}
+              >
+                <Iconify width="1rem" icon="ic:outline-plus" />
+                <Box component="span">اضافه کردن کارگزاری جدید</Box>
+              </Typography>
+            </Link>
           </Box>
         )}
       </Box>

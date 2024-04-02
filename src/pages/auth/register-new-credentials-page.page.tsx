@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import ModernRegisterNewCredentialsView from 'src/sections/auth/modern-register-new-credentials.view';
+import ModernRegisterNewCredentialsView from 'src/sections/auth/view/modern-register-new-credentials.view';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (

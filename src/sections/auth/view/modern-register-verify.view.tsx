@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Link from '@mui/material/Link';
@@ -16,27 +17,30 @@ import { useRouter } from 'src/routes/hooks/index.hook';
 import { IRANIAN_MOBILE_NUMBER_REGEX } from 'src/utils/regExp.util';
 
 import { useTranslate } from 'src/locales';
-import { verifyApi } from 'src/api/verify.api';
 import { useAuthContext } from 'src/auth/hooks';
+import { verifyRegisterApi } from 'src/api/verify-register.api';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFCode } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export default function ModernForgetPasswordVerifyView() {
-  const { user } = useAuthContext();
-  const otpExpirationTime = user?.time || null;
-  const mobileNumber = user?.mobileNumber;
+export default function ModernRegisterVerifyView() {
   const { palette } = useTheme();
   const router = useRouter();
+  const { loginWithToken } = useAuthContext();
   const { t } = useTranslate();
+  const searchParams = useSearchParams();
 
   const [errorMsg, setErrorMsg] = useState('');
 
   const VerifySchema = Yup.object().shape({
     code: Yup.string().required(t('code_is_required')).min(4, t('code_must_be_4_characters')),
   });
+
+  const { user } = useAuthContext();
+  const otpExpirationTime = user?.time || null;
+  const mobileNumber = user?.mobile_number;
 
   // ---------------------------- Timer ----------------------------
   // Calculate the time difference to set the initial countdown
@@ -49,6 +53,8 @@ export default function ModernForgetPasswordVerifyView() {
 
   // State to keep track of remaining time
   const [time, setTime] = useState(calculateInitialTime);
+  const isOtpExpired = time <= 0;
+  const isDisabled = time <= 0;
 
   useEffect(() => {
     // Decrease time every second
@@ -74,7 +80,6 @@ export default function ModernForgetPasswordVerifyView() {
   };
 
   // ----------------------------------------------------------------------
-
   /**
    * If the mobile number is not valid, redirect to the forgot password page
    */
@@ -84,13 +89,7 @@ export default function ModernForgetPasswordVerifyView() {
       !mobileNumber.match(IRANIAN_MOBILE_NUMBER_REGEX) ||
       mobileNumber === 'null'
     ) {
-      console.log(
-        !mobileNumber,
-        !mobileNumber?.match(IRANIAN_MOBILE_NUMBER_REGEX),
-        mobileNumber === 'null',
-        'googooli'
-      );
-      router.push(paths.auth.jwt.forgotPassword);
+      router.push(paths.auth.jwt.register);
     }
   }, [mobileNumber, router]);
 
@@ -114,10 +113,11 @@ export default function ModernForgetPasswordVerifyView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const res = await verifyApi(data.code);
-      console.log(res, 'sdlfkjewlk');
-      if (res.status === 'ok') {
-        router.push(paths.auth.jwt.forgetPasswordNewCredentials);
+      const verifyRegisterResponse = await verifyRegisterApi(data.code);
+      const { accessToken } = verifyRegisterResponse;
+      if (verifyRegisterResponse.status === 'ok') {
+        await loginWithToken(accessToken);
+        router.push(paths.auth.jwt.registerNewCredentials);
       }
     } catch (error) {
       console.error(error);
@@ -133,19 +133,32 @@ export default function ModernForgetPasswordVerifyView() {
           color={palette.error.main}
           fontSize={14}
           fontWeight={400}
-          sx={{ mb: 3, alignSelf: 'start' }}
+          sx={{ mb: 3, textAlign: 'center' }}
         >
           {errorMsg}
         </Typography>
       )}
-
       <Box sx={{ display: 'flex', width: '100%', justifyContent: 'start' }}>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {otpExpirationTime ? `${t('code_validity_time')} : ${formatTime()}` : null}
+        <Typography variant="body2" sx={{ color: 'text.primary' }}>
+          {`${t('code_validity_time')} : ${formatTime()}`}
+          {isOtpExpired && (
+            <Link
+              variant="subtitle2"
+              color={palette.primary.main}
+              underline="always"
+              sx={{
+                cursor: 'pointer',
+                ml: 1,
+              }}
+            >
+              {t('resend')}
+            </Link>
+          )}
         </Typography>
       </Box>
 
       <LoadingButton
+        disabled={isDisabled}
         fullWidth
         size="large"
         type="submit"
@@ -155,49 +168,36 @@ export default function ModernForgetPasswordVerifyView() {
         {t('verify')}
       </LoadingButton>
 
-      <Typography variant="body2">
-        {t('do_not_have_a_code')}
-        &nbsp;
-        <Link
-          variant="subtitle2"
-          sx={{
-            cursor: 'pointer',
-          }}
-        >
-          {t('resend')}
-        </Link>
-      </Typography>
+      <Typography variant="body2" />
 
       <Link
         component={RouterLink}
-        href={paths.auth.jwt.forgotPassword}
+        href={paths.auth.jwt.register}
         color="inherit"
+        underline="always"
         variant="subtitle2"
         sx={{
           alignItems: 'center',
           display: 'inline-flex',
+          fontSize: 14,
         }}
       >
-        {t('return_to_first_page')}
+        {t('edit_information')}
         <Iconify icon="material-symbols:arrow-back-ios" width="0.8em" height="0.8em" />
       </Link>
     </Stack>
   );
 
   const renderHead = (
-    <>
-      {/* <EmailInboxIcon sx={{ height: 96 }} /> */}
+    <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
+      <Typography variant="h3">{t('enter_the_verification_code')}</Typography>
 
-      <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h5">{t('enter_the_verification_code')}</Typography>
-
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {t('the_verification_code_has_been_sent_to_the_following_mobile_number', {
-            mobile_number: mobileNumber,
-          })}
-        </Typography>
-      </Stack>
-    </>
+      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        {t('the_verification_code_has_been_sent_to_the_following_mobile_number', {
+          mobile_number: searchParams[0].get('mobile_number'),
+        })}
+      </Typography>
+    </Stack>
   );
 
   return (

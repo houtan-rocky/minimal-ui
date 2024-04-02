@@ -3,10 +3,13 @@ import { useState, ChangeEvent } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
+import { Box, Alert } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Box, List, ListItem, useTheme, IconButton, InputAdornment } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
 
 import { paths } from 'src/routes/paths.constant';
 import { useRouter } from 'src/routes/hooks/index.hook';
@@ -21,47 +24,22 @@ import {
 } from 'src/utils/regExp.util';
 
 import { useTranslate } from 'src/locales';
-import { registerSetUsernamePasswordApi } from 'src/api/register-set-username-password.api';
+import { setNewPasswordApi } from 'src/api/set-new-password.api';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
-import { PasswordStrengthStepper } from './password-strength-stepper.component';
+import { PasswordStrengthStepper } from '../password-strength-stepper.component';
 
 // ----------------------------------------------------------------------
 
-export default function ModernRegisterNewCredentialsView() {
-  const { palette } = useTheme();
-  const router = useRouter();
-  const password = useBoolean();
+export default function ModernForgetPasswordNewCredentials() {
   const { t } = useTranslate();
+  const password = useBoolean();
   const [errorMsg, setErrorMsg] = useState('');
   const [activeStep, setActiveStep] = useState<StepIdEnum>(StepIdEnum.Weak);
 
-  const registerSetUsernamePasswordSchema = Yup.object().shape({
-    username: Yup.string().required(t('username_is_required')),
-    password: Yup.string()
-      .required(t('password_is_required'))
-      .min(8, t('password_must_be_at_least_8_characters'))
-      .matches(REGEX_CONTAIN_LETTERS, t('password_must_contain_letters'))
-      .matches(REGEX_CONTAIN_NUMBERS, t('password_must_contain_numbers'))
-      .matches(REGEX_SPECIAL_CHARACTERS, t('password_must_contain_special_characters')),
-    password_confirm: Yup.string()
-      .required(t('password_confirm_is_required'))
-      .oneOf([Yup.ref('password')], t('passwords_must_match')),
-  });
-
-  const defaultValues = {
-    username: '',
-    password: '',
-    password_confirm: '',
-  };
-
-  const methods = useForm({
-    resolver: yupResolver(registerSetUsernamePasswordSchema),
-    defaultValues,
-  });
-
+  // Function to update the active step based on some password strength criteria
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     const pw = event.target.value;
 
@@ -70,49 +48,53 @@ export default function ModernRegisterNewCredentialsView() {
     setActiveStep(step);
   };
 
+  const router = useRouter();
+
+  const NewPasswordSchema = Yup.object().shape({
+    password: Yup.string()
+      .required(t('password_is_required'))
+      .min(8, t('password_must_be_at_least_8_characters'))
+      .matches(REGEX_CONTAIN_LETTERS, t('password_must_contain_letters'))
+      .matches(REGEX_CONTAIN_NUMBERS, t('password_must_contain_numbers'))
+      .matches(REGEX_SPECIAL_CHARACTERS, t('password_must_contain_special_characters')),
+    confirmPassword: Yup.string()
+      .required(t('password_confirm_is_required'))
+      .oneOf([Yup.ref('password')], t('passwords_must_match')),
+  });
+
+  const defaultValues = {
+    password: '',
+    confirmPassword: '',
+  };
+
+  const methods = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(NewPasswordSchema),
+    defaultValues,
+  });
+
   const {
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const res = await registerSetUsernamePasswordApi(
-        data.username,
-        data.password,
-        data.password_confirm
-      );
+      const res = await setNewPasswordApi(data.password, data.confirmPassword);
 
       if (res.status === 'ok') {
-        router.push(paths.dashboard.root);
+        console.info('MESSAGE', res.message);
+        router.push(paths.auth.jwt.login);
       }
+      console.info('DATA', data);
     } catch (error) {
-      console.error(error);
       setErrorMsg(error.message);
+      console.error(error);
     }
   });
 
   const renderForm = (
-    <Stack spacing={3} alignItems="center">
-      {!!errorMsg && (
-        <Typography
-          color={palette.error.main}
-          fontSize={14}
-          fontWeight={400}
-          sx={{ mb: 3, textAlign: 'center' }}
-        >
-          {errorMsg}
-        </Typography>
-      )}
-      <RHFTextField
-        error={!!errorMsg || !!errors.username}
-        name="username"
-        size="medium"
-        autoComplete="off"
-        placeholder={t('username_placeholder')}
-        label={t('username')}
-      />
-
+    <Stack spacing={2} alignItems="center">
       <Controller
         name="password"
         control={methods.control}
@@ -129,7 +111,6 @@ export default function ModernRegisterNewCredentialsView() {
               handlePasswordChange(event);
             }}
             InputProps={{
-              autoComplete: 'new-password', // disable autocomplete,
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={password.onToggle} edge="end">
@@ -141,13 +122,15 @@ export default function ModernRegisterNewCredentialsView() {
           />
         )}
       />
+
       <Box sx={{ width: 300 }}>
         <PasswordStrengthStepper activeStep={activeStep} setActiveStep={() => {}} />
       </Box>
+
       <RHFTextField
-        name="password_confirm"
-        label={t('password_confirm')}
+        name="confirmPassword"
         autoComplete="off"
+        label={t('password_confirm')}
         type={password.value ? 'text' : 'password'}
         InputProps={{
           endAdornment: (
@@ -166,35 +149,51 @@ export default function ModernRegisterNewCredentialsView() {
         type="submit"
         variant="contained"
         loading={isSubmitting}
-        sx={{ justifyContent: 'center', pl: 2, pr: 1.5 }}
       >
-        {t('continue')}
+        {t('apply')}
       </LoadingButton>
+
+      <Typography variant="body2">
+        {t('do_not_have_a_code')}
+        &nbsp;
+        <Link
+          variant="subtitle2"
+          sx={{
+            cursor: 'pointer',
+          }}
+        >
+          {t('resend')}
+        </Link>
+      </Typography>
     </Stack>
   );
 
   const renderHead = (
-    <Stack alignItems="end">
-      {/* <PasswordIcon sx={{ height: 96 }} /> */}
-      <Stack spacing={1} sx={{ mt: 1, mb: 1 }}>
-        <Typography variant="h3">{t('set_password')}</Typography>
+    <>
+      {/* <SentIcon sx={{ height: 96 }} /> */}
+
+      <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
+        <Typography variant="h3">{t('new_password')}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          <List>
-            <ListItem>{t('set_password_description_1')}</ListItem>
-
-            <ListItem>{t('set_password_description_2')}</ListItem>
-          </List>
+          {t('new_password_description')}
         </Typography>
       </Stack>
-    </Stack>
+    </>
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
-      {renderHead}
+    <>
+      {!!errorMsg && (
+        <Alert severity="error" sx={{ mb: 3 }}>
+          {errorMsg}
+        </Alert>
+      )}
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        {renderHead}
 
-      {renderForm}
-    </FormProvider>
+        {renderForm}
+      </FormProvider>
+    </>
   );
 }

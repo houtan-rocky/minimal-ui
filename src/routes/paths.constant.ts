@@ -57,16 +57,9 @@ export const paths = {
       forgotPassword: `${ROOTS.AUTH}/forget-password`,
       forgetPasswordNewCredentials: `${ROOTS.AUTH}/forget-password-new-credentials`,
       registerNewCredentials: `${ROOTS.AUTH}/register-new-credentials`,
-      forgetPasswordVerify: (mobileNumber: string) =>
-        `${ROOTS.AUTH}/forget-password-verify?mobile_number=${mobileNumber}`,
-      registerVerify: (mobileNumber?: string) => {
-        if (mobileNumber) {
-          return `${ROOTS.AUTH}/register-verify?mobile_number=${mobileNumber}`;
-        }
-        return `${ROOTS.AUTH}/register-verify`;
-      },
-      loginVerify: (phoneNumber: string) =>
-        `${ROOTS.AUTH}/login-verify?mobile_number=${phoneNumber}`,
+      forgetPasswordVerify: `${ROOTS.AUTH}/forget-password-verify`,
+      registerVerify: `${ROOTS.AUTH}/register-verify`,
+      loginVerify: `${ROOTS.AUTH}/login-verify`,
       brokerSelect: `${ROOTS.AUTH}/broker-select`,
       brokerSingUp: `${ROOTS.AUTH}/broker-sign-up`,
       loginVerifyDisable: `${ROOTS.AUTH}/login-verify-disable`,

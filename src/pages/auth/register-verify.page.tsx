@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import ModernRegisterVerifyView from 'src/sections/auth/modern-register-verify.view';
+import ModernRegisterVerifyView from 'src/sections/auth/view/modern-register-verify.view';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (

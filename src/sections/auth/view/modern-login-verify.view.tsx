@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Link from '@mui/material/Link';
@@ -18,20 +17,18 @@ import { IRANIAN_MOBILE_NUMBER_REGEX } from 'src/utils/regExp.util';
 
 import { useTranslate } from 'src/locales';
 import { useAuthContext } from 'src/auth/hooks';
-import { verifyRegisterApi } from 'src/api/verify-register.api';
+import { verifyLoginApi } from 'src/api/verify-login.api';
 
-import Iconify from 'src/components/iconify';
 import FormProvider, { RHFCode } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export default function ModernRegisterVerifyView() {
+export default function ModernLoginVerifyView() {
+  const { login } = useAuthContext();
   const { palette } = useTheme();
   const router = useRouter();
   const { loginWithToken } = useAuthContext();
   const { t } = useTranslate();
-  const searchParams = useSearchParams();
-
   const [errorMsg, setErrorMsg] = useState('');
 
   const VerifySchema = Yup.object().shape({
@@ -53,6 +50,8 @@ export default function ModernRegisterVerifyView() {
 
   // State to keep track of remaining time
   const [time, setTime] = useState(calculateInitialTime);
+  const isOtpExpired = time <= 0;
+  const isDisabled = time <= 0;
 
   useEffect(() => {
     // Decrease time every second
@@ -68,7 +67,7 @@ export default function ModernRegisterVerifyView() {
 
     // Cleanup the interval on component unmount
     return () => clearInterval(interval);
-  }, []);
+  }, [time]);
 
   // Format the time in minutes and seconds
   const formatTime = () => {
@@ -78,22 +77,15 @@ export default function ModernRegisterVerifyView() {
   };
 
   // ----------------------------------------------------------------------
-  /**
-   * If the mobile number is not valid, redirect to the forgot password page
-   */
+
+  // Redirect to login if the mobile number is not valid
   useEffect(() => {
     if (
       !mobileNumber ||
       !mobileNumber.match(IRANIAN_MOBILE_NUMBER_REGEX) ||
-      mobileNumber === 'null'
+      mobileNumber === null
     ) {
-      console.log(
-        !mobileNumber,
-        !mobileNumber?.match(IRANIAN_MOBILE_NUMBER_REGEX),
-        mobileNumber === 'null',
-        'googooli'
-      );
-      router.push(paths.auth.jwt.forgotPassword);
+      router.push(paths.auth.jwt.login);
     }
   }, [mobileNumber, router]);
 
@@ -113,21 +105,37 @@ export default function ModernRegisterVerifyView() {
   const {
     handleSubmit,
     formState: { isSubmitting },
+    reset,
   } = methods;
+
+  // -------------------Handlers-------------------
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const verifyRegisterResponse = await verifyRegisterApi(data.code);
+      const verifyRegisterResponse = await verifyLoginApi(data.code);
       const { accessToken } = verifyRegisterResponse;
       if (verifyRegisterResponse.status === 'ok') {
         await loginWithToken(accessToken);
-        router.push(paths.auth.jwt.registerNewCredentials);
+        router.push(paths.auth.jwt.brokerSelect);
       }
     } catch (error) {
       console.error(error);
       setErrorMsg(error.message);
     }
   });
+
+  const resendCode = async () => {
+    try {
+      const res = await login();
+      setTime(res.time);
+
+      reset();
+    } catch (error) {
+      console.error(error);
+      // reset()
+      setErrorMsg(typeof error === 'string' ? error : error.message);
+    }
+  };
 
   const renderForm = (
     <Stack spacing={3} alignItems="center">
@@ -142,13 +150,30 @@ export default function ModernRegisterVerifyView() {
           {errorMsg}
         </Typography>
       )}
+
       <Box sx={{ display: 'flex', width: '100%', justifyContent: 'start' }}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {otpExpirationTime ? `${t('code_validity_time')} : ${formatTime()}` : null}
         </Typography>
+        {isOtpExpired && (
+          <Link
+            component="button"
+            onClick={resendCode}
+            variant="subtitle2"
+            color={palette.primary.main}
+            underline="always"
+            sx={{
+              cursor: 'pointer',
+              ml: 1,
+            }}
+          >
+            {t('resend')}
+          </Link>
+        )}
       </Box>
 
       <LoadingButton
+        disabled={isDisabled}
         fullWidth
         size="large"
         type="submit"
@@ -158,33 +183,19 @@ export default function ModernRegisterVerifyView() {
         {t('verify')}
       </LoadingButton>
 
-      <Typography variant="body2">
-        {t('do_not_have_a_code')}
-        &nbsp;
-        <Link
-          variant="subtitle2"
-          sx={{
-            cursor: 'pointer',
-          }}
-        >
-          {t('resend')}
-        </Link>
-      </Typography>
-
       <Link
         component={RouterLink}
-        href={paths.auth.jwt.register}
+        href={paths.auth.jwt.loginVerifyDisable}
         color="inherit"
         underline="always"
         variant="subtitle2"
         sx={{
           alignItems: 'center',
+          mt: 4,
           display: 'inline-flex',
-          fontSize: 14,
         }}
       >
-        {t('edit_information')}
-        <Iconify icon="material-symbols:arrow-back-ios" width="0.8em" height="0.8em" />
+        {t('do_not_have_a_code')}
       </Link>
     </Stack>
   );
@@ -195,7 +206,7 @@ export default function ModernRegisterVerifyView() {
 
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
         {t('the_verification_code_has_been_sent_to_the_following_mobile_number', {
-          mobile_number: searchParams[0].get('mobile_number'),
+          mobile_number: mobileNumber,
         })}
       </Typography>
     </Stack>

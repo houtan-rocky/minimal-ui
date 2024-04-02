@@ -46,8 +46,8 @@ export default function ModernLoginView() {
   });
 
   const defaultValues = {
-    username: 'demo@minimals.cc',
-    password: 'demo1234',
+    username: '',
+    password: '',
     rememberMe: false,
   };
 
@@ -70,7 +70,7 @@ export default function ModernLoginView() {
       };
 
       if (res.has2fa) {
-        router.push(paths.auth.jwt.loginVerify(res.phone_number || ''));
+        router.push(paths.auth.jwt.loginVerify);
         return;
       }
       router.push(PATH_AFTER_LOGIN);

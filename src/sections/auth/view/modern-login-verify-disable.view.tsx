@@ -22,7 +22,6 @@ import { useBoolean } from 'src/hooks/use-boolean.hook';
 
 import { useTranslate } from 'src/locales';
 import { useAuthContext } from 'src/auth/hooks';
-import { LoginVerifyDisable } from 'src/api/login-verify-disable.api';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
@@ -51,7 +50,7 @@ const ModernLoginVerifyDisableView: React.FC = () => {
     // .min(8, t('password_must_be_at_least_8_characters'))
   });
 
-  const auth = useAuthContext();
+  const { loginVerifyDisable } = useAuthContext();
   // ---------------------- States --------------------------
   const password = useBoolean();
   const router = useRouter();
@@ -87,9 +86,9 @@ const ModernLoginVerifyDisableView: React.FC = () => {
   // ----------------------- handlers -----------------------
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const res = await LoginVerifyDisable(data.username, data.password, data.captcha);
-      await auth.login(data.username, data.password, false);
+      const res = await loginVerifyDisable(data.username, data.password, data.captcha);
 
+      console.log(res, 'sdfsjfkl23');
       if (res.status === 'ok') {
         router.push(paths.dashboard.root);
       }

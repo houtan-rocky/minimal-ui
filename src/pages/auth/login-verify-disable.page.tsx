@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { useTranslate } from 'src/locales';
 
-import ModernLoginVerifyDisableView from 'src/sections/auth/modern-login-verify-disable.view';
+import ModernLoginVerifyDisableView from 'src/sections/auth/view/modern-login-verify-disable.view';
 
 // ----------------------------------------------------------------------
 const onRenderCallback = (

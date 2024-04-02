@@ -60,7 +60,7 @@ export default function ModernForgetPasswordView() {
       await forgetPasswordCall(data.national_code, data.mobile_number);
 
       if (res.status === 'ok') {
-        router.push(`${paths.auth.jwt.forgetPasswordVerify(data.mobile_number)}`);
+        router.push(`${paths.auth.jwt.forgetPasswordVerify}`);
       }
     } catch (error) {
       console.error(error);
@@ -110,16 +110,18 @@ export default function ModernForgetPasswordView() {
   const renderHead = (
     <Stack alignItems="end">
       {/* <PasswordIcon sx={{ height: 96 }} /> */}
-      <Iconify
-        justifySelf="end"
-        sx={{ cursor: 'pointer' }}
-        onClick={() => router.push(paths.auth.jwt.login)}
-        icon="eva:arrow-back-fill"
-        width={30}
-      />
 
       <Stack spacing={1} sx={{ mt: 3, mb: 5 }}>
-        <Typography variant="h3">{t('forget_password')}</Typography>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" gap={2}>
+          <Typography variant="h3">{t('forget_password')}</Typography>
+          <Iconify
+            justifySelf="end"
+            sx={{ cursor: 'pointer' }}
+            onClick={() => router.push(paths.auth.jwt.login)}
+            icon="eva:arrow-back-fill"
+            width={30}
+          />
+        </Stack>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {t('forget_password_description')}
