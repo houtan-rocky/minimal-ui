@@ -45,6 +45,9 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
+      devOptions: {
+        // enabled: true,
+      },
       manifest: {
         name: 'test-app',
         short_name: 'TA',

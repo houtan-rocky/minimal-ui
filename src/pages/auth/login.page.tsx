@@ -17,9 +17,7 @@ export default function LoginPage() {
     actualDuration: number, // time spent rendering the committed update
     baseDuration: number, // estimated time to render the entire subtree without memoization
     startTime: number, // when React began rendering this update
-    commitTime: number, // when React committed this update
-    interactions: any
-    // interactions: Set<React.ProfilerInteraction> // the Set of interactions belonging to this update
+    commitTime: number // when React committed this update
   ) => {
     console.log('Profiling data for login_page:', {
       id,
@@ -28,7 +26,6 @@ export default function LoginPage() {
       baseDuration,
       startTime,
       commitTime,
-      interactions,
     });
   };
 
