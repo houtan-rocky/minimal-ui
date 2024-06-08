@@ -1,33 +1,32 @@
-import { _mock } from './_mock';
+import { _mock as mock } from './_mock';
 
 // ----------------------------------------------------------------------
 
 export const _carouselsMembers = [...Array(6)].map((_, index) => ({
-  id: _mock.id(index),
-  name: _mock.fullName(index),
-  role: _mock.role(index),
-  avatarUrl: _mock.image.portrait(index),
+  id: mock.id(index),
+  name: mock.fullName(index),
+  role: mock.role(index),
+  avatarUrl: mock.image.portrait(index),
 }));
-
 // ----------------------------------------------------------------------
 
 export const _faqs = [...Array(8)].map((_, index) => ({
-  id: _mock.id(index),
+  id: mock.id(index),
   value: `panel${index + 1}`,
   heading: `Questions ${index + 1}`,
-  detail: _mock.description(index),
+  detail: mock.description(index),
 }));
 
 // ----------------------------------------------------------------------
 
 export const _addressBooks = [...Array(24)].map((_, index) => ({
-  id: _mock.id(index),
+  id: mock.id(index),
   primary: index === 0,
-  name: _mock.fullName(index),
-  email: _mock.email(index + 1),
-  fullAddress: _mock.fullAddress(index),
-  phoneNumber: _mock.phoneNumber(index),
-  company: _mock.companyName(index + 1),
+  name: mock.fullName(index),
+  email: mock.email(index + 1),
+  fullAddress: mock.fullAddress(index),
+  phoneNumber: mock.phoneNumber(index),
+  company: mock.companyName(index + 1),
   addressType: index === 0 ? 'Home' : 'Office',
 }));
 
@@ -38,28 +37,28 @@ export const _contacts = [...Array(20)].map((_, index) => {
     (index % 2 && 'online') || (index % 3 && 'offline') || (index % 4 && 'alway') || 'busy';
 
   return {
-    id: _mock.id(index),
+    id: mock.id(index),
     status,
-    role: _mock.role(index),
-    email: _mock.email(index),
-    name: _mock.fullName(index),
-    phoneNumber: _mock.phoneNumber(index),
-    lastActivity: _mock.time(index),
-    avatarUrl: _mock.image.avatar(index),
-    address: _mock.fullAddress(index),
+    role: mock.role(index),
+    email: mock.email(index),
+    name: mock.fullName(index),
+    phoneNumber: mock.phoneNumber(index),
+    lastActivity: mock.time(index),
+    avatarUrl: mock.image.avatar(index),
+    address: mock.fullAddress(index),
   };
 });
 
 // ----------------------------------------------------------------------
 
 export const _notifications = [...Array(9)].map((_, index) => ({
-  id: _mock.id(index),
+  id: mock.id(index),
   avatarUrl: [
-    _mock.image.avatar(1),
-    _mock.image.avatar(2),
-    _mock.image.avatar(3),
-    _mock.image.avatar(4),
-    _mock.image.avatar(5),
+    mock.image.avatar(1),
+    mock.image.avatar(2),
+    mock.image.avatar(3),
+    mock.image.avatar(4),
+    mock.image.avatar(5),
     null,
     null,
     null,
@@ -80,8 +79,8 @@ export const _notifications = [...Array(9)].map((_, index) => ({
     'Communication',
     'Communication',
   ][index],
-  isUnRead: _mock.boolean(index),
-  createdAt: _mock.time(index),
+  isUnRead: mock.boolean(index),
+  createdAt: mock.time(index),
   title:
     (index === 0 && `<p><strong>Deja Brady</strong> sent you a friend request</p>`) ||
     (index === 1 &&
@@ -104,13 +103,13 @@ export const _notifications = [...Array(9)].map((_, index) => ({
 export const _mapContact = [
   {
     latlng: [33, 65],
-    address: _mock.fullAddress(1),
-    phoneNumber: _mock.phoneNumber(1),
+    address: mock.fullAddress(1),
+    phoneNumber: mock.phoneNumber(1),
   },
   {
     latlng: [-12.5, 18.5],
-    address: _mock.fullAddress(2),
-    phoneNumber: _mock.phoneNumber(2),
+    address: mock.fullAddress(2),
+    phoneNumber: mock.phoneNumber(2),
   },
 ];
 
@@ -209,45 +208,45 @@ export const _pricingPlans = [
 
 export const _testimonials = [
   {
-    name: _mock.fullName(1),
-    postedDate: _mock.time(1),
-    ratingNumber: _mock.number.rating(1),
-    avatarUrl: _mock.image.avatar(1),
+    name: mock.fullName(1),
+    postedDate: mock.time(1),
+    ratingNumber: mock.number.rating(1),
+    avatarUrl: mock.image.avatar(1),
     content: `Excellent Work! Thanks a lot!`,
   },
   {
-    name: _mock.fullName(2),
-    postedDate: _mock.time(2),
-    ratingNumber: _mock.number.rating(2),
-    avatarUrl: _mock.image.avatar(2),
+    name: mock.fullName(2),
+    postedDate: mock.time(2),
+    ratingNumber: mock.number.rating(2),
+    avatarUrl: mock.image.avatar(2),
     content: `It's a very good dashboard and we are really liking the product . We've done some things, like migrate to TS and implementing a react useContext api, to fit our job methodology but the product is one of the best in terms of design and application architecture. The team did a really good job.`,
   },
   {
-    name: _mock.fullName(3),
-    postedDate: _mock.time(3),
-    ratingNumber: _mock.number.rating(3),
-    avatarUrl: _mock.image.avatar(3),
+    name: mock.fullName(3),
+    postedDate: mock.time(3),
+    ratingNumber: mock.number.rating(3),
+    avatarUrl: mock.image.avatar(3),
     content: `Customer support is realy fast and helpful the desgin of this theme is looks amazing also the code is very clean and readble realy good job !`,
   },
   {
-    name: _mock.fullName(4),
-    postedDate: _mock.time(4),
-    ratingNumber: _mock.number.rating(4),
-    avatarUrl: _mock.image.avatar(4),
+    name: mock.fullName(4),
+    postedDate: mock.time(4),
+    ratingNumber: mock.number.rating(4),
+    avatarUrl: mock.image.avatar(4),
     content: `Amazing, really good code quality and gives you a lot of examples for implementations.`,
   },
   {
-    name: _mock.fullName(5),
-    postedDate: _mock.time(5),
-    ratingNumber: _mock.number.rating(5),
-    avatarUrl: _mock.image.avatar(5),
+    name: mock.fullName(5),
+    postedDate: mock.time(5),
+    ratingNumber: mock.number.rating(5),
+    avatarUrl: mock.image.avatar(5),
     content: `Got a few questions after purchasing the product. The owner responded very fast and very helpfull. Overall the code is excellent and works very good. 5/5 stars!`,
   },
   {
-    name: _mock.fullName(6),
-    postedDate: _mock.time(6),
-    ratingNumber: _mock.number.rating(6),
-    avatarUrl: _mock.image.avatar(6),
+    name: mock.fullName(6),
+    postedDate: mock.time(6),
+    ratingNumber: mock.number.rating(6),
+    avatarUrl: mock.image.avatar(6),
     content: `CEO of Codealy.io here. We’ve built a developer assessment platform that makes sense - tasks are based on git repositories and run in virtual machines. We automate the pain points - storing candidates code, running it and sharing test results with the whole team, remotely. Bought this template as we need to provide an awesome dashboard for our early customers. I am super happy with purchase. The code is just as good as the design. Thanks!`,
   },
 ];
