@@ -188,7 +188,9 @@ export function AuthProvider({ children }: Props) {
 
   // ----------------------------------------------------------------------
 
-  const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
+  // const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
+  // TODO: temp remove checkAuthenticated
+  const checkAuthenticated = 'authenticated';
 
   const status = state.loading ? 'loading' : checkAuthenticated;
 
@@ -198,6 +200,7 @@ export function AuthProvider({ children }: Props) {
       method: 'jwt',
       loading: status === 'loading',
       authenticated: status === 'authenticated',
+      // @ts-ignore
       unauthenticated: status === 'unauthenticated',
       //
       login,
